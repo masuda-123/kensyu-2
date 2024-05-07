@@ -1,0 +1,323 @@
+@charset "UTF-8";
+
+/*bodyタグ*/
+body {
+	/*幅を650pxにする*/
+	width: 650px;
+	/*真ん中に寄せる*/
+	margin: 0 auto;
+}
+
+/* labelタグ*/
+label {
+	/*右に10pxの余白をつくる*/
+	margin-right: 10px;
+}
+
+/* pタグ */
+p {
+	/* 余白を作らない */
+	margin: 0;
+}
+
+/* btn_areaとResult画面のbottom_menu_areaクラス */
+.btn_area, .bottom_menu_area {
+	/*幅は全体の100%*/
+	width: 100%;
+	/*右に寄せる*/
+	text-align: right;
+}
+
+/* bottom_btn_areaクラス*/
+.bottom_btn_area {
+	/*右寄せする*/
+	text-align: right;
+	/*上に余白を10pxつくる*/
+	margin-top: 10px;
+}
+
+/*Login画面のformクラス*/
+.form {
+	/*ラベルと入力欄を横並びにする*/
+	display: flex;
+	/*真ん中に寄せる*/
+	justify-content: center;
+	/*上に余白を作る*/
+	margin-top: 15px;
+}
+
+/*Login画面のformクラスのlabelタグ*/
+.form label {
+	/*幅を全体の6%にする*/
+	width: 6%;
+}
+
+/* Top画面のmenu_areaクラスのbuttonタグ*/
+.menu_area button {
+	/*要素をブロック化*/
+	display: block;
+	/*横幅を全体の40%にする*/
+	width: 40%;
+	/*要素を真ん中に寄せて、上に10pxの余白をつくる*/
+	margin: 10px auto;
+	/*ボタン内の文字を左に寄せる*/
+	text-align: left;
+}
+
+/* List画面の新規作成ボタンのnew_btnクラス*/
+.new_btn {
+	/*要素をブロック化*/
+	display: block;
+	/*要素を真ん中に寄せる*/
+	margin: 0 auto;
+}
+
+/* List画面のlist_areaクラス*/
+.list_area {
+	/*下に余白を10pxつくる*/
+	margin-bottom: 10px;
+	/*要素を横並びに*/
+	display: flex;
+}
+
+/* List画面のlistクラス*/
+.list {
+	/*幅を84.5%にする*/
+	width: 84.5%;
+}
+
+/* List画面のlist_questionクラス*/
+.list_question_area {
+	/*要素を横並びにする*/
+	display: flex;
+	/*下に余白を5pxつくる*/
+	margin-bottom: 5px;
+}
+
+/* List画面のlist_question_areaクラスのpタグ*/
+.list_question_area p {
+	/*幅を全体の80%にする*/
+	width: 80%;
+	/*はみ出た部分を非表示に*/
+	overflow: hidden;
+	/*はみ出た部分を...で省略*/
+	text-overflow: ellipsis;
+	/*テキストを改行しないようにする*/
+	white-space: nowrap;
+}
+
+/* List画面のlist_answers_areaクラス*/
+.list_answers_area {
+	/*左に余白を20pxつくる*/
+	margin-left: 20px;
+}
+
+/* List画面のlist_answers_areaクラスのpタグ*/
+.list_answers_area p {
+	/*はみ出た部分を非表示に*/
+	overflow: hidden;
+	/*はみ出た部分を...で省略*/
+	text-overflow: ellipsis;
+	/*テキストを改行しないようにする*/
+	white-space: nowrap;
+}
+
+/* Edit、Register画面のquestion__form_areaクラス*/
+.question_form_area {
+	/*上に余白を20pxつくる*/
+	margin-top: 20px;
+	/*要素を横並びにする*/
+	display: flex;
+}
+
+/* Edit、Register画面のquestion_form_areaクラスのtextareaタグ*/
+.question_form_area textarea {
+	/*幅を全体の76.7%にする*/
+	width: 76.7%;
+	/*高さを100pxにする*/
+	height: 100px;
+}
+
+/* Edit、Register画面のquestion_form_areaクラスのlabelタグ*/
+.question_form_area label {
+	/*幅を全体の7%にする*/
+	width: 7%;
+}
+
+/* Edit、Register画面のanswer_forms_areaクラス*/
+.answer_forms_area {
+	/*上に余白を20pxつくる*/
+	margin-top: 20px;
+	/*要素を横並びにする*/
+	display: flex;
+}
+
+/* Edit、Register画面のanswer_forms_areaクラスのlabelタグ*/
+.answer_forms_area label {
+	/*幅を全体の7%にする*/
+	width: 7%;;
+}
+
+/* Edit、Register画面のanswer_formsクラス*/
+.answer_forms {
+	/*幅を全体の90%にする*/
+	width: 90%;
+}
+
+/* Edit、Register画面のansewer_formクラス*/
+.answer_form {
+	/* 要素を横並びに*/
+	display: flex;
+	/* 上に10pxの余白をつくる*/
+	margin-bottom: 10px;
+	/* 高さを26pxにする*/
+	height: 26px;
+}
+
+/* Edit、Register画面のanswer_formクラスのinputタグ*/
+.answer_form input {
+	/*要素をブロック化*/
+	display: block;
+	/*幅を全体の85%にする*/
+	width: 85%;
+}
+
+/* Edit、Register画面のanswer_formクラスのbuttonタグ*/
+.answer_form button {
+	/*要素をブロック化*/
+	display: block;
+	/*左に余白を10px*/
+	margin-left: 10px;
+}
+
+/* Edit、Edit_confirm画面のquestion_id_areaクラス*/
+.question_id_area {
+	/*要素を横並びに*/
+	display: flex;
+}
+
+/* Edit、Edit_confirm画面のedit_question_areaクラスとedit_answrs_areaクラスとquestion_id_areaクラスのlabelタグ*/
+.edit_question_area label, .edit_answers_area label, .question_id_area label {
+	/*幅を全体の11%にする*/
+	width: 11%;
+	/*右寄せする*/
+	text-align: right;
+}
+
+/* Confirm、Delete_confirm画面のquestion_areaクラスとanswrs_areaクラスのlabelタグ*/
+.question_area label, .answers_area label {
+	/*幅を全体の11%にする*/
+	width: 7%;
+	/*右寄せする*/
+	text-align: right;
+}
+
+/* Test画面のtest_question_areaクラスとtest_answers_areaクラスのlabelタグ*/
+.test_question_area label, .test_answers_area label {
+	/*幅を全体の7%にする*/
+    width: 7%;
+    /*中央寄せする*/
+    text-align: center;
+}
+
+/* Edit_confirm画面のedit_question_areaクラスとConfirm、Delete_confirm画面のreg_question_areaクラスとTest画面のtest_question_areaクラス*/
+.edit_question_area, .question_area, .test_question_area {
+	/*上に余白を10pxつくる*/
+	margin-top: 10px;
+	/*要素を横並びにする*/
+	display: flex;
+}
+
+/*  Edit_confirm画面のedit_question_areaクラスとConfirm、Delete_confirm画面のreg_question_areaクラスのpタグ*/
+.edit_question_area p, .question_area p {
+	/*幅を全体の87%にする*/
+	width: 87%;
+	/*要素に収まるように改行*/
+	overflow-wrap: break-word;
+}
+
+/* Edit_confirm画面のedit_answers_areaクラスとConfirm、Delete_confirm画面のreg_answers_areaクラスとTest画面のtest_asnwers_areaクラス*/
+.edit_answers_area, .answers_area, .test_answers_area {
+	/*上に余白を10pxつくる*/
+	margin-top: 10px;
+	/*要素を横並びに*/
+	display: flex;
+}
+
+/* Edit_confirm、Confirm、Delete_confirm画面のanswersクラス*/
+.answers {
+	/*幅を全体の87%にする*/
+	width: 87%;
+}
+
+/* Edit_confirm、Confirm、Delete_confirm画面のanswersクラスのpタグ*/
+.answers p {
+	/*要素に収まるように改行*/
+	overflow-wrap: break-word;
+}
+
+/* Confirm画面、Edit_confirm画面のerrorクラス*/
+.error {
+	padding-top:10px;
+	color: red;
+}
+
+/* Test画面のtest_question_areaクラスのpタグ*/
+.test_question_area p {
+	/*幅を全体の91%にする*/
+	width: 91%;
+	/*要素に収まるように改行*/
+	overflow-wrap: break-word;
+}
+
+/* Test画面のtest_answer_formクラス*/
+.test_answer_form {
+	/* 幅を全体の100%にする*/
+	width: 100%;
+}
+
+/* Test画面のtest_answer_formクラスのinputタグ*/
+.test_answer_form input {
+	/* 幅を全体の98.6%にする*/
+	width: 98.6%;
+	/* 高さを20pxにする*/
+	height: 20px;
+}
+
+/* btn_areaとbottom_menu_areaクラス */
+.btn_area, .bottom_menu_area {
+	/*幅は全体の100%*/
+	width: 100%;
+	/*右に寄せる*/
+	text-align: right;
+}
+
+/* Result画面のbottom_menu_areaクラスのaタグ*/
+.bottom_menu_area a {
+	/*文字色を赤にする*/
+	color: red;
+	/*下線をなくす*/
+	text-decoration: none;
+}
+
+/* Result画面、History画面のh2タグ*/
+h2 {
+	/*文字を真ん中に寄せる*/
+	text-align: center;
+}
+
+/* History画面のtableタグ*/
+table {
+	/* 票の枠線を重ねる*/
+	border-collapse: collapse;
+}
+
+/* History画面のtd, thタグ*/
+td, th {
+	/*余白を7px作る*/
+	padding: 7px;
+	/*幅を210pxにする*/
+	width: 210px;
+	/*枠線の太さを1pxにして、1本線にする*/
+	border: solid 1px;
+}
