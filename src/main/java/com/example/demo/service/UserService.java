@@ -19,5 +19,9 @@ public class UserService {
     public ArrayList<User> getUser() {
         return userMapper.getUser();
     }
+    
+    public User findByName(String username) {
+    	return userMapper.findByName(username);
+    }
 
 }

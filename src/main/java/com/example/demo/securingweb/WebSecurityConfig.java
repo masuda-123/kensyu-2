@@ -12,6 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
+
     
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -20,8 +21,6 @@ public class WebSecurityConfig {
                 // アクセス制限をかけない
                 .requestMatchers("/"
                         , "/login?error"
-                        , "/top"
-                        , "/list"
                         ,"/css/**")
                 .permitAll()
                 .anyRequest().authenticated()
@@ -36,7 +35,7 @@ public class WebSecurityConfig {
                 // ログイン失敗時のURL
                 .failureUrl("/login?error")
                 // ログインに成功した場合の遷移先
-                .defaultSuccessUrl("/loginSuccess", true)
+                .defaultSuccessUrl("/top", true)
                 // アクセス権
                 .permitAll()
 
@@ -48,10 +47,8 @@ public class WebSecurityConfig {
         return http.build();
     }
     
-    // パスワードのハッシュ化
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    
 }

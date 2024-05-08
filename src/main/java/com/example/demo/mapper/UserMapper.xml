@@ -4,4 +4,8 @@
     <select id="getUser" resultType="com.example.demo.model.User">
         SELECT * FROM users;
     </select>
+    
+   	<select id="findByName" resultType="com.example.demo.model.User">
+        SELECT * FROM users WHERE name = #{username};
+    </select>
 </mapper>
