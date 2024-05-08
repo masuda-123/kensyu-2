@@ -18,6 +18,14 @@
 						<!-- 問題文を表示  -->
 						<p th:text="${que.getQuestion()}" ></p>
 					</div>
+					<!-- 答えの数だけ処理を繰り返す  -->
+					<div class="list_answers_area" th:each="ans:${ansList}">
+						<!-- 答えのquestions_idと問題のidが一致しない場合は、繰り返しの先頭に戻る  -->
+						<div th:if="${ans.getQuestions_id() == que.getId()}">
+						<!-- 答えの番号をカウントアップし、答えの文を表示  -->
+						<p th:text="'答え ' + ${ans.getAnswer()}"></p>
+						</div>
+					</div>
 				</div>
 				<div>
 					<!-- Edit画面に遷移させる（パラメータに問題のidを設定）ボタン  -->
