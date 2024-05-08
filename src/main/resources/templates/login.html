@@ -7,11 +7,11 @@
 	</head>
 	<body>
 	 	<!-- formタグで入力されたデータを./Loginにpostで送信する  -->
-		<form action="./login" method="post">
+		 <form th:action="@{/login}" method="post">
 			<div class="form">
-				<label for="userId">ID:</label>
+				<label for="username">名前:</label>
 				<!-- userIdを入力する欄  -->
-				<input type="number" id="userId" name="userId">
+				<input type="text" id="username" name="username">
 			</div>
 			<div class="form">
 				<label for="password">pw:</label>

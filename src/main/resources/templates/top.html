@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Top</title>
+	<link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
+</head>
+<body>
+	<div class="btn_area">
+		<!--  logoutボタンを押下後、Logout.java の doGetメソッドの処理に移動 -->
+		<button onclick="location.href='./Logout'">logout</button>
+	</div>
+	<div class="menu_area">
+		<!-- List画面に遷移させるボタン  -->
+		<button onclick="location.href='./list'">問題と答えを確認・登録する ></button>
+		<!-- Test画面に遷移させるボタン  -->
+		<button onclick="location.href='./Test'">テストをする ></button>
+		<!-- History画面に遷移させるボタン  -->
+		<button onclick="location.href='./History'">過去の採点結果をみる ></button>
+	</div>
+</body>
+</html>
