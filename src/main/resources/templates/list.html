@@ -15,15 +15,15 @@
 			</form>
 		</div>
 		<!-- Register画面に遷移させるボタン  -->
-		<button class="new_btn" onclick="location.href='./Register'" >新規登録</button>
+		<button class="new_btn" onclick="location.href='./register'" >新規登録</button>
 		<!-- 問題の数だけ処理を繰り返す  -->
 		<div class="list_area" th:each="que, queStatus:${queList}">
 			<div class="list">
 				<div class="list_question_area">
-						<!-- 問題のidを表示  -->
-						<label th:text="'問題:' + ${que.getId()} + ' '"></label>
-						<!-- 問題文を表示  -->
-						<p th:text="${que.getQuestion()}" ></p>
+					<!-- 問題のidを表示  -->
+					<label th:text="'問題:' + ${que.getId()} + ' '"></label>
+					<!-- 問題文を表示  -->
+					<p th:text="${que.getQuestion()}" ></p>
 				</div>
 				<!-- 問題に紐づく答えの数だけ処理を繰り返す  -->
 				<div class="list_answers_area" th:each="ans, ansStatus:${ansList.get(queStatus.index)}">
