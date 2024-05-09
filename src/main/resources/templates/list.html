@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
+</head>
+	<body>
+		<div class="btn_area">
+			<!-- Topに遷移させるボタン  -->
+			<button onclick="location.href='./top'">top</button>
+			<!--  logoutさせるボタン -->
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="logout">
+			</form>
+		</div>
+		<!-- Register画面に遷移させるボタン  -->
+		<button class="new_btn" onclick="location.href='./Register'" >新規登録</button>
+		<!-- 問題の数だけ処理を繰り返す  -->
+		<div th:each="que:${queList}">
+			<div class="list_area">
+				<div class="list">
+					<div class="list_question_area">
+						<!-- 問題のidを表示  -->
+						<label>問題 :<span th:text="${que.getId()}"></span></label>
+						<!-- 問題文を表示  -->
+						<p th:text="${que.getQuestion()}" ></p>
+					</div>
+					<!-- 答えの数だけ処理を繰り返す  -->
+					<div class="list_answers_area" th:each="ans:${ansList}">
+						<!-- 答えのquestions_idと問題のidが一致しない場合は、繰り返しの先頭に戻る  -->
+						<div th:if="${ans.getQuestions_id() == que.getId()}">
+						<!-- 答えの番号をカウントアップし、答えの文を表示  -->
+						<p th:text="'答え ' + ${ans.getAnswer()}"></p>
+						</div>
+					</div>
+				</div>
+				<div>
+					<!-- Edit画面に遷移させる（パラメータに問題のidを設定）ボタン  -->
+					<a href="./Edit?id=<%= que.getId() %>"><button>編集</button></a>
+					<!-- Delete_confirm画面に遷移させる（パラメータに問題のidを設定）ボタン  -->
+					<a href="./Delete_confirm?id=<%= que.getId() %>"><button>削除</button></a>
+				</div>
+			</div>
+	</body>
+</html>
