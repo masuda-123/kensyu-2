@@ -33,20 +33,23 @@ public class WebSecurityConfig {
                 // ログイン画面
                 .loginPage("/login")
                 // ログイン失敗時のURL
-                .failureUrl("/login?error")
+                .failureUrl("/login")
                 // ログインに成功した場合の遷移先
-                .defaultSuccessUrl("/top", true)
-                // アクセス権
+                .successForwardUrl("/top")
                 .permitAll()
 
             )
             .logout((logout) -> logout
+            	// ログアウトのURL
+            	.logoutUrl("/logout")
                  // ログアウトした場合の遷移先
+            	.logoutSuccessUrl("/login")
                 .permitAll());
         
         return http.build();
     }
     
+    // パスワードのハッシュ化
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

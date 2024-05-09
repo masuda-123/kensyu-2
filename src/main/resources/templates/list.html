@@ -9,8 +9,10 @@
 		<div class="btn_area">
 			<!-- Topに遷移させるボタン  -->
 			<button onclick="location.href='./top'">top</button>
-			<!-- Logoutさせるボタン  -->
-			<button onclick="location.href='./logout'">logout</button>
+			<!--  logoutさせるボタン -->
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="logout">
+			</form>
 		</div>
 		<!-- Register画面に遷移させるボタン  -->
 		<button class="new_btn" onclick="location.href='./Register'" >新規登録</button>

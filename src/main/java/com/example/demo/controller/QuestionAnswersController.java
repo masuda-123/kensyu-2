@@ -31,8 +31,6 @@ public class QuestionAnswersController {
 		model.addAttribute("queList", queList);
 		ArrayList<Answer> ansList = ansService.getAnswer();
 		model.addAttribute("ansList", ansList);
-		int cnt = 0;
-		model.addAttribute("cnt", cnt);
 		return "list";
 	}
 
