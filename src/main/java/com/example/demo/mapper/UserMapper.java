@@ -12,5 +12,5 @@ import com.example.demo.model.User;
 public interface UserMapper {
 	ArrayList<User> getUser();
 	
-	User findByName(String username);
+	User findById(int userId);
 }

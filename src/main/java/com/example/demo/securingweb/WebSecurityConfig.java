@@ -26,7 +26,7 @@ public class WebSecurityConfig {
                 .anyRequest().authenticated()
             )
             .formLogin((login) -> login
-                .usernameParameter("username")
+                .usernameParameter("userId")
                 .passwordParameter("password")
                 // ログインを実行するページ
                 .loginProcessingUrl("/login")
