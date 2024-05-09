@@ -29,7 +29,11 @@ public class QuestionAnswersController {
 	public String getList(Model model) {
 		ArrayList<Question> queList = queService.getQuestion();
 		model.addAttribute("queList", queList);
-		ArrayList<Answer> ansList = ansService.getAnswer();
+		ArrayList<ArrayList<Answer>> ansList = new ArrayList<>();
+		for(Question que: queList) {
+			ArrayList<Answer> ans = ansService.findById(que.getId());
+			ansList.add(ans);
+		}
 		model.addAttribute("ansList", ansList);
 		return "list";
 	}

@@ -11,4 +11,5 @@ import com.example.demo.model.Answer;
 @Mapper
 public interface AnswerMapper {
 	ArrayList<Answer> getAnswer();
+	ArrayList<Answer> findById(int questionId);
 }
