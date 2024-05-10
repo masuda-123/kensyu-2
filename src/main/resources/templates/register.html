@@ -5,6 +5,11 @@
 		<title>Register</title>
 		<!-- cssを読み込む  -->
 		<link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
+		<script th:inline="javascript">
+			var i = 1
+		</script>
+		<script type="text/javascript" th:src="@{/js/add_answer_form.js}"></script>
+		<script type="text/javascript" th:src="@{/js/delete_answer_form.js}"></script>
 	</head>
 	
 	<body>
@@ -26,10 +31,6 @@
 			<div class="answer_forms_area">
 				<label for="answer">答え:</label>
 				<div class="answer_forms">
-					<div class="answer_form" id="answerform1">
-						<!-- 答えを入力する欄  -->
-						<input type="text" id="answer" name="answer">
-					</div>
 					<div class="answer_form" id="answerform1">
 						<!-- 答えを入力する欄  -->
 						<input type="text" id="answer" name="answer">
