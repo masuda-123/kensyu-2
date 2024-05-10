@@ -15,9 +15,9 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
 	
 	//以下のクラスをインスタンス化
-    @Autowired
-    private final UserService service;
-    
+	@Autowired
+	private final UserService service;
+	
 	@GetMapping("/login")
 	public String getLogin() {
 		//login画面に遷移
