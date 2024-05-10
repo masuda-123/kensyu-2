@@ -18,22 +18,22 @@ public class AnswerService {
 	
 	//答えを全件取得
 	@Transactional
-	public ArrayList<Answer> getAnswer() {
-		return answerMapper.getAnswer();
+	public ArrayList<Answer> findAll() {
+		return answerMapper.findAll();
 	}
 	
 	//questionIdをもとに答えを取得
 	@Transactional
-	public ArrayList<Answer> findById(int questionId) {
-		return answerMapper.findById(questionId);
+	public ArrayList<Answer> findByQuestionId(int questionId) {
+		return answerMapper.findByQuestionId(questionId);
 	}
 	
 	//答えを登録
 	@Transactional
-	public void registerAnswers(String[] answers, int questionId) {
+	public void register(String[] answers, int questionId) {
 		//答えを一つ一つ登録
 		for(String answer : answers) {
-			answerMapper.registerAnswer(answer, questionId);
+			answerMapper.register(answer, questionId);
 		}
 	}
 }

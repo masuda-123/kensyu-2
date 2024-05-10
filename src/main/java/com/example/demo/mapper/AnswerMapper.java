@@ -9,11 +9,11 @@ import com.example.demo.model.Answer;
 @Mapper
 public interface AnswerMapper {
 	//全ての答えを取得
-	ArrayList<Answer> getAnswer();
+	ArrayList<Answer> findAll();
 	
 	//questionIdをもとに答えを取得
-	ArrayList<Answer> findById(int questionId);
+	ArrayList<Answer> findByQuestionId(int questionId);
 	
 	//答えを登録
-	void registerAnswer(String answer, int questionId);
+	void register(String answer, int questionId);
 }

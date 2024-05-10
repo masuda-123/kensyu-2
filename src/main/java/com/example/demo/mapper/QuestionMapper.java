@@ -9,10 +9,10 @@ import com.example.demo.model.Question;
 @Mapper
 public interface QuestionMapper {
 	//全ての問題を取得
-	ArrayList<Question> getQuestion();
+	ArrayList<Question> findAll();
 	
 	//問題を登録
-	void registerQuestion(String question);
+	void register(String question);
 	
 	//idの最大値を取得
 	int findMaxId();

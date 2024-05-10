@@ -18,15 +18,15 @@ public class QuestionService {
 	
 	//問題を全件取得
 	@Transactional
-	public ArrayList<Question> getQuestion() {
-		return questionMapper.getQuestion();
+	public ArrayList<Question> findAll() {
+		return questionMapper.findAll();
 	}
 	
 	//問題を登録し、idを取得
 	@Transactional
-	public int registerQuestion(String question) {
+	public int register(String question) {
 		//問題を登録
-		questionMapper.registerQuestion(question);
+		questionMapper.register(question);
 		//idの最大値を取得
 		int questionId = questionMapper.findMaxId();
 		return questionId;

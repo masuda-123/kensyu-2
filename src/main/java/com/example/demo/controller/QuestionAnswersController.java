@@ -34,12 +34,12 @@ public class QuestionAnswersController {
 	@GetMapping("/list")
 	public String getList(Model model) {
 		//全ての問題データを取得
-		ArrayList<Question> queList = queService.getQuestion();
+		ArrayList<Question> queList = queService.findAll();
 		//全ての答えデータを取得
 		ArrayList<ArrayList<Answer>> ansList = new ArrayList<>();
 		//それぞれの問題に紐づく答えデータをリスト化する
 		for(Question que: queList) {
-			ArrayList<Answer> ans = ansService.findById(que.getId());
+			ArrayList<Answer> ans = ansService.findByQuestionId(que.getId());
 			ansList.add(ans);
 		}
 		//変数をモデルに登録
@@ -70,9 +70,9 @@ public class QuestionAnswersController {
     @PostMapping("/complete")
     public String postComplete(@RequestParam("question") String question, @RequestParam("answer") String[] answers, Model model) {
     	//フォームから渡された問題を登録し、questionIdを取得
-    	int questionId = queService.registerQuestion(question);
+    	int questionId = queService.register(question);
     	//questionIdをもとに、フォームから渡された答えを登録
-    	ansService.registerAnswers(answers, questionId);
+    	ansService.register(answers, questionId);
     	//list画面にリダイレクト
         return "redirect:/list";
     }
