@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Register</title>
+		<!-- cssを読み込む  -->
+		<link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
+	</head>
+	
+	<body>
+		<div class="btn_area">
+			<!-- Topに遷移させるボタン  -->
+			<button onclick="location.href='./top'">top</button>
+			<!--  logoutさせるボタン -->
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="logout">
+			</form>
+		</div>
+		<!-- formタグで入力されたデータを./Register/Confirmにpostで送信する  -->
+		<form th:action="@{/confirm}" method="post">
+			<div class="question_form_area">
+				<label for="question">問題:</label>
+				<!-- 問題文を入力する欄  -->
+				<textarea id="question" name="question"></textarea>
+			</div>
+			<div class="answer_forms_area">
+				<label for="answer">答え:</label>
+				<div class="answer_forms">
+					<div class="answer_form" id="answerform1">
+						<!-- 答えを入力する欄  -->
+						<input type="text" id="answer" name="answer">
+					</div>
+					<div class="answer_form" id="answerform1">
+						<!-- 答えを入力する欄  -->
+						<input type="text" id="answer" name="answer">
+					</div>
+				</div>
+			</div>
+			<div class="bottom_btn_area">
+				<!-- 1つ前のページに戻るボタン  -->
+				<button type="button" onclick="history.back()">戻る</button>
+				<!-- フォームデータを送信するボタン -->
+				<input type="submit" value="確認">
+				<!-- jsファイルのaddForm関数を実行するボタン  -->
+				<button type="button" onclick="addForm()">追加</button>
+			</div>
+		</form>
+	</body>
+</html>

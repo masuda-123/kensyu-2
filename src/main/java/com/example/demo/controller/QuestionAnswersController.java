@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.Answer;
 import com.example.demo.model.Question;
@@ -37,5 +39,17 @@ public class QuestionAnswersController {
 		model.addAttribute("ansList", ansList);
 		return "list";
 	}
+	
+	@GetMapping("/register")
+	public String getRegister() {
+		return "register";
+	}
+	
+    @PostMapping("/confirm")
+    public String getConfirm(@RequestParam("question") String question, @RequestParam("answer") String[] answers, Model model) {
+    	model.addAttribute("question", question);
+    	model.addAttribute("answers", answers);
+        return "confirm";
+    }
 
 }

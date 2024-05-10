@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Confirm</title>
+		<link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
+	</head>
+	<body>
+		<div class="btn_area">
+			<!-- Topに遷移させるボタン  -->
+			<button onclick="location.href='./top'">top</button>
+			<!--  logoutさせるボタン -->
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="logout">
+			</form>
+		</div>
+		<!-- formタグで入力されたデータを./RegisterCompleteにpostで送信  -->
+		<form th:action="@{/registerComplete}" method="post">
+			<div class="question_area">
+				<label>問題:</label>
+				<!-- 問題文を表示  -->
+				<p th:text="${question}" %></p>
+				<!-- 隠し入力欄に、問題文を設定  -->
+				<input type="hidden" id="question" name="question" th:value="${question}">
+			</div>
+			<div class="answers_area" th:each="answer:${answers}">
+				<label>答え:</label>
+				<div class="answers">
+					<!-- 答えを表示  -->
+					<p th:text="${answer}"></p>
+					<!-- 隠し入力欄に、答えを設定  -->
+					<input type="hidden" id="answer" name="answer" th:value="${answer}">
+				</div>
+			</div>
+			<div class="bottom_btn_area">
+				<!-- 1つ前のページに戻るボタン  -->
+				<button type="button" onclick="history.back()">戻る</button>
+				<!-- フォームデータを送信するボタン  -->
+				<input type="submit" value="登録">
+			</div>
+		</form>
+	</body>
+</html>
