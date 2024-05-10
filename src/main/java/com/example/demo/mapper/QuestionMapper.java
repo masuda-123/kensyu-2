@@ -11,4 +11,6 @@ import com.example.demo.model.Question;
 @Mapper
 public interface QuestionMapper {
 	ArrayList<Question> getQuestion();
-}
+	void registerQuestion(String question);
+	int findMaxId();
+	}

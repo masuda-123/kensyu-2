@@ -12,4 +12,5 @@ import com.example.demo.model.Answer;
 public interface AnswerMapper {
 	ArrayList<Answer> getAnswer();
 	ArrayList<Answer> findById(int questionId);
+	void registerAnswer(String answer, int questionId);
 }

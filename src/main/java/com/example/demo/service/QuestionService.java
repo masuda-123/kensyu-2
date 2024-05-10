@@ -29,8 +29,10 @@ public class QuestionService {
         return questionMapper.getQuestion();
     }
     
-    public Question saveQuestion(Question question) {
-        return questionRepository.save(question);
+    public int registerQuestion(String question) {
+        questionMapper.registerQuestion(question);
+        int questionId = questionMapper.findMaxId();
+        return questionId;
     }
 
 }

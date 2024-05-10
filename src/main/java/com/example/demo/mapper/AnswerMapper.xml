@@ -7,4 +7,7 @@
     <select id="findById" resultType="com.example.demo.model.Answer">
         SELECT * FROM correct_answers WHERE questions_id = #{questionId};
     </select>
+    <insert id="registerAnswer">
+		INSERT INTO correct_answers (questions_id, answer, created_at) values(#{questionId}, #{answer}, CURRENT_TIMESTAMP());
+	</insert>
 </mapper>

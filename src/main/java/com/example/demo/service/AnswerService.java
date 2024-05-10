@@ -32,8 +32,10 @@ public class AnswerService {
         return answerMapper.findById(questionId);
     }
     
-    public Answer saveAnswer(Answer answer) {
-        return answerRepository.save(answer);
+    public void registerAnswers(String[] answers, int questionId) {
+    	for(String answer : answers) {
+    		answerMapper.registerAnswer(answer, questionId);
+    	}
     }
 
 }

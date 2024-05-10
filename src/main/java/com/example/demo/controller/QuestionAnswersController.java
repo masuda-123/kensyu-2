@@ -46,10 +46,17 @@ public class QuestionAnswersController {
 	}
 	
     @PostMapping("/confirm")
-    public String getConfirm(@RequestParam("question") String question, @RequestParam("answer") String[] answers, Model model) {
+    public String postConfirm(@RequestParam("question") String question, @RequestParam("answer") String[] answers, Model model) {
     	model.addAttribute("question", question);
     	model.addAttribute("answers", answers);
         return "confirm";
+    }
+    
+    @PostMapping("/complete")
+    public String postComplete(@RequestParam("question") String question, @RequestParam("answer") String[] answers, Model model) {
+    	int questionId = queService.registerQuestion(question);
+    	ansService.registerAnswers(answers, questionId);
+        return "redirect:/list";
     }
 
 }

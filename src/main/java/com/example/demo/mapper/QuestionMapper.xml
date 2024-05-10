@@ -4,4 +4,10 @@
     <select id="getQuestion" resultType="com.example.demo.model.Question">
         SELECT * FROM questions;
     </select>
+    <insert id="registerQuestion">
+		INSERT INTO questions (question, created_at) values (#{question}, CURRENT_TIMESTAMP());
+	</insert>
+	<select id="findMaxId" resultType="int">
+        SELECT MAX(id) FROM questions;
+    </select>
 </mapper>
