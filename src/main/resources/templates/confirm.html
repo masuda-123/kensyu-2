@@ -16,6 +16,11 @@
 		</div>
 		<!-- formタグで入力されたデータを./RegisterCompleteにpostで送信  -->
 		<form th:action="@{/complete}" method="post">
+			<!-- エラーメッセージがある場合  -->
+			<th:block th:if="${!errorMessage.isEmpty()}">
+				<!-- エラーメッセージを表示  -->
+				<p class="error" th:utext="${errorMessage}">[]</p>
+			</th:block>
 			<div class="question_area">
 				<label>問題:</label>
 				<!-- 問題文を表示  -->
@@ -35,8 +40,11 @@
 			<div class="bottom_btn_area">
 				<!-- 1つ前のページに戻るボタン  -->
 				<button type="button" onclick="history.back()">戻る</button>
-				<!-- フォームデータを送信するボタン  -->
-				<input type="submit" value="登録">
+				<!-- エラーメッセージがない場合  -->
+				<th:block th:if="${errorMessage.isEmpty()}">
+					<!-- フォームデータを送信するボタンを表示  -->
+					<input type="submit" value="登録">
+				</th:block>
 			</div>
 		</form>
 	</body>

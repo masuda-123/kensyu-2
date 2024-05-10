@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.Answer;
 import com.example.demo.model.Question;
+import com.example.demo.other.Validation;
 import com.example.demo.service.AnswerService;
 import com.example.demo.service.QuestionService;
 
@@ -26,6 +27,9 @@ public class QuestionAnswersController {
     
     @Autowired
     private final AnswerService ansService;
+    
+    @Autowired
+    private final Validation val;
 	
 	@GetMapping("/list")
 	public String getList(Model model) {
@@ -47,6 +51,8 @@ public class QuestionAnswersController {
 	
     @PostMapping("/confirm")
     public String postConfirm(@RequestParam("question") String question, @RequestParam("answer") String[] answers, Model model) {
+		String errorMessage = val.validate(question, answers);
+		model.addAttribute("errorMessage", errorMessage);
     	model.addAttribute("question", question);
     	model.addAttribute("answers", answers);
         return "confirm";
