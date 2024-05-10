@@ -8,31 +8,27 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.mapper.QuestionMapper;
 import com.example.demo.model.Question;
-import com.example.demo.repository.QuestionRepository;
 
 @Service
-@Transactional
 public class QuestionService {
-    
-    @Autowired
-    private QuestionMapper questionMapper;
-    
-    private final QuestionRepository questionRepository;
-    
-    @Autowired
-    public QuestionService(QuestionRepository questionRepository) {
-        this.questionRepository = questionRepository;
-    }
-
-
-    public ArrayList<Question> getQuestion() {
-        return questionMapper.getQuestion();
-    }
-    
-    public int registerQuestion(String question) {
-        questionMapper.registerQuestion(question);
-        int questionId = questionMapper.findMaxId();
-        return questionId;
-    }
-
+	
+	//以下のクラスをインスタンス化
+	@Autowired
+	private QuestionMapper questionMapper;
+	
+	//問題を全件取得
+	@Transactional
+	public ArrayList<Question> getQuestion() {
+		return questionMapper.getQuestion();
+	}
+	
+	//問題を登録し、idを取得
+	@Transactional
+	public int registerQuestion(String question) {
+		//問題を登録
+		questionMapper.registerQuestion(question);
+		//idの最大値を取得
+		int questionId = questionMapper.findMaxId();
+		return questionId;
+	}
 }

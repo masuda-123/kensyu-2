@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class QuestionAnswersController {
 	
-	
+	//以下のクラスをインスタンス化
     @Autowired
     private final QuestionService queService;
     
@@ -33,35 +33,47 @@ public class QuestionAnswersController {
 	
 	@GetMapping("/list")
 	public String getList(Model model) {
+		//全ての問題データを取得
 		ArrayList<Question> queList = queService.getQuestion();
-		model.addAttribute("queList", queList);
+		//全ての答えデータを取得
 		ArrayList<ArrayList<Answer>> ansList = new ArrayList<>();
+		//それぞれの問題に紐づく答えデータをリスト化する
 		for(Question que: queList) {
 			ArrayList<Answer> ans = ansService.findById(que.getId());
 			ansList.add(ans);
 		}
+		//変数をモデルに登録
+		model.addAttribute("queList", queList);
 		model.addAttribute("ansList", ansList);
+		//list画面に遷移
 		return "list";
 	}
 	
 	@GetMapping("/register")
 	public String getRegister() {
+		//register画面に遷移
 		return "register";
 	}
 	
     @PostMapping("/confirm")
     public String postConfirm(@RequestParam("question") String question, @RequestParam("answer") String[] answers, Model model) {
+    	//Validationクラスで、入力された問題文や答えの文字数などをチェックし、エラーメッセージを取得
 		String errorMessage = val.validate(question, answers);
+		//変数をモデルに登録
 		model.addAttribute("errorMessage", errorMessage);
     	model.addAttribute("question", question);
     	model.addAttribute("answers", answers);
+    	//confirm画面に遷移
         return "confirm";
     }
     
     @PostMapping("/complete")
     public String postComplete(@RequestParam("question") String question, @RequestParam("answer") String[] answers, Model model) {
+    	//フォームから渡された問題を登録し、questionIdを取得
     	int questionId = queService.registerQuestion(question);
+    	//questionIdをもとに、フォームから渡された答えを登録
     	ansService.registerAnswers(answers, questionId);
+    	//list画面にリダイレクト
         return "redirect:/list";
     }
 

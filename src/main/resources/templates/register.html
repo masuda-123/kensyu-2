@@ -5,9 +5,11 @@
 		<title>Register</title>
 		<!-- cssを読み込む  -->
 		<link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
+		<!-- jsファイルで使う変数を宣言し、初期値を設定   -->
 		<script th:inline="javascript">
 			var i = 1
 		</script>
+		<!-- jsファイルを読み込む  -->
 		<script type="text/javascript" th:src="@{/js/add_answer_form.js}"></script>
 		<script type="text/javascript" th:src="@{/js/delete_answer_form.js}"></script>
 	</head>

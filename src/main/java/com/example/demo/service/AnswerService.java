@@ -8,34 +8,32 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.mapper.AnswerMapper;
 import com.example.demo.model.Answer;
-import com.example.demo.repository.AnswerRepository;
 
 @Service
-@Transactional
 public class AnswerService {
-    
-    @Autowired
-    private AnswerMapper answerMapper;
-    
-    private final AnswerRepository answerRepository;
-    
-    @Autowired
-    public AnswerService(AnswerRepository answerRepository) {
-        this.answerRepository = answerRepository;
-    }
-
-    public ArrayList<Answer> getAnswer() {
-        return answerMapper.getAnswer();
-    }
-    
-    public ArrayList<Answer> findById(int questionId) {
-        return answerMapper.findById(questionId);
-    }
-    
-    public void registerAnswers(String[] answers, int questionId) {
-    	for(String answer : answers) {
-    		answerMapper.registerAnswer(answer, questionId);
-    	}
-    }
-
+	
+	//以下のクラスをインスタンス化
+	@Autowired
+	private AnswerMapper answerMapper;
+	
+	//答えを全件取得
+	@Transactional
+	public ArrayList<Answer> getAnswer() {
+		return answerMapper.getAnswer();
+	}
+	
+	//questionIdをもとに答えを取得
+	@Transactional
+	public ArrayList<Answer> findById(int questionId) {
+		return answerMapper.findById(questionId);
+	}
+	
+	//答えを登録
+	@Transactional
+	public void registerAnswers(String[] answers, int questionId) {
+		//答えを一つ一つ登録
+		for(String answer : answers) {
+			answerMapper.registerAnswer(answer, questionId);
+		}
+	}
 }
