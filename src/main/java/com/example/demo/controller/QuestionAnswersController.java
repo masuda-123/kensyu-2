@@ -55,26 +55,25 @@ public class QuestionAnswersController {
 		return "register";
 	}
 	
-    @PostMapping("/confirm")
-    public String postConfirm(@RequestParam("question") String question, @RequestParam("answer") String[] answers, Model model) {
-    	//Validationクラスで、入力された問題文や答えの文字数などをチェックし、エラーメッセージを取得
+	@PostMapping("/confirm")
+	public String postConfirm(@RequestParam("question") String question, @RequestParam("answer") String[] answers, Model model) {
+		//Validationクラスで、入力された問題文や答えの文字数などをチェックし、エラーメッセージを取得
 		String errorMessage = val.validate(question, answers);
 		//変数をモデルに登録
 		model.addAttribute("errorMessage", errorMessage);
-    	model.addAttribute("question", question);
-    	model.addAttribute("answers", answers);
-    	//confirm画面に遷移
-        return "confirm";
-    }
-    
-    @PostMapping("/complete")
-    public String postComplete(@RequestParam("question") String question, @RequestParam("answer") String[] answers, Model model) {
-    	//フォームから渡された問題を登録し、questionIdを取得
-    	int questionId = queService.register(question);
-    	//questionIdをもとに、フォームから渡された答えを登録
-    	ansService.register(answers, questionId);
-    	//list画面にリダイレクト
-        return "redirect:/list";
-    }
-
+		model.addAttribute("question", question);
+		model.addAttribute("answers", answers);
+		//confirm画面に遷移
+		return "confirm";
+		}
+	
+	@PostMapping("/complete")
+	public String postComplete(@RequestParam("question") String question, @RequestParam("answer") String[] answers, Model model) {
+		//フォームから渡された問題を登録し、questionIdを取得
+		int questionId = queService.register(question);
+		//questionIdをもとに、フォームから渡された答えを登録
+		ansService.register(answers, questionId);
+		//list画面にリダイレクト
+		return "redirect:/list";
+	}
 }
