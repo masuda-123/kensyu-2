@@ -19,5 +19,9 @@ public class AnswerService {
     public ArrayList<Answer> getAnswer() {
         return answerMapper.getAnswer();
     }
+    
+    public ArrayList<Answer> findById(int questionId) {
+        return answerMapper.findById(questionId);
+    }
 
 }

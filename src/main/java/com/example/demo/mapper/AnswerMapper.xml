@@ -4,4 +4,7 @@
     <select id="getAnswer" resultType="com.example.demo.model.Answer">
         SELECT * FROM correct_answers;
     </select>
+    <select id="findById" resultType="com.example.demo.model.Answer">
+        SELECT * FROM correct_answers WHERE questions_id = #{questionId};
+    </select>
 </mapper>
