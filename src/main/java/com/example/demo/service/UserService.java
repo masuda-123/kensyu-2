@@ -8,14 +8,15 @@ import com.example.demo.mapper.UserMapper;
 import com.example.demo.model.User;
 
 @Service
-@Transactional
 public class UserService {
-    
-    @Autowired
-    private UserMapper userMapper;
-    
+	
+	//以下のクラスをインスタンス化
+	@Autowired
+	private UserMapper userMapper;
+	
+	//userIdをもとにユーザーを取得
+	@Transactional
 	public User findById(int userId) {
-        return userMapper.findById(userId);
-    }
-
+		return userMapper.findById(userId);
+	}
 }

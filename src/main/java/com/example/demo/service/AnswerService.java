@@ -10,18 +10,30 @@ import com.example.demo.mapper.AnswerMapper;
 import com.example.demo.model.Answer;
 
 @Service
-@Transactional
 public class AnswerService {
-    
-    @Autowired
-    private AnswerMapper answerMapper;
-
-    public ArrayList<Answer> getAnswer() {
-        return answerMapper.getAnswer();
-    }
-    
-    public ArrayList<Answer> findById(int questionId) {
-        return answerMapper.findById(questionId);
-    }
-
+	
+	//以下のクラスをインスタンス化
+	@Autowired
+	private AnswerMapper answerMapper;
+	
+	//答えを全件取得
+	@Transactional
+	public ArrayList<Answer> findAll() {
+		return answerMapper.findAll();
+	}
+	
+	//questionIdをもとに答えを取得
+	@Transactional
+	public ArrayList<Answer> findByQuestionId(int questionId) {
+		return answerMapper.findByQuestionId(questionId);
+	}
+	
+	//答えを登録
+	@Transactional
+	public void register(String[] answers, int questionId) {
+		//答えを一つ一つ登録
+		for(String answer : answers) {
+			answerMapper.register(answer, questionId);
+		}
+	}
 }

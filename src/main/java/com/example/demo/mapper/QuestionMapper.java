@@ -3,12 +3,17 @@ package com.example.demo.mapper;
 import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.Question;
 
-@Repository
 @Mapper
 public interface QuestionMapper {
-	ArrayList<Question> getQuestion();
+	//全ての問題を取得
+	ArrayList<Question> findAll();
+	
+	//問題を登録
+	void register(String question);
+	
+	//idの最大値を取得
+	int findMaxId();
 }

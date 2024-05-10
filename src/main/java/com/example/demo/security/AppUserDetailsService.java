@@ -1,4 +1,4 @@
-package com.example.demo.securingweb;
+package com.example.demo.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +12,7 @@ import com.example.demo.service.UserService;
 @Service
 public class AppUserDetailsService implements UserDetailsService {
 	
+	//以下のクラスをインスタンス化
 	@Autowired
 	UserService userService;
 	
@@ -40,5 +41,4 @@ public class AppUserDetailsService implements UserDetailsService {
 				.password(user.getPassword())
 				.build();
 	}
-
 }

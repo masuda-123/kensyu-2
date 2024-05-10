@@ -14,16 +14,19 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserController {
 	
-    @Autowired
-    private final UserService service;
-    
+	//以下のクラスをインスタンス化
+	@Autowired
+	private final UserService service;
+	
 	@GetMapping("/login")
 	public String getLogin() {
+		//login画面に遷移
 		return "login";
 	}
 	
 	@PostMapping("/logout")
 	public String getLogout() {
+		//login画面に遷移
 		return "login";
 	}
 }
