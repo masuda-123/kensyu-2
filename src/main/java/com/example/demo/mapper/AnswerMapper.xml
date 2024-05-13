@@ -10,7 +10,13 @@
 	<insert id="register">
 		INSERT INTO correct_answers (questions_id, answer, created_at) values(#{questionId}, #{answer}, CURRENT_TIMESTAMP());
 	</insert>
-	<delete id="delete">
+	<delete id="deleteByQuestionId">
 		DELETE FROM correct_answers WHERE questions_id = #{questionId};
+	</delete>
+	<update id="update">
+		UPDATE correct_answers SET answer = #{answer} WHERE id = #{answerId};
+	</update>
+	<delete id="deleteById">
+		DELETE FROM correct_answers WHERE id = #{answerId};
 	</delete>
 </mapper>

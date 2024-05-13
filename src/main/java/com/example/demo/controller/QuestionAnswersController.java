@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -73,7 +74,9 @@ public class QuestionAnswersController {
 		//フォームから渡された問題を登録し、questionIdを取得
 		int questionId = queService.register(question);
 		//questionIdをもとに、フォームから渡された答えを登録
-		ansService.register(answers, questionId);
+		for(String answer : answers) {
+			ansService.register(answer, questionId);
+		}
 		//list画面にリダイレクト
 		return "redirect:/list";
 	}
@@ -100,7 +103,7 @@ public class QuestionAnswersController {
 	public String postDeleteComplete(@RequestParam("questionId") int questionId, Model model) {
 		//フォームから渡された問題idをもとに、問題と答えを削除
 		queService.delete(questionId);
-		ansService.delete(questionId);
+		ansService.deleteByQuestionId(questionId);
 		//list画面にリダイレクト
 		return "redirect:/list";
 	}
@@ -131,5 +134,34 @@ public class QuestionAnswersController {
 		model.addAttribute("errorMessage", errorMessage);
 		//edit_confirm画面に遷移
 		return "edit_confirm";
+	}
+	
+	@PostMapping("/edit/complete")
+	public String postEditComplete(@RequestParam("question") String question,@RequestParam("answer") String[] answers, @RequestParam("questionId") 
+		int questionId, @RequestParam("answerId") int[] answersId, Model model) {
+		
+		//フォームから渡された問題idをもとに、問題を更新
+		queService.update(questionId, question);
+		//フォームから渡された問題idと一致するレコードを取得し、既存の答えのデータを取得
+		ArrayList<Answer> ansList = ansService.findByQuestionId(questionId);
+		
+		//フォームから渡された答えの数だけ処理を繰り返す
+		for(int i = 0; i < answers.length; i++) {
+			if( i < answersId.length) { //フォームから渡された答えの中に、idを持つものがあった場合（更新された答えがあった場合）
+				ansService.update(answers[i], answersId[i]); //答えを更新
+			} else { //idを持たない答えがあった場合（新たに追加された答えがあった場合）
+				ansService.register(answers[i], questionId); //答えを登録
+			}
+		}
+		//既存の答えの数の方が、フォームから渡されたidの数より多かった場合（削除された答えがあった場合）
+		if(ansList.size() > answersId.length) {
+			for(Answer ans : ansList) { //既存の答えの数だけ、処理を繰り返す
+				if(!(Arrays.stream(answersId).anyMatch(x -> x == ans.getId()))){ //既存の答えにしかないidがあった場合
+					ansService.deleteById(ans.getId()); //答えを削除
+				}
+			}
+		}
+		//list画面にリダイレクト
+		return "redirect:/list";
 	}
 }

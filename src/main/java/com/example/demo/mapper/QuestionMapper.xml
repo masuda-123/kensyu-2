@@ -16,4 +16,7 @@
 	<delete id="delete">
 		DELETE FROM questions WHERE id = #{questionId};
 	</delete>
+	<update id="update">
+		UPDATE questions SET question = #{question} WHERE id = #{questionId};
+	</update>
 </mapper>

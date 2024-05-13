@@ -43,4 +43,10 @@ public class QuestionService {
 	public void delete(int questionId) {
 		questionMapper.delete(questionId);
 	}
+	
+	//idをもとに問題を更新
+	@Transactional
+	public void update(int questionId, String question) {
+		questionMapper.update(questionId, question);
+	}
 }

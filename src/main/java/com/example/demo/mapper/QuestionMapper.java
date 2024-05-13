@@ -22,4 +22,7 @@ public interface QuestionMapper {
 	
 	//idから問題を削除
 	void delete(int questionId);
+	
+	//idをもとに問題を更新
+	void update(int questionId, String question);
 }
