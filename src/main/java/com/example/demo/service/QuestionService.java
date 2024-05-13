@@ -31,4 +31,10 @@ public class QuestionService {
 		int questionId = questionMapper.findMaxId();
 		return questionId;
 	}
+	
+	//idから問題を取得
+	@Transactional
+	public Question findById(int questionId) {
+		return questionMapper.findById(questionId);
+	}
 }

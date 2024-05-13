@@ -16,4 +16,7 @@ public interface QuestionMapper {
 	
 	//idの最大値を取得
 	int findMaxId();
+	
+	//idから問題を取得
+	Question findById(int questionId);
 }

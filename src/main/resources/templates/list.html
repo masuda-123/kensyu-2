@@ -35,7 +35,7 @@
 				<!-- Edit画面に遷移させる（パラメータに問題のidを設定）ボタン  -->
 				<a href="./Edit?id=<%= que.getId() %>"><button>編集</button></a>
 				<!-- Delete_confirm画面に遷移させる（パラメータに問題のidを設定）ボタン  -->
-				<a href="./Delete_confirm?id=<%= que.getId() %>"><button>削除</button></a>
+				<a th:href="@{/delete_confirm/{id}(id=${que.getId()})}"><button>削除</button></a>
 			</div>
 		</div>
 	</body>

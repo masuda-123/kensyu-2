@@ -10,4 +10,7 @@
 	<select id="findMaxId" resultType="int">
 		SELECT MAX(id) FROM questions;
 	</select>
+	<select id="findById" resultType="com.example.demo.model.Question">
+		SELECT * FROM questions WHERE id = #{questionId};
+	</select>
 </mapper>

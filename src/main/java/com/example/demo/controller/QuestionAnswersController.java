@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -55,8 +56,8 @@ public class QuestionAnswersController {
 		return "register";
 	}
 	
-	@PostMapping("/confirm")
-	public String postConfirm(@RequestParam("question") String question, @RequestParam("answer") String[] answers, Model model) {
+	@PostMapping("/register/confirm")
+	public String postRegisterConfirm(@RequestParam("question") String question, @RequestParam("answer") String[] answers, Model model) {
 		//Validationクラスで、入力された問題文や答えの文字数などをチェックし、エラーメッセージを取得
 		String errorMessage = val.validate(question, answers);
 		//変数をモデルに登録
@@ -65,15 +66,32 @@ public class QuestionAnswersController {
 		model.addAttribute("answers", answers);
 		//confirm画面に遷移
 		return "confirm";
-		}
+	}
 	
-	@PostMapping("/complete")
-	public String postComplete(@RequestParam("question") String question, @RequestParam("answer") String[] answers, Model model) {
+	@PostMapping("/register/complete")
+	public String postRegisterComplete(@RequestParam("question") String question, @RequestParam("answer") String[] answers, Model model) {
 		//フォームから渡された問題を登録し、questionIdを取得
 		int questionId = queService.register(question);
 		//questionIdをもとに、フォームから渡された答えを登録
 		ansService.register(answers, questionId);
 		//list画面にリダイレクト
 		return "redirect:/list";
+	}
+	
+	@GetMapping("/delete_confirm/{id}")
+	public String getDeleteConfirm(@PathVariable("id") int questionId,  Model model) {
+		Question que = queService.findById(questionId);
+		ArrayList<Answer> ansList = ansService.findByQuestionId(questionId);
+		//asListをArrayList型から配列に変換
+		String[] answers = new String[ansList.size()];
+		for(int i = 0; i < ansList.size(); i++) {
+			answers[i] = ansList.get(i).getAnswer();
+		}
+		//変数をモデルに登録
+		model.addAttribute("questionId", que.getId());
+		model.addAttribute("question", que.getQuestion());
+		model.addAttribute("answers", answers);
+		//confirm画面に遷移
+		return "delete_confirm";
 	}
 }
