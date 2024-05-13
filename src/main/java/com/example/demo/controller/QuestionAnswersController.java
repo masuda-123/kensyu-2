@@ -116,4 +116,20 @@ public class QuestionAnswersController {
 		//edit画面に遷移
 		return "edit";
 	}
+	
+	@PostMapping("/edit/confirm")
+	public String postEditConfirm(@RequestParam("question") String question,@RequestParam("answer") String[] answers, @RequestParam("questionId") 
+		int questionId, @RequestParam("answerId") int[] answersId, Model model) {
+		
+		//Validationクラスで、入力された問題文や答えの文字数などをチェックし、エラーメッセージを取得
+		String errorMessage = val.validate(question, answers);
+		//変数をモデルに登録
+		model.addAttribute("questionId", questionId);
+		model.addAttribute("question", question);
+		model.addAttribute("answers", answers);
+		model.addAttribute("answersId", answersId);
+		model.addAttribute("errorMessage", errorMessage);
+		//edit_confirm画面に遷移
+		return "edit_confirm";
+	}
 }

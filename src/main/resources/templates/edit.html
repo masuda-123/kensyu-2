@@ -38,7 +38,7 @@
 			<div class="question_form_area">
 				<label for="question">問題:</label>
 				<!-- 問題文を入力する欄（初期値として問題文を設定）  -->
-				<textarea id="question" name="question"  th:value="${que.getQuestion()}"></textarea>
+				<textarea id="question" name="question">[[${que.getQuestion()}]]</textarea>
 			</div>
 			
 			<div class="answer_forms_area">
