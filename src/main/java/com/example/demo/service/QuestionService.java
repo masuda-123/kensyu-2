@@ -37,4 +37,10 @@ public class QuestionService {
 	public Question findById(int questionId) {
 		return questionMapper.findById(questionId);
 	}
+	
+	//idから問題を削除
+	@Transactional
+	public void delete(int questionId) {
+		questionMapper.delete(questionId);
+	}
 }

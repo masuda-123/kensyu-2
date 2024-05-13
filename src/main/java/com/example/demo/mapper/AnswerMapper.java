@@ -16,4 +16,7 @@ public interface AnswerMapper {
 	
 	//答えを登録
 	void register(String answer, int questionId);
+	
+	//questionIdをもとに答えを削除
+	void delete(int questionId);
 }

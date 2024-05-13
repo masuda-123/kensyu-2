@@ -19,4 +19,7 @@ public interface QuestionMapper {
 	
 	//idから問題を取得
 	Question findById(int questionId);
+	
+	//idから問題を削除
+	void delete(int questionId);
 }

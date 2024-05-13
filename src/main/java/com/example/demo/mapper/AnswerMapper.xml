@@ -10,4 +10,7 @@
 	<insert id="register">
 		INSERT INTO correct_answers (questions_id, answer, created_at) values(#{questionId}, #{answer}, CURRENT_TIMESTAMP());
 	</insert>
+	<delete id="delete">
+		DELETE FROM correct_answers WHERE questions_id = #{questionId};
+	</delete>
 </mapper>

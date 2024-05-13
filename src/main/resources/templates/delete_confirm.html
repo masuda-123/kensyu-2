@@ -27,6 +27,7 @@
 			<div class="answers_area">
 				<label>答え:</label>
 				<div class="answers">
+					<!-- 答えの数だけ繰り返す  -->
 					<th:block th:each="answer : ${answers}">
 						<!-- 答えを表示  -->
 						<p th:text="${answer}"></p>

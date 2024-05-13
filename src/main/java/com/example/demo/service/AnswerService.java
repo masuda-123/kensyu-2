@@ -36,4 +36,10 @@ public class AnswerService {
 			answerMapper.register(answer, questionId);
 		}
 	}
+	
+	//questionIdをもとに答えを削除
+	@Transactional
+	public void delete(int questionId) {
+		answerMapper.delete(questionId);
+	}
 }

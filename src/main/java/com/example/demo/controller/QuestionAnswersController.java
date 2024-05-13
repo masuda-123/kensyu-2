@@ -80,9 +80,10 @@ public class QuestionAnswersController {
 	
 	@GetMapping("/delete_confirm/{id}")
 	public String getDeleteConfirm(@PathVariable("id") int questionId,  Model model) {
+		//パスから取得した問題Idをもとに、問題と答えを取得
 		Question que = queService.findById(questionId);
 		ArrayList<Answer> ansList = ansService.findByQuestionId(questionId);
-		//asListをArrayList型から配列に変換
+		//ansListからanswerを取得し、配列に格納
 		String[] answers = new String[ansList.size()];
 		for(int i = 0; i < ansList.size(); i++) {
 			answers[i] = ansList.get(i).getAnswer();
@@ -91,7 +92,16 @@ public class QuestionAnswersController {
 		model.addAttribute("questionId", que.getId());
 		model.addAttribute("question", que.getQuestion());
 		model.addAttribute("answers", answers);
-		//confirm画面に遷移
+		//delete_confirm画面に遷移
 		return "delete_confirm";
+	}
+	
+	@PostMapping("/delete/complete")
+	public String postDeleteComplete(@RequestParam("questionId") int questionId, Model model) {
+		//フォームから渡された問題idをもとに、問題と答えを削除
+		queService.delete(questionId);
+		ansService.delete(questionId);
+		//list画面にリダイレクト
+		return "redirect:/list";
 	}
 }

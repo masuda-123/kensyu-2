@@ -13,4 +13,7 @@
 	<select id="findById" resultType="com.example.demo.model.Question">
 		SELECT * FROM questions WHERE id = #{questionId};
 	</select>
+	<delete id="delete">
+		DELETE FROM questions WHERE id = #{questionId};
+	</delete>
 </mapper>
