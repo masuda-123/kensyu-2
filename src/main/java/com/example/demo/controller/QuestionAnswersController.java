@@ -104,4 +104,16 @@ public class QuestionAnswersController {
 		//list画面にリダイレクト
 		return "redirect:/list";
 	}
+	
+	@GetMapping("/edit/{id}")
+	public String getEdit(@PathVariable("id") int questionId,  Model model) {
+		//パスから取得した問題Idをもとに、問題と答えを取得
+		Question que = queService.findById(questionId);
+		ArrayList<Answer> ansList = ansService.findByQuestionId(questionId);
+		//変数をモデルに登録
+		model.addAttribute("que", que);
+		model.addAttribute("ansList", ansList);
+		//edit画面に遷移
+		return "edit";
+	}
 }
