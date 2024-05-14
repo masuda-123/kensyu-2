@@ -17,9 +17,9 @@
 		</div>
 		<h2>テスト結果</h2>
 		<!-- ユーザー名を表示  -->
-		<p th:text="${userName}">さん</p>
+		<p>[[${userName}]]さん</p>
 		<!-- 全体の問題数と正解数を表示  -->
-		<p>[[${queScore}]]問中[[${correctQueCnt}]]問正解です。</p>
+		<p>[[${queCnt}]]問中[[${correctQueCnt}]]問正解です。</p>
 		<!-- 点数を表示  -->
 		<p>[[${point}]]点でした。</p>
 		
