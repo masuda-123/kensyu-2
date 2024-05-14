@@ -145,7 +145,7 @@ public class QuestionAnswersController {
 		model.addAttribute("question", question);
 		model.addAttribute("answers", answers);
 		model.addAttribute("answersId", answersId);
-		//edit_confirm画面に遷移
+		//edit_back画面に遷移
 		return "edit_back";
 	}
 	
