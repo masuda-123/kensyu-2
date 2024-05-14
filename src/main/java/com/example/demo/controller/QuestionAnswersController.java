@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -225,16 +227,24 @@ public class QuestionAnswersController {
 		//点数を計算
 		int point = Math.round(100 * correctQueCnt / questionsId.length);
 		
+		//sessionからユーザー情報を取得
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		//Principalからログインユーザの情報を取得
 		String userName = auth.getName();
+		
+		//現在の日時をtimestampに格納
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		//日時のフィーマットを指定
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		String strTimestamp = sdf.format(timestamp);
 		
 		//変数をモデルに登録
 		model.addAttribute("correctQueCnt", correctQueCnt);
 		model.addAttribute("queCnt", questionsId.length);
 		model.addAttribute("point", point);
 		model.addAttribute("userName", userName);
-		//list画面に遷移
+		model.addAttribute("dateTime",strTimestamp);
+		
+		//result画面に遷移
 		return "result";
 	}
 }
