@@ -2,8 +2,11 @@ package com.example.demo.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -185,5 +188,53 @@ public class QuestionAnswersController {
 		}
 		//list画面にリダイレクト
 		return "redirect:/list";
+	}
+	
+	@GetMapping("/test")
+	public String getTest(Model model) {
+		//全ての問題データを取得
+		ArrayList<Question> queList = queService.findAll();
+		//問題の順番をランダムに入れ替える
+		Collections.shuffle(queList);
+		//変数をモデルに登録
+		model.addAttribute("queList", queList);
+		//test画面に遷移
+		return "test";
+	}
+	
+	@PostMapping("/test/result")
+	public String getResult(@RequestParam("questionId") int[] questionsId, @RequestParam("answer") String[] answers, Model model) {
+		int correctQueCnt = 0;
+		
+		//questionsIdの要素数分だけ処理を繰り返す
+		for(int i = 0; i < questionsId.length; i++) {
+			//search_answerメソッドを呼び出して、answerと一致するレコードを取得
+			ArrayList<Answer> ansList = ansService.findByAnswer(answers[i]);
+			//ansListの要素数分だけ繰り返す
+			for(Answer ans : ansList ) {
+				//入力された答えと一致するレコードがあり、答えに紐づく問題idが一致する場合
+				if(ans.getId() != 0 && ans.getQuestions_id() == questionsId[i]) {
+					//正解の問題数をカウントアップ
+					correctQueCnt ++;
+					//繰り返し処理を抜ける
+					break;
+				}
+			}
+		}
+		
+		//点数を計算
+		int point = Math.round(100 * correctQueCnt / questionsId.length);
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		//Principalからログインユーザの情報を取得
+		String userName = auth.getName();
+		
+		//変数をモデルに登録
+		model.addAttribute("correctQueCnt", correctQueCnt);
+		model.addAttribute("queCnt", questionsId.length);
+		model.addAttribute("point", point);
+		model.addAttribute("userName", userName);
+		//list画面に遷移
+		return "result";
 	}
 }

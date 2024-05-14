@@ -19,4 +19,7 @@
 	<delete id="deleteById">
 		DELETE FROM correct_answers WHERE id = #{answerId};
 	</delete>
+	<select id="findByAnswer" resultType="com.example.demo.model.Answer">
+		SELECT * FROM correct_answers WHERE answer = #{answer};
+	</select>
 </mapper>

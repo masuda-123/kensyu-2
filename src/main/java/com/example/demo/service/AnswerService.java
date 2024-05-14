@@ -51,4 +51,10 @@ public class AnswerService {
 	public void deleteById(int answerId) {
 		answerMapper.deleteById(answerId);
 	}
+	
+	//答えを全件取得
+	@Transactional
+	public ArrayList<Answer> findByAnswer(String answer) {
+		return answerMapper.findByAnswer(answer);
+	}
 }

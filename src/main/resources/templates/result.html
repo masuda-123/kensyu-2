@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Result</title>
+		<!-- cssを読み込む  -->
+		<link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
+	</head>
+	<body>
+		<div class="btn_area">
+			<!-- Top画面に遷移させるボタン  -->
+			<button onclick="location.href='../top'">top</button>
+			<!--  logoutさせるボタン -->
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="logout">
+			</form>
+		</div>
+		<h2>テスト結果</h2>
+		<!-- ユーザー名を表示  -->
+		<p th:text="${userName}">さん</p>
+		<!-- 全体の問題数と正解数を表示  -->
+		<p>[[${queScore}]]問中[[${correctQueCnt}]]問正解です。</p>
+		<!-- 点数を表示  -->
+		<p>[[${point}]]点でした。</p>
+		
+		<div class="bottom_menu_area">
+			<!-- 現在日時を表示  -->
+<!--			<p>[[${data}]]</p>-->
+			<!-- History画面に遷移するボタン  -->
+			<a href='../history'>採点結果履歴へ</a>
+		</div>
+	</body>
+</html>
