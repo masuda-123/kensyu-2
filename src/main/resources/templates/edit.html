@@ -36,7 +36,6 @@
 				<!-- 問題文を入力する欄（初期値として問題文を設定）  -->
 				<textarea id="question" name="question">[[${question}]]</textarea>
 			</div>
-			
 			<div class="answer_forms_area">
 				<label for="answer">答え:</label>
 				<div class="answer_forms">
@@ -45,6 +44,11 @@
 						<div class="answer_form" th:id="'answer_form' + ${ansStatus.count}">
 							<!-- 答えの文を表示  -->
 							<input type="text" id="answer" name="answer" th:value="${answer}">
+							<!-- 答えidより渡された答えの数が少なかった場合、もしくは同じだった場合-->
+							<th:block th:if="${answers.length <= answersId.length}">
+								<!-- 隠し入力欄に、答えidを設定  -->
+								<input type="hidden" id="answerId" name="answerId" th:value="${answersId[ansStatus.index]}">
+							</th:block>
 							<!-- 1つ目の答え以外の場合  -->
 							<th:block th:if="${ansStatus.index != 0}">
 								<!-- 削除ボタンを表示し、ボタンを押下後、jsファイルのdeleteForm関数を実行（引数としてタグのidを渡す）  -->
@@ -52,10 +56,13 @@
 							</th:block>
 						</div>
 					</th:block>
-					<!-- 答えidの数だけ処理を繰り返す  -->
-					<th:block th:each="answerId : ${answersId}">
-						<!-- 隠し入力欄に、答えidを設定  -->
-						<input type="hidden" id="answerId" name="answerId" th:value="${answerId}">
+					<!-- 答えidより渡された答えの数が多かった場合-->
+					<th:block th:if="${answers.length > answersId.length}">
+						<!-- 答えidの数だけ処理を繰り返す  -->
+						<th:block th:each="answerId : ${answersId}">
+							<!-- 隠し入力欄に、答えidを設定  -->
+							<input type="hidden" id="answerId" name="answerId" th:value="${answerId}">
+						</th:block>
 					</th:block>
 				</div>
 			</div>
