@@ -62,8 +62,8 @@
 			</div>
 		</form>
 		
-		<!-- formタグで入力されたデータを/edit/backにpostで送信する  -->
-		<form th:action="@{/edit/back}" method="post">
+		<!-- formタグで入力されたデータを/edit/{id}にpostで送信する  -->
+		<form th:action="@{/edit/{id}(id=${questionId})}" method="post">
 			<input type="hidden" id="questionId" name="questionId" th:value="${questionId}">
 			<input type="hidden" id="question" name="question" th:value="${question}">
 			<!-- 答えの数だけ繰り返す  -->

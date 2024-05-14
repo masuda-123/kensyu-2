@@ -113,9 +113,18 @@ public class QuestionAnswersController {
 		//パスから取得した問題Idをもとに、問題と答えを取得
 		Question que = queService.findById(questionId);
 		ArrayList<Answer> ansList = ansService.findByQuestionId(questionId);
+		//ansListからanswer、idを取得し、それぞれ配列に格納
+		String[] answers = new String[ansList.size()];
+		int[] answersId = new int[ansList.size()];
+		for(int i = 0; i < ansList.size(); i++) {
+			answers[i] = ansList.get(i).getAnswer();
+			answersId[i] = ansList.get(i).getId();
+		}
 		//変数をモデルに登録
-		model.addAttribute("que", que);
-		model.addAttribute("ansList", ansList);
+		model.addAttribute("questionId", questionId);
+		model.addAttribute("question", que.getQuestion());
+		model.addAttribute("answers", answers);
+		model.addAttribute("answersId", answersId);
 		//edit画面に遷移
 		return "edit";
 	}
@@ -136,7 +145,7 @@ public class QuestionAnswersController {
 		return "edit_confirm";
 	}
 	
-	@PostMapping("/edit/back")
+	@PostMapping("/edit/{id}")
 	public String postEditConfirmBack(@RequestParam("question") String question, @RequestParam("answer") String[] answers, @RequestParam("questionId") 
 	int questionId, @RequestParam("answerId") int[] answersId, Model model) {
 		
@@ -145,8 +154,8 @@ public class QuestionAnswersController {
 		model.addAttribute("question", question);
 		model.addAttribute("answers", answers);
 		model.addAttribute("answersId", answersId);
-		//edit_back画面に遷移
-		return "edit_back";
+		//edit画面に遷移
+		return "edit";
 	}
 	
 	@PostMapping("/edit/complete")
