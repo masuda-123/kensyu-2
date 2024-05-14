@@ -54,13 +54,31 @@
 				</div>
 			</div>
 			<div class="bottom_btn_area">
-				<!-- 1つ前のページに戻るボタン  -->
-				<button type="button" onclick="history.back()">戻る</button>
 				<!-- エラーメッセージがない場合  -->
 				<th:block th:if="${errorMessage.isEmpty()}">
 					<!-- フォームデータを送信するボタン  -->
 					<input type="submit" value="更新">
 				</th:block>
+			</div>
+		</form>
+		
+		<!-- formタグで入力されたデータを/edit/backにpostで送信する  -->
+		<form th:action="@{/edit/back}" method="post">
+			<input type="hidden" id="questionId" name="questionId" th:value="${questionId}">
+			<input type="hidden" id="question" name="question" th:value="${question}">
+			<!-- 答えの数だけ繰り返す  -->
+			<th:block th:each="answer : ${answers}">
+				<!-- 隠し入力欄に、答えを設定  -->
+				<input type="hidden" id="answer" name="answer" th:value="${answer}">
+			</th:block>
+			<!-- 答えidの数だけ繰り返す  -->
+			<th:block th:each="answerId : ${answersId}">
+				<!-- 隠し入力欄に、答えidを設定  -->
+				<input type="hidden" id="answerId" name="answerId" th:value="${answerId}">
+			</th:block>
+			<div class="bottom_btn_area">
+				<!-- edit画面に戻るボタン  -->
+				<input type="submit" value="戻る">
 			</div>
 		</form>
 	</body>
