@@ -7,14 +7,14 @@
 </head>
 	<body>
 		<div class="btn_area">
-			<!-- Topに遷移させるボタン  -->
+			<!-- topに遷移させるボタン  -->
 			<button onclick="location.href='./top'">top</button>
 			<!--  logoutさせるボタン -->
 			<form th:action="@{/logout}" method="post">
 				<input type="submit" value="logout">
 			</form>
 		</div>
-		<!-- Register画面に遷移させるボタン  -->
+		<!-- register画面に遷移させるボタン  -->
 		<button class="new_btn" onclick="location.href='./register'" >新規登録</button>
 		<!-- 問題の数だけ処理を繰り返す  -->
 		<div class="list_area" th:each="que, queStatus:${queList}">
@@ -32,10 +32,10 @@
 					</div>
 				</div>
 			<div>
-				<!-- Edit画面に遷移させる（パラメータに問題のidを設定）ボタン  -->
-				<a href="./Edit?id=<%= que.getId() %>"><button>編集</button></a>
-				<!-- Delete_confirm画面に遷移させる（パラメータに問題のidを設定）ボタン  -->
-				<a href="./Delete_confirm?id=<%= que.getId() %>"><button>削除</button></a>
+				<!-- edit画面に遷移させる（パラメータに問題のidを設定）ボタン  -->
+				<a th:href="@{/edit/{id}(id=${que.getId()})}"><button>編集</button></a>
+				<!-- delete_confirm画面に遷移させる（パラメータに問題のidを設定）ボタン  -->
+				<a th:href="@{/delete_confirm/{id}(id=${que.getId()})}"><button>削除</button></a>
 			</div>
 		</div>
 	</body>

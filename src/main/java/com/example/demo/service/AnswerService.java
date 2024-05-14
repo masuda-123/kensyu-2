@@ -30,10 +30,25 @@ public class AnswerService {
 	
 	//答えを登録
 	@Transactional
-	public void register(String[] answers, int questionId) {
-		//答えを一つ一つ登録
-		for(String answer : answers) {
-			answerMapper.register(answer, questionId);
-		}
+	public void register(String answer, int questionId) {
+		answerMapper.register(answer, questionId);
+	}
+	
+	//questionIdをもとに答えを削除
+	@Transactional
+	public void deleteByQuestionId(int questionId) {
+		answerMapper.deleteByQuestionId(questionId);
+	}
+	
+	//idをもとに答えを更新
+	@Transactional
+	public void update(String answer, int answerId) {
+		answerMapper.update(answer, answerId);
+	}
+	
+	//idをもとに答えを削除
+	@Transactional
+	public void deleteById(int answerId) {
+		answerMapper.deleteById(answerId);
 	}
 }

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Delete_confirm</title>
+		<!-- cssを読み込む  -->
+		<link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
+	</head>
+	<body>
+		<div class="btn_area">
+			<!-- Topに遷移させるボタン  -->
+			<button onclick="location.href='../top'">top</button>
+			<!--  logoutさせるボタン -->
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="logout">
+			</form>
+		</div>
+		<!-- formタグで入力されたデータを/delete/completeにpostで送信  -->
+		<form th:action="@{/delete/complete}" method="post">
+			<div class="question_area">
+				<label>問題:</label>
+				<!-- 問題文を表示  -->
+				<p th:text="${question}" %></p>
+				<!-- 隠し入力欄に、問題文を設定  -->
+				<input type="hidden" id="questionId" name="questionId" th:value="${questionId}">
+			</div>
+			<div class="answers_area">
+				<label>答え:</label>
+				<div class="answers">
+					<!-- 答えの数だけ繰り返す  -->
+					<th:block th:each="answer : ${answers}">
+						<!-- 答えを表示  -->
+						<p th:text="${answer}"></p>
+					</th:block>
+				</div>
+			</div>
+			<div class="bottom_btn_area">
+				<!-- 1つ前のページに戻るボタン  -->
+				<button type="button" onclick="history.back()">戻る</button>
+				<!-- フォームデータを送信するボタン  -->
+				<input type="submit" value="削除">
+			</div>
+		</form>
+	</body>
+</html>

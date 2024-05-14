@@ -31,4 +31,22 @@ public class QuestionService {
 		int questionId = questionMapper.findMaxId();
 		return questionId;
 	}
+	
+	//idから問題を取得
+	@Transactional
+	public Question findById(int questionId) {
+		return questionMapper.findById(questionId);
+	}
+	
+	//idから問題を削除
+	@Transactional
+	public void delete(int questionId) {
+		questionMapper.delete(questionId);
+	}
+	
+	//idをもとに問題を更新
+	@Transactional
+	public void update(int questionId, String question) {
+		questionMapper.update(questionId, question);
+	}
 }
