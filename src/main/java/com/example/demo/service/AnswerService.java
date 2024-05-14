@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.mapper.AnswerMapper;
 import com.example.demo.model.Answer;
+import com.example.demo.repository.AnswerMapper;
 
 @Service
 public class AnswerService {
