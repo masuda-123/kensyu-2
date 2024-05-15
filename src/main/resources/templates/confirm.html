@@ -14,16 +14,14 @@
 				<input type="submit" value="logout">
 			</form>
 		</div>
-		<!-- formタグで入力されたデータを./RegisterCompleteにpostで送信  -->
+		<!-- formタグで入力されたデータを./register/completeにpostで送信  -->
 		<form th:action="@{/register/complete}" method="post">
 			<!-- エラーメッセージがある場合  -->
 			<th:block th:if="${!errorMessage.isEmpty()}">
-				<!-- エラーメッセージを表示  -->
 				<p class="error" th:utext="${errorMessage}"></p>
 			</th:block>
 			<div class="question_area">
 				<label>問題:</label>
-				<!-- 問題文を表示  -->
 				<p th:text="${question}" %></p>
 				<!-- 隠し入力欄に、問題文を設定  -->
 				<input type="hidden" id="question" name="question" th:value="${question}">
@@ -33,7 +31,6 @@
 				<div class="answers">
 					<!-- 答えの数だけ繰り返す  -->
 					<th:block th:each="answer : ${answers}">
-					<!-- 答えを表示  -->
 					<p th:text="${answer}"></p>
 					<!-- 隠し入力欄に、答えを設定  -->
 					<input type="hidden" id="answer" name="answer" th:value="${answer}">
@@ -41,13 +38,23 @@
 				</div>
 			</div>
 			<div class="bottom_btn_area">
-				<!-- 1つ前のページに戻るボタン  -->
-				<button type="button" onclick="history.back()">戻る</button>
 				<!-- エラーメッセージがない場合  -->
 				<th:block th:if="${errorMessage.isEmpty()}">
-					<!-- フォームデータを送信するボタンを表示  -->
 					<input type="submit" value="登録">
 				</th:block>
+			</div>
+		</form>
+		<!-- formタグで入力されたデータを/registerにpostで送信する  -->
+		<form th:action="@{/register}" method="post">
+			<input type="hidden" id="questionId" name="questionId" th:value="${questionId}">
+			<input type="hidden" id="question" name="question" th:value="${question}">
+			<!-- 答えの数だけ繰り返す  -->
+			<th:block th:each="answer : ${answers}">
+				<!-- 隠し入力欄に、答えを設定  -->
+				<input type="hidden" id="answer" name="answer" th:value="${answer}">
+			</th:block>
+			<div class="bottom_btn_area">
+				<input type="submit" value="戻る">
 			</div>
 		</form>
 	</body>

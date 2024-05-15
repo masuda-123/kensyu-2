@@ -57,7 +57,12 @@ public class QuestionAnswersController {
 	}
 	
 	@GetMapping("/register")
-	public String getRegister() {
+	public String getRegister(Model model) {
+		String question = "";
+		String[] answers = new String[0];
+		//変数をモデルに登録
+		model.addAttribute("question", question);
+		model.addAttribute("answers", answers);
 		//register画面に遷移
 		return "register";
 	}
@@ -72,6 +77,16 @@ public class QuestionAnswersController {
 		model.addAttribute("answers", answers);
 		//confirm画面に遷移
 		return "confirm";
+	}
+	
+	@PostMapping("/register")
+	public String postRegister(@RequestParam("question") String question, @RequestParam("answer") String[] answers, Model model) {
+		
+		//変数をモデルに登録
+		model.addAttribute("question", question);
+		model.addAttribute("answers", answers);
+		//register画面に遷移
+		return "register";
 	}
 	
 	@PostMapping("/register/complete")
@@ -151,7 +166,7 @@ public class QuestionAnswersController {
 	}
 	
 	@PostMapping("/edit/{id}")
-	public String postEditConfirmBack(@RequestParam("question") String question, @RequestParam("answer") String[] answers, @RequestParam("questionId") 
+	public String postEdit(@RequestParam("question") String question, @RequestParam("answer") String[] answers, @RequestParam("questionId") 
 	int questionId, @RequestParam("answerId") int[] answersId, Model model) {
 		
 		//変数をモデルに登録
@@ -205,7 +220,7 @@ public class QuestionAnswersController {
 	}
 	
 	@PostMapping("/test/result")
-	public String getResult(@RequestParam("questionId") int[] questionsId, @RequestParam("answer") String[] answers, Model model) {
+	public String postResult(@RequestParam("questionId") int[] questionsId, @RequestParam("answer") String[] answers, Model model) {
 		int correctQueCnt = 0;
 		
 		//questionsIdの要素数分だけ処理を繰り返す
