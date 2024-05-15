@@ -52,8 +52,19 @@ public class QuestionAnswersController {
 		//変数をモデルに登録
 		model.addAttribute("queList", queList);
 		model.addAttribute("ansList", ansList);
-		//list画面に遷移
-		return "list";
+		
+		if(queList.isEmpty()) { //登録されている問題がなかった場合
+			String question = "";
+			String[] answers = new String[0];
+			//変数をモデルに登録
+			model.addAttribute("question", question);
+			model.addAttribute("answers", answers);
+			//register画面に遷移
+			return "register";
+		} else { //登録されている問題があった場合
+			//list画面に遷移
+			return "list";
+		}
 	}
 	
 	@GetMapping("/register")
@@ -81,7 +92,6 @@ public class QuestionAnswersController {
 	
 	@PostMapping("/register")
 	public String postRegister(@RequestParam("question") String question, @RequestParam("answer") String[] answers, Model model) {
-		
 		//変数をモデルに登録
 		model.addAttribute("question", question);
 		model.addAttribute("answers", answers);

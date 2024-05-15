@@ -44,7 +44,7 @@
 		</form>
 		<!-- formタグで入力されたデータを/registerにpostで送信する  -->
 		<form th:action="@{/register}" method="post">
-			<input type="hidden" id="questionId" name="questionId" th:value="${questionId}">
+			<!-- 隠し入力欄に、問題文を設定  -->
 			<input type="hidden" id="question" name="question" th:value="${question}">
 			<!-- 答えの数だけ繰り返す  -->
 			<th:block th:each="answer : ${answers}">
