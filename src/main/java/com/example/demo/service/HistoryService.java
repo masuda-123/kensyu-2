@@ -16,10 +16,16 @@ public class HistoryService {
 	@Autowired
 	private HistoryMapper historyMapper;
 	
-	//questionIdをもとに答えを取得
+	//questionIdをもとに履歴を取得
 	@Transactional
 	public ArrayList<History> findByUserId(int userId) {
 		return historyMapper.findByUserId(userId);
+	}
+	
+	//履歴を登録
+	@Transactional
+	public void register(int userId, int point) {
+		historyMapper.register(userId, point);
 	}
 
 }

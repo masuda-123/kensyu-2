@@ -10,4 +10,7 @@ import com.example.demo.model.History;
 public interface HistoryMapper {
 	//userIdをもとに履歴を取得
 	ArrayList<History> findByUserId(int userId);
+	
+	//履歴を登録
+	void register(int userId, int point);
 }

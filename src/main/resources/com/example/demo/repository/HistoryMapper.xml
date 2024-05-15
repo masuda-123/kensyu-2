@@ -4,4 +4,7 @@
 	<select id="findByUserId" resultType="com.example.demo.model.History">
 		SELECT * FROM histories WHERE user_id = #{userId};
 	</select>
+	<insert id="register">
+		INSERT INTO histories (user_id, point, created_at) VALUES (#{userId}, #{point}, CURRENT_TIMESTAMP());
+	</insert>
 </mapper>

@@ -14,7 +14,7 @@
 		DELETE FROM correct_answers WHERE questions_id = #{questionId};
 	</delete>
 	<update id="update">
-		UPDATE correct_answers SET answer = #{answer} WHERE id = #{answerId};
+		UPDATE correct_answers SET answer = #{answer}, updated_at = CURRENT_TIMESTAMP() WHERE id = #{answerId};
 	</update>
 	<delete id="deleteById">
 		DELETE FROM correct_answers WHERE id = #{answerId};

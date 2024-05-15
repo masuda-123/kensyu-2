@@ -262,7 +262,7 @@ public class QuestionAnswersController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		int userId = Integer.parseInt(auth.getName());
 		//userIdをもとにuserデータを取得
-		User user= userService.findById(userId);
+		User user = userService.findById(userId);
 		//userデータからuserNameを取得
 		String userName = user.getName();
 		
@@ -273,6 +273,7 @@ public class QuestionAnswersController {
 		String strTimestamp = sdf.format(timestamp);
 		
 		//履歴を登録
+		hisService.register(userId, point);
 		
 		//変数をモデルに登録
 		model.addAttribute("correctQueCnt", correctQueCnt);
