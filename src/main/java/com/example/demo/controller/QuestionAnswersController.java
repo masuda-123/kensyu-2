@@ -17,9 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.Answer;
 import com.example.demo.model.Question;
+import com.example.demo.model.User;
 import com.example.demo.other.Validation;
 import com.example.demo.service.AnswerService;
+import com.example.demo.service.HistoryService;
 import com.example.demo.service.QuestionService;
+import com.example.demo.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -36,6 +39,12 @@ public class QuestionAnswersController {
     
     @Autowired
     private final Validation val;
+    
+    @Autowired
+    private final UserService userService;
+    
+    @Autowired
+    private final HistoryService hisService;
 	
 	@GetMapping("/list")
 	public String getList(Model model) {
@@ -249,15 +258,21 @@ public class QuestionAnswersController {
 		//点数を計算
 		int point = Math.round(100 * correctQueCnt / questionsId.length);
 		
-		//sessionからユーザー情報を取得
+		//sessionからuserIdを取得
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String userName = auth.getName();
+		int userId = Integer.parseInt(auth.getName());
+		//userIdをもとにuserデータを取得
+		User user= userService.findById(userId);
+		//userデータからuserNameを取得
+		String userName = user.getName();
 		
 		//現在の日時をtimestampに格納
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		//日時のフィーマットを指定
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String strTimestamp = sdf.format(timestamp);
+		
+		//履歴を登録
 		
 		//変数をモデルに登録
 		model.addAttribute("correctQueCnt", correctQueCnt);
