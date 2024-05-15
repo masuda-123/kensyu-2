@@ -3,14 +3,11 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Confirm</title>
-		<!-- cssを読み込む  -->
 		<link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
 	</head>
 	<body>
 		<div class="btn_area">
-			<!-- topに遷移させるボタン  -->
 			<button onclick="location.href='../top'">top</button>
-			<!--  logoutさせるボタン -->
 			<form th:action="@{/logout}" method="post">
 				<input type="submit" value="logout">
 			</form>
@@ -19,19 +16,16 @@
 		<form th:action="@{/edit/complete}" method="post">
 			<!-- エラーメッセージがある場合  -->
 			<th:block th:if="${!errorMessage.isEmpty()}">
-				<!-- エラーメッセージを表示  -->
 				<p class="error" th:utext="${errorMessage}"></p>
 			</th:block>
 			<div class="question_id_area">
 				<label>問題番号:</label>
-				<!-- 問題idを表示  -->
 				<p th:text="${questionId}"></p>
 			</div>
 			<!-- 隠し入力欄に、問題idを設定  -->
 			<input type="hidden" id="questionId" name="questionId" th:value="${questionId}">
 			<div class="edit_question_area">
 				<label>問題:</label>
-				<!-- 問題文を表示  -->
 				<p th:text="${question}"></p>
 				<!-- 隠し入力欄に、問題文を設定  -->
 				<input type="hidden" id="question" name="question" th:value="${question}">
@@ -41,7 +35,6 @@
 				<div class="answers">
 					<!-- 答えの数だけ繰り返す  -->
 					<th:block th:each="answer : ${answers}">
-						<!-- 答えを表示  -->
 						<p th:text="${answer}"></p>
 						<!-- 隠し入力欄に、答えを設定  -->
 						<input type="hidden" id="answer" name="answer" th:value="${answer}">
@@ -56,7 +49,6 @@
 			<div class="bottom_btn_area">
 				<!-- エラーメッセージがない場合  -->
 				<th:block th:if="${errorMessage.isEmpty()}">
-					<!-- フォームデータを送信するボタン  -->
 					<input type="submit" value="更新">
 				</th:block>
 			</div>
@@ -77,7 +69,6 @@
 				<input type="hidden" id="answerId" name="answerId" th:value="${answerId}">
 			</th:block>
 			<div class="bottom_btn_area">
-				<!-- edit画面に戻るボタン  -->
 				<input type="submit" value="戻る">
 			</div>
 		</form>

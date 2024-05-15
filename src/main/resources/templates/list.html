@@ -7,34 +7,26 @@
 </head>
 	<body>
 		<div class="btn_area">
-			<!-- topに遷移させるボタン  -->
 			<button onclick="location.href='./top'">top</button>
-			<!--  logoutさせるボタン -->
 			<form th:action="@{/logout}" method="post">
 				<input type="submit" value="logout">
 			</form>
 		</div>
-		<!-- register画面に遷移させるボタン  -->
 		<button class="new_btn" onclick="location.href='./register'" >新規登録</button>
 		<!-- 問題の数だけ処理を繰り返す  -->
 		<div class="list_area" th:each="que, queStatus:${queList}">
 			<div class="list">
 				<div class="list_question_area">
-					<!-- 問題のidを表示  -->
 					<label th:text="'問題:' + ${que.getId()} + ' '"></label>
-					<!-- 問題文を表示  -->
 					<p th:text="${que.getQuestion()}" ></p>
 				</div>
 				<!-- 問題に紐づく答えの数だけ処理を繰り返す  -->
 				<div class="list_answers_area" th:each="ans, ansStatus:${ansList.get(queStatus.index)}">
-					<!-- 答えをナンバリング、答えの文を表示  -->
 					<p th:text="'答え' + ${ansStatus.count} + ' ' + ${ans.getAnswer()}"></p>
 					</div>
 				</div>
 			<div>
-				<!-- edit画面に遷移させる（パラメータに問題のidを設定）ボタン  -->
 				<a th:href="@{/edit/{id}(id=${que.getId()})}"><button>編集</button></a>
-				<!-- delete_confirm画面に遷移させる（パラメータに問題のidを設定）ボタン  -->
 				<a th:href="@{/delete_confirm/{id}(id=${que.getId()})}"><button>削除</button></a>
 			</div>
 		</div>
