@@ -31,21 +31,22 @@ import lombok.RequiredArgsConstructor;
 public class QuestionAnswersController {
 	
 	//以下のクラスをインスタンス化
-    @Autowired
-    private final QuestionService queService;
-    
-    @Autowired
-    private final AnswerService ansService;
-    
-    @Autowired
-    private final Validation val;
-    
-    @Autowired
-    private final UserService userService;
-    
-    @Autowired
-    private final HistoryService hisService;
+	@Autowired
+	private final QuestionService queService;
 	
+	@Autowired
+	private final AnswerService ansService;
+	
+	@Autowired
+	private final Validation val;
+	
+	@Autowired
+	private final UserService userService;
+	
+	@Autowired
+	private final HistoryService hisService;
+	
+	//一覧画面の処理
 	@GetMapping("/list")
 	public String getList(Model model) {
 		//全ての問題データを取得
@@ -75,6 +76,7 @@ public class QuestionAnswersController {
 		}
 	}
 	
+	//登録画面の処理
 	@GetMapping("/register")
 	public String getRegister(Model model) {
 		String question = "";
@@ -86,6 +88,7 @@ public class QuestionAnswersController {
 		return "register";
 	}
 	
+	//登録確認画面の処理
 	@PostMapping("/register/confirm")
 	public String postRegisterConfirm(@RequestParam("question") String question, @RequestParam("answer") String[] answers, Model model) {
 		//Validationクラスで、入力された問題文や答えの文字数などをチェックし、エラーメッセージを取得
@@ -98,6 +101,7 @@ public class QuestionAnswersController {
 		return "confirm";
 	}
 	
+	//登録確認画面からも登録画面に戻った際の処理
 	@PostMapping("/register")
 	public String postRegister(@RequestParam("question") String question, @RequestParam("answer") String[] answers, Model model) {
 		//変数をモデルに登録
@@ -107,6 +111,7 @@ public class QuestionAnswersController {
 		return "register";
 	}
 	
+	//問題と答えの登録処理
 	@PostMapping("/register/complete")
 	public String postRegisterComplete(@RequestParam("question") String question, @RequestParam("answer") String[] answers, Model model) {
 		//フォームから渡された問題を登録し、questionIdを取得
@@ -119,6 +124,7 @@ public class QuestionAnswersController {
 		return "redirect:/list";
 	}
 	
+	//削除確認画面の処理
 	@GetMapping("/delete_confirm/{id}")
 	public String getDeleteConfirm(@PathVariable("id") int questionId,  Model model) {
 		//パスから取得した問題Idをもとに、問題と答えを取得
@@ -137,6 +143,7 @@ public class QuestionAnswersController {
 		return "delete_confirm";
 	}
 	
+	//削除処理
 	@PostMapping("/delete/complete")
 	public String postDeleteComplete(@RequestParam("questionId") int questionId, Model model) {
 		//フォームから渡された問題idをもとに、問題と答えを削除
@@ -146,6 +153,7 @@ public class QuestionAnswersController {
 		return "redirect:/list";
 	}
 	
+	//編集画面の処理
 	@GetMapping("/edit/{id}")
 	public String getEdit(@PathVariable("id") int questionId,  Model model) {
 		//パスから取得した問題Idをもとに、問題と答えを取得
@@ -167,6 +175,7 @@ public class QuestionAnswersController {
 		return "edit";
 	}
 	
+	//編集確認画面の処理
 	@PostMapping("/edit/confirm")
 	public String postEditConfirm(@RequestParam("question") String question, @RequestParam("answer") String[] answers, @RequestParam("questionId") 
 		int questionId, @RequestParam("answerId") int[] answersId, Model model) {
@@ -183,6 +192,7 @@ public class QuestionAnswersController {
 		return "edit_confirm";
 	}
 	
+	//編集確認画面から編集画面に戻った際の処理
 	@PostMapping("/edit/{id}")
 	public String postEdit(@RequestParam("question") String question, @RequestParam("answer") String[] answers, @RequestParam("questionId") 
 	int questionId, @RequestParam("answerId") int[] answersId, Model model) {
@@ -196,6 +206,7 @@ public class QuestionAnswersController {
 		return "edit";
 	}
 	
+	//編集処理
 	@PostMapping("/edit/complete")
 	public String postEditComplete(@RequestParam("question") String question, @RequestParam("answer") String[] answers, @RequestParam("questionId") 
 		int questionId, @RequestParam("answerId") int[] answersId, Model model) {
@@ -225,6 +236,7 @@ public class QuestionAnswersController {
 		return "redirect:/list";
 	}
 	
+	//テスト画面の処理
 	@GetMapping("/test")
 	public String getTest(Model model) {
 		//全ての問題データを取得
@@ -235,6 +247,7 @@ public class QuestionAnswersController {
 		return "test";
 	}
 	
+	//テスト結果画面の処理
 	@PostMapping("/test/result")
 	public String postResult(@RequestParam("questionId") int[] questionsId, @RequestParam("answer") String[] answers, Model model) {
 		int correctQueCnt = 0;

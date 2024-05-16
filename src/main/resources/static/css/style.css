@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-/*bodyタグ*/
+/* bodyタグ*/
 body {
 	/*幅を650pxにする*/
 	width: 650px;
@@ -26,6 +26,24 @@ p {
 	width: 100%;
 	/*右に寄せる*/
 	text-align: right;
+	/*要素を横並びにする*/
+	display: flex;
+	/* 横並びにした要素を右寄せする*/
+	justify-content: right;
+}
+
+/* btn_areaクラス*/
+.btn_area {
+	/*上に余白を20px作る*/
+	margin-top: 20px;
+}
+
+/* logout_btnクラス */
+.logout_btn{
+	/*高さを24.5pxにする*/
+	height: 24.5px;
+	/*左に余白を10px作る*/
+	margin-left: 10px;
 }
 
 /* bottom_btn_areaクラス*/
@@ -36,7 +54,7 @@ p {
 	margin-top: 10px;
 }
 
-/*Login画面のformクラス*/
+/* Login画面のformクラス*/
 .form {
 	/*ラベルと入力欄を横並びにする*/
 	display: flex;
@@ -46,7 +64,7 @@ p {
 	margin-top: 15px;
 }
 
-/*Login画面のformクラスのlabelタグ*/
+/* Login画面のformクラスのlabelタグ*/
 .form label {
 	/*幅を全体の6%にする*/
 	width: 6%;

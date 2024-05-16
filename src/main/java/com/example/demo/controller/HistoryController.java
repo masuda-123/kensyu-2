@@ -27,6 +27,7 @@ public class HistoryController {
 	@Autowired
 	private final UserService userService;
 	
+	//履歴画面の処理
 	@GetMapping("/history")
 	public String getHistory(Model model) {
 		
