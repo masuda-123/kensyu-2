@@ -1,4 +1,4 @@
-package com.example.demo.mapper;
+package com.example.demo.repository;
 
 import java.util.ArrayList;
 
@@ -25,4 +25,7 @@ public interface AnswerMapper {
 	
 	//idをもとに答えを削除
 	void deleteById(int answerId);
+	
+	//answerをもとに答えを取得
+	ArrayList<Answer> findByAnswer(String answer);
 }

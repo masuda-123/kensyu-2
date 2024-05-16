@@ -1,4 +1,4 @@
-package com.example.demo.mapper;
+package com.example.demo.repository;
 
 import java.util.ArrayList;
 
@@ -25,4 +25,7 @@ public interface QuestionMapper {
 	
 	//idをもとに問題を更新
 	void update(int questionId, String question);
+	
+	//問題をランダムに取得
+	ArrayList<Question> findAllOrderByRand();
 }

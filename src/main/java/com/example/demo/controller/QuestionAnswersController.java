@@ -1,9 +1,13 @@
 package com.example.demo.controller;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,12 +51,28 @@ public class QuestionAnswersController {
 		//変数をモデルに登録
 		model.addAttribute("queList", queList);
 		model.addAttribute("ansList", ansList);
-		//list画面に遷移
-		return "list";
+		
+		if(queList.isEmpty()) { //登録されている問題がなかった場合
+			String question = "";
+			String[] answers = new String[0];
+			//変数をモデルに登録
+			model.addAttribute("question", question);
+			model.addAttribute("answers", answers);
+			//register画面に遷移
+			return "register";
+		} else { //登録されている問題があった場合
+			//list画面に遷移
+			return "list";
+		}
 	}
 	
 	@GetMapping("/register")
-	public String getRegister() {
+	public String getRegister(Model model) {
+		String question = "";
+		String[] answers = new String[0];
+		//変数をモデルに登録
+		model.addAttribute("question", question);
+		model.addAttribute("answers", answers);
 		//register画面に遷移
 		return "register";
 	}
@@ -67,6 +87,15 @@ public class QuestionAnswersController {
 		model.addAttribute("answers", answers);
 		//confirm画面に遷移
 		return "confirm";
+	}
+	
+	@PostMapping("/register")
+	public String postRegister(@RequestParam("question") String question, @RequestParam("answer") String[] answers, Model model) {
+		//変数をモデルに登録
+		model.addAttribute("question", question);
+		model.addAttribute("answers", answers);
+		//register画面に遷移
+		return "register";
 	}
 	
 	@PostMapping("/register/complete")
@@ -146,7 +175,7 @@ public class QuestionAnswersController {
 	}
 	
 	@PostMapping("/edit/{id}")
-	public String postEditConfirmBack(@RequestParam("question") String question, @RequestParam("answer") String[] answers, @RequestParam("questionId") 
+	public String postEdit(@RequestParam("question") String question, @RequestParam("answer") String[] answers, @RequestParam("questionId") 
 	int questionId, @RequestParam("answerId") int[] answersId, Model model) {
 		
 		//変数をモデルに登録
@@ -185,5 +214,59 @@ public class QuestionAnswersController {
 		}
 		//list画面にリダイレクト
 		return "redirect:/list";
+	}
+	
+	@GetMapping("/test")
+	public String getTest(Model model) {
+		//全ての問題データを取得
+		ArrayList<Question> queList = queService.findAllOrderByRand();
+		//変数をモデルに登録
+		model.addAttribute("queList", queList);
+		//test画面に遷移
+		return "test";
+	}
+	
+	@PostMapping("/test/result")
+	public String postResult(@RequestParam("questionId") int[] questionsId, @RequestParam("answer") String[] answers, Model model) {
+		int correctQueCnt = 0;
+		
+		//questionsIdの要素数分だけ処理を繰り返す
+		for(int i = 0; i < questionsId.length; i++) {
+			//search_answerメソッドを呼び出して、answerと一致するレコードを取得
+			ArrayList<Answer> ansList = ansService.findByAnswer(answers[i]);
+			//ansListの要素数分だけ繰り返す
+			for(Answer ans : ansList ) {
+				//入力された答えと一致するレコードがあり、答えに紐づく問題idが一致する場合
+				if(ans.getId() != 0 && ans.getQuestions_id() == questionsId[i]) {
+					//正解の問題数をカウントアップ
+					correctQueCnt ++;
+					//繰り返し処理を抜ける
+					break;
+				}
+			}
+		}
+		
+		//点数を計算
+		int point = Math.round(100 * correctQueCnt / questionsId.length);
+		
+		//sessionからユーザー情報を取得
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String userName = auth.getName();
+		
+		//現在の日時をtimestampに格納
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		//日時のフィーマットを指定
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		String strTimestamp = sdf.format(timestamp);
+		
+		//変数をモデルに登録
+		model.addAttribute("correctQueCnt", correctQueCnt);
+		model.addAttribute("queCnt", questionsId.length);
+		model.addAttribute("point", point);
+		model.addAttribute("userName", userName);
+		model.addAttribute("dateTime",strTimestamp);
+		
+		//result画面に遷移
+		return "result";
 	}
 }

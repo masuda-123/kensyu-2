@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Result</title>
+		<link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
+	</head>
+	<body>
+		<div class="btn_area">
+			<button onclick="location.href='../top'">top</button>
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="logout">
+			</form>
+		</div>
+		<h2>テスト結果</h2>
+		<p>[[${userName}]]さん</p>
+		<p>[[${queCnt}]]問中[[${correctQueCnt}]]問正解です。</p>
+		<p>[[${point}]]点でした。</p>
+		
+		<div class="bottom_menu_area">
+			<p th:text="${dateTime}"></p>
+			<a href='../history'>採点結果履歴へ</a>
+		</div>
+	</body>
+</html>

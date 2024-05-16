@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo.mapper.AnswerMapper">
+<mapper namespace="com.example.demo.repository.AnswerMapper">
 	<select id="findAll" resultType="com.example.demo.model.Answer">
 		SELECT * FROM correct_answers;
 	</select>
@@ -19,4 +19,7 @@
 	<delete id="deleteById">
 		DELETE FROM correct_answers WHERE id = #{answerId};
 	</delete>
+	<select id="findByAnswer" resultType="com.example.demo.model.Answer">
+		SELECT * FROM correct_answers WHERE answer = #{answer};
+	</select>
 </mapper>
