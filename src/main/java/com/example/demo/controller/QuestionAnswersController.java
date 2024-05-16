@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -220,9 +219,7 @@ public class QuestionAnswersController {
 	@GetMapping("/test")
 	public String getTest(Model model) {
 		//全ての問題データを取得
-		ArrayList<Question> queList = queService.findAll();
-		//問題の順番をランダムに入れ替える
-		Collections.shuffle(queList);
+		ArrayList<Question> queList = queService.findAllOrderByRand();
 		//変数をモデルに登録
 		model.addAttribute("queList", queList);
 		//test画面に遷移

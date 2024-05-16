@@ -19,4 +19,7 @@
 	<update id="update">
 		UPDATE questions SET question = #{question} WHERE id = #{questionId};
 	</update>
+	<select id="findAllOrderByRand" resultType="com.example.demo.model.Question">
+		SELECT * FROM questions ORDER By RAND();
+	</select>
 </mapper>

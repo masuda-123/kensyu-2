@@ -32,13 +32,13 @@ public class QuestionService {
 		return questionId;
 	}
 	
-	//idから問題を取得
+	//idをもとに問題を取得
 	@Transactional
 	public Question findById(int questionId) {
 		return questionMapper.findById(questionId);
 	}
 	
-	//idから問題を削除
+	//idをもとに問題を削除
 	@Transactional
 	public void delete(int questionId) {
 		questionMapper.delete(questionId);
@@ -48,5 +48,11 @@ public class QuestionService {
 	@Transactional
 	public void update(int questionId, String question) {
 		questionMapper.update(questionId, question);
+	}
+	
+	//問題をランダムに取得
+	@Transactional
+	public ArrayList<Question> findAllOrderByRand(){
+		return questionMapper.findAllOrderByRand();
 	}
 }
