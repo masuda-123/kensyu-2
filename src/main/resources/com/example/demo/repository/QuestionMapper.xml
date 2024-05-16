@@ -17,7 +17,7 @@
 		DELETE FROM questions WHERE id = #{questionId};
 	</delete>
 	<update id="update">
-		UPDATE questions SET question = #{question} WHERE id = #{questionId};
+		UPDATE questions SET question = #{question}, updated_at = CURRENT_TIMESTAMP() WHERE id = #{questionId};
 	</update>
 	<select id="findAllOrderByRand" resultType="com.example.demo.model.Question">
 		SELECT * FROM questions ORDER By RAND();

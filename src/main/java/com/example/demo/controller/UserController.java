@@ -1,11 +1,8 @@
 package com.example.demo.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import com.example.demo.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -14,16 +11,14 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserController {
 	
-	//以下のクラスをインスタンス化
-	@Autowired
-	private final UserService service;
-	
+	//ログイン画面の処理
 	@GetMapping("/login")
 	public String getLogin() {
 		//login画面に遷移
 		return "login";
 	}
 	
+	//ログアウトの処理
 	@PostMapping("/logout")
 	public String getLogout() {
 		//login画面に遷移

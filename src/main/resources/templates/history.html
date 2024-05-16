@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>History</title>
+		<link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
+	</head>
+	<body>
+		<div class="btn_area">
+			<button onclick="location.href='./top'">top</button>
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="logout" class="logout_btn">
+			</form>
+		</div>
+		<h2>履歴</h2>
+		<!--履歴が登録されていない場合  -->
+		<th:block th:if="${hisList.isEmpty()}">
+			<p>履歴が登録されていません</p>
+		</th:block>
+		<!--履歴が登録されている場合  -->
+		<th:block th:if="${!hisList.isEmpty()}">
+			<table>
+				 <tr>
+				 	<th>氏名</th>
+				 	<th>得点</th>
+				 	<th>採点時間</th>
+				 </tr>
+				<!-- 履歴の数だけ繰り返す  -->
+				 <th:block th:each="his, hisStatus: ${hisList}">
+					 <tr>
+					 	<td th:text="${userName}"></td>
+					 	<td>[[${his.getPoint()}]]点</td>
+					 	<td th:text="${dateTime[hisStatus.index]}"></td>
+					 </tr>
+				</th:block>
+			</table>
+		</th:block>
+	</body>
+</html>

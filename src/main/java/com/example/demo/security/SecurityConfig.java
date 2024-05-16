@@ -1,5 +1,6 @@
 package com.example.demo.security;
 
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,42 +12,37 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig {
+public class SecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
-		.authorizeHttpRequests((requests) -> requests
-				// アクセス制限をかけない
-				.requestMatchers("/"
-						, "/login?error"
-						,"/css/**")
-				.permitAll()
+			.authorizeHttpRequests((authorize) -> authorize
+				// アクセス制限をかけない要求
+				.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+				//上記以外のすべての要求で、ユーザーの認証を必要とする
 				.anyRequest().authenticated()
-				)
-		.formLogin((login) -> login
+			)
+			.formLogin((login) -> login
 				.usernameParameter("userId")
 				.passwordParameter("password")
-				// ログインを実行するページ
-				.loginProcessingUrl("/login")
 				// ログイン画面
-				.loginPage("/login")
+				.loginPage("/login").permitAll()
 				// ログイン失敗時のURL
-				.failureUrl("/login")
+				.failureUrl("/login").permitAll()
 				// ログインに成功した場合の遷移先
-				.successForwardUrl("/top")
-				.permitAll()
-				)
-		.logout((logout) -> logout
+				.defaultSuccessUrl("/top")
+			)
+			.logout((logout) -> logout
 				// ログアウトのURL
 				.logoutUrl("/logout")
 				// ログアウトした場合の遷移先
-				.logoutSuccessUrl("/login")
-				.permitAll());
+				.logoutSuccessUrl("/login").permitAll()
+			);
 		return http.build();
-		}
+	}
 	
-	// パスワードのハッシュ化
+	//ユーザーが入力したパスワードをハッシュ化する
 	@Bean
 	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
