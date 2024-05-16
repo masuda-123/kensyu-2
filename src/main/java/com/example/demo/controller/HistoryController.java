@@ -38,7 +38,7 @@ public class HistoryController {
 		//userデータからuserNameを取得
 		String userName = user.getName();
 		
-		//現在ログインしているユーザーの履歴データを取得
+		//現在ログインしているユーザーの履歴データを、採点時間の昇順で取得
 		ArrayList<History> hisList = hisService.findByUserId(userId);
 		
 		//履歴データから作成日を取り出し、配列に格納
@@ -54,6 +54,7 @@ public class HistoryController {
 		model.addAttribute("dateTime", dateTime);
 		model.addAttribute("userName", userName);
 		
+		//hisotry画面に遷移
 		return "history";
 	}
 

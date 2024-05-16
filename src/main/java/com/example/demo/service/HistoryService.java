@@ -16,7 +16,7 @@ public class HistoryService {
 	@Autowired
 	private HistoryMapper historyMapper;
 	
-	//questionIdをもとに履歴を取得
+	//userIdをもとに履歴を取得（採点時間の昇順で）
 	@Transactional
 	public ArrayList<History> findByUserId(int userId) {
 		return historyMapper.findByUserId(userId);
