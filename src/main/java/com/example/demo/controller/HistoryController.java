@@ -54,8 +54,6 @@ public class HistoryController {
 		model.addAttribute("dateTime", dateTime);
 		model.addAttribute("userName", userName);
 		
-		System.out.println(hisList);
-		
 		return "history";
 	}
 

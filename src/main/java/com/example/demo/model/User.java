@@ -28,32 +28,38 @@ public class User implements UserDetails {
 	private Timestamp updated_at;
 	
 	private Timestamp deleted_at;
-
+	
+	//権限を取得
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return null;
 	}
-
+	
+	//userIdを取得
 	@Override
 	public String getUsername() {
 		return Integer.toString(this.id);
 	}
-
+	
+	//アカウントが有効期限内であるか
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
 	}
-
+	
+	//アカウントがロックされていないか
 	@Override
 	public boolean isAccountNonLocked() {
 		return true;
 	}
-
+	
+	//資格情報が有効期限内であるか
 	@Override
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
-
+	
+	// 有効なアカウントであるか
 	@Override
 	public boolean isEnabled() {
 		return true;

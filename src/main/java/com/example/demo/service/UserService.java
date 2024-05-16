@@ -17,6 +17,7 @@ public class UserService implements UserDetailsService {
 	@Autowired
 	private UserMapper userMapper;
 	
+	//UserDetailsServiceのメソッドをオーバーライドし、ログイン時の認証方法を設定
 	@Override
 	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
 		
@@ -32,12 +33,14 @@ public class UserService implements UserDetailsService {
 		} finally {
 			//ユーザーが存在しない場合は、例外をスロー
 			if (user == null) {
-				throw new UsernameNotFoundException("User" + userId + "was not found in the database");
+				throw new UsernameNotFoundException("User_id = " + userId + " was not found in the database");
 			}
 		}
 		return user;
 	}
 	
+	
+	//useIdをもとにユーザーを取得
 	@Transactional
 	public User findById(int userId) {
 		return userMapper.findById(userId);
