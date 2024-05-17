@@ -94,7 +94,7 @@ class QuestionServiceTest {
 		ArrayList<Question> queList1 = questionService.findAll();
 		questionService.delete(5);
 		ArrayList<Question> queList2 = questionService.findAll();
-		assertThat(queList2.size() - queList1.size(), is(0));
+		assertThat(queList1.size() - queList2.size(), is(0));
 		assertThat(queList2.get(0).getId(), is(1));
 	}
 	

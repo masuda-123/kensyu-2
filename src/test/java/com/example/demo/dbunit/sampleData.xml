@@ -4,4 +4,7 @@
     <questions id="1" question="test" />
     <questions id="2" question="test2" />
     <questions id="3" question="test3" />
+    <correct_answers id="1" answer="test" questions_id="1" />
+    <correct_answers id="2" answer="test2" questions_id="1" />
+    <correct_answers id="3" answer="test3" questions_id="3" />
 </dataset>
