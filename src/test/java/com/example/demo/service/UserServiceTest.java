@@ -90,7 +90,6 @@ class UserServiceTest {
 		}
 	}
 	
-	
 	@Test
 	@DisplayName("loadUserByUsernameメソッドに、負の数を渡した場合、UserDetailsが取得できないこと")
 	public void notGetUserDetailsWhenNegativeNumber() throws Exception{
