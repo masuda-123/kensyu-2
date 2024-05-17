@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import org.junit.jupiter.api.DisplayName;
@@ -25,8 +24,7 @@ class HomeControllerTest {
     @WithMockUser
     @DisplayName("topページにアクセスできるかどうか")
     void getTop() throws Exception {
-        // andDo(print())でリクエスト・レスポンスを表示
-        this.mvc.perform(get("/top")).andDo(print())
+        this.mvc.perform(get("/top"))
             .andExpect(status().isOk());
     }
 
