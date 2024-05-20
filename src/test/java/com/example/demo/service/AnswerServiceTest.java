@@ -91,7 +91,7 @@ class AnswerServiceTest {
 	@Test
 	@Transactional
 	@DatabaseSetup("../dbunit/sampleData.xml")
-	@DisplayName("deleteByQuestionsIdメソッドに、登録されていないquestions_idを渡すと、答えが削除できること")
+	@DisplayName("deleteByQuestionsIdメソッドに、登録されているquestions_idを渡すと、答えが削除できること")
 	public void deleteAnswerWhenRegisterQuestionId() throws Exception {
 		ArrayList<Answer> ansList1 = answerService.findAll();
 		answerService.deleteByQuestionId(3);
@@ -140,7 +140,7 @@ class AnswerServiceTest {
 	@Test
 	@Transactional
 	@DatabaseSetup("../dbunit/sampleData.xml")
-	@DisplayName("deleteメソッドに、登録されていないidを渡すと、答えが削除できること")
+	@DisplayName("deleteメソッドに、登録されているidを渡すと、答えが削除できること")
 	public void deleteAnswerWhenRegisterId() throws Exception {
 		ArrayList<Answer> ansList1 = answerService.findAll();
 		answerService.deleteById(1);

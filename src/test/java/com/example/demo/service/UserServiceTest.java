@@ -107,7 +107,7 @@ class UserServiceTest {
 	}
 	
 	@Test
-	@DisplayName("loadUserByUsernameメソッドに、登録されていあるuserIdを渡した場合、UserDetailsが取得できること")
+	@DisplayName("loadUserByUsernameメソッドに、登録されているuserIdを渡した場合、UserDetailsが取得できること")
 	public void getUserDetailsWhenRegisterUserId() throws Exception {
 		UserDetails user = null;
 		try {
