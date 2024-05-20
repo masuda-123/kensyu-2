@@ -52,7 +52,7 @@ public class AnswerService {
 		answerMapper.deleteById(answerId);
 	}
 	
-	//答えを全件取得
+	//answerをもとに答えを取得
 	@Transactional
 	public ArrayList<Answer> findByAnswer(String answer) {
 		return answerMapper.findByAnswer(answer);

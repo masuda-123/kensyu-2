@@ -74,6 +74,94 @@ class AnswerServiceTest {
 		ArrayList<Answer> ansList2 = answerService.findAll();
 		assertThat(ansList2.size() - ansList1.size(), is(1));
 		assertThat(ansList2.get(3).getAnswer(), is(answer));
+		
+	}
+	
+	@Test
+	@Transactional
+	@DatabaseSetup("../dbunit/sampleData.xml")
+	@DisplayName("deleteByQuestionIdメソッドに、登録されていないquestions_idを渡すと、答えが削除できないこと")
+	public void notDeleteAnswerWhenNotRegisterQuestionId() throws Exception {
+		ArrayList<Answer> ansList1 = answerService.findAll();
+		answerService.deleteByQuestionId(2);
+		ArrayList<Answer> ansList2 = answerService.findAll();
+		assertThat(ansList1.size() - ansList2.size(), is(0));
+	}
+	
+	@Test
+	@Transactional
+	@DatabaseSetup("../dbunit/sampleData.xml")
+	@DisplayName("deleteByQuestionsIdメソッドに、登録されていないquestions_idを渡すと、答えが削除できること")
+	public void deleteAnswerWhenRegisterQuestionId() throws Exception {
+		ArrayList<Answer> ansList1 = answerService.findAll();
+		answerService.deleteByQuestionId(3);
+		ArrayList<Answer> ansList2 = answerService.findAll();
+		assertThat(ansList1.size() - ansList2.size(), is(1));
+		for(Answer ans : ansList2) {
+			assertThat(ans.getQuestions_id(), is(not(3)));
+		}
+	}
+	
+	@Test
+	@Transactional
+	@DatabaseSetup("../dbunit/sampleData.xml")
+	@DisplayName("updateメソッドに、登録されていないidを渡すと、答えが更新できないこと")
+	public void notUpdateAnswerWhenNotRegisterId() throws Exception {
+		answerService.update("testtest", 4);
+		ArrayList<Answer> ansList = answerService.findAll();
+		ArrayList<String> answers = new ArrayList<>();
+		for(int i = 0; i < ansList.size(); i++) {
+			answers.add(ansList.get(i).getAnswer());
+		}
+		assertThat(answers, hasItems(not("testtest")));
+	}
+	
+	@Test
+	@Transactional
+	@DatabaseSetup("../dbunit/sampleData.xml")
+	@DisplayName("updateメソッドに、登録されているidを渡すと、答えが更新できること")
+	public void updateAnswerWhenRegisterId() throws Exception {
+		answerService.update("testtest", 1);
+		ArrayList<Answer> ansList = answerService.findAll();
+		assertThat(ansList.get(0).getAnswer(), is("testtest"));
+	}
+	
+	@Test
+	@Transactional
+	@DatabaseSetup("../dbunit/sampleData.xml")
+	@DisplayName("deleteメソッドに、登録されていないidを渡すと、答えが削除できないこと")
+	public void notDeleteAnswerWhenNotRegisterId() throws Exception {
+		ArrayList<Answer> ansList1 = answerService.findAll();
+		answerService.deleteById(5);
+		ArrayList<Answer> ansList2 = answerService.findAll();
+		assertThat(ansList1.size() - ansList2.size(), is(0));
+	}
+	
+	@Test
+	@Transactional
+	@DatabaseSetup("../dbunit/sampleData.xml")
+	@DisplayName("deleteメソッドに、登録されていないidを渡すと、答えが削除できること")
+	public void deleteAnswerWhenRegisterId() throws Exception {
+		ArrayList<Answer> ansList1 = answerService.findAll();
+		answerService.deleteById(1);
+		ArrayList<Answer> ansList2 = answerService.findAll();
+		assertThat(ansList1.size() - ansList2.size(), is(1));
+	}
+	
+	@Test
+	@DatabaseSetup("../dbunit/sampleData.xml")
+	@DisplayName("findByAnswerメソッドに、登録されていないanswerを渡すと、答えが取得できないこと")
+	public void notGetAnswerWhenNotRegisterAnswer() throws Exception {
+		ArrayList<Answer> ansList = answerService.findByAnswer("testtest");
+		assertTrue(ansList.isEmpty());
+	}
+	
+	@Test
+	@DatabaseSetup("../dbunit/sampleData.xml")
+	@DisplayName("findByAnswerメソッドに、登録されているanswerを渡すと、答えが取得できること")
+	public void getAnswerWhenRegisterAnswer() throws Exception {
+		ArrayList<Answer> ansList = answerService.findByAnswer("test");
+		assertThat(ansList.get(0).getAnswer(), is("test"));
 	}
 
 }
