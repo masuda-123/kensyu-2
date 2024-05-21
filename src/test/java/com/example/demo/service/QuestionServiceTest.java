@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
 import com.example.demo.model.Question;
@@ -23,9 +24,11 @@ import jakarta.transaction.Transactional;
 @SpringBootTest
 @TestExecutionListeners({
     DependencyInjectionTestExecutionListener.class,
+    DirtiesContextTestExecutionListener.class,
     TransactionalTestExecutionListener.class,
     DbUnitTestExecutionListener.class
 })
+@Transactional
 class QuestionServiceTest {
 	
 	//以下のクラスをインスタンス化
@@ -45,7 +48,6 @@ class QuestionServiceTest {
 	}
 	
 	@Test
-	@Transactional
 	@DatabaseSetup("../dbunit/sampleData.xml")
 	@DisplayName("registerメソッドで、問題が登録でき、idが取得できていること")
 	public void registerQuestion() throws Exception {
@@ -85,7 +87,6 @@ class QuestionServiceTest {
 	}
 
 	@Test
-	@Transactional
 	@DatabaseSetup("../dbunit/sampleData.xml")
 	@DisplayName("deleteメソッドに、登録されているidを渡すと、問題が削除できること")
 	public void deleteQuestionWhenRegisterId() throws Exception {
@@ -104,7 +105,6 @@ class QuestionServiceTest {
 	}
 	
 	@Test
-	@Transactional
 	@DatabaseSetup("../dbunit/sampleData.xml")
 	@DisplayName("deleteメソッドに、登録されていないidを渡すと、問題が削除できないこと")
 	public void notDeleteQuestionWhenNotRegisterId() throws Exception {
@@ -119,7 +119,6 @@ class QuestionServiceTest {
 	}
 	
 	@Test
-	@Transactional
 	@DatabaseSetup("../dbunit/sampleData.xml")
 	@DisplayName("updateメソッドに、登録されているidを渡すと、問題が更新できること")
 	public void updateQuestionWhenRegisterId() throws Exception {
@@ -132,7 +131,6 @@ class QuestionServiceTest {
 	}
 	
 	@Test
-	@Transactional
 	@DatabaseSetup("../dbunit/sampleData.xml")
 	@DisplayName("updateメソッドに、登録されていないidを渡すと、問題が更新できないこと")
 	public void notUpdateQuestionWhenNotRegisterId() throws Exception {

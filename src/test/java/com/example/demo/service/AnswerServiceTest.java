@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
 import com.example.demo.model.Answer;
@@ -23,9 +24,11 @@ import jakarta.transaction.Transactional;
 @SpringBootTest
 @TestExecutionListeners({
     DependencyInjectionTestExecutionListener.class,
+    DirtiesContextTestExecutionListener.class,
     TransactionalTestExecutionListener.class,
     DbUnitTestExecutionListener.class
 })
+@Transactional
 class AnswerServiceTest {
 	
 	//以下のクラスをインスタンス化
@@ -66,7 +69,6 @@ class AnswerServiceTest {
 	}
 	
 	@Test
-	@Transactional
 	@DatabaseSetup("../dbunit/sampleData.xml")
 	@DisplayName("registerメソッドで、questionIdを渡すと、答えが登録できること")
 	public void registerAnswerWhenQuestionId() throws Exception {
@@ -85,7 +87,6 @@ class AnswerServiceTest {
 	}
 	
 	@Test
-	@Transactional
 	@DatabaseSetup("../dbunit/sampleData.xml")
 	@DisplayName("deleteByQuestionIdメソッドに、登録されていないquestions_idを渡すと、答えが削除できないこと")
 	public void notDeleteAnswerWhenNotRegisterQuestionId() throws Exception {
@@ -100,7 +101,6 @@ class AnswerServiceTest {
 	}
 	
 	@Test
-	@Transactional
 	@DatabaseSetup("../dbunit/sampleData.xml")
 	@DisplayName("deleteByQuestionsIdメソッドに、登録されているquestions_idを渡すと、答えが削除できること")
 	public void deleteAnswerWhenRegisterQuestionId() throws Exception {
@@ -119,7 +119,6 @@ class AnswerServiceTest {
 	}
 	
 	@Test
-	@Transactional
 	@DatabaseSetup("../dbunit/sampleData.xml")
 	@DisplayName("updateメソッドに、登録されていないidを渡すと、答えが更新できないこと")
 	public void notUpdateAnswerWhenNotRegisterId() throws Exception {
@@ -137,7 +136,6 @@ class AnswerServiceTest {
 	}
 	
 	@Test
-	@Transactional
 	@DatabaseSetup("../dbunit/sampleData.xml")
 	@DisplayName("updateメソッドに、登録されているidを渡すと、答えが更新できること")
 	public void updateAnswerWhenRegisterId() throws Exception {
@@ -150,7 +148,6 @@ class AnswerServiceTest {
 	}
 	
 	@Test
-	@Transactional
 	@DatabaseSetup("../dbunit/sampleData.xml")
 	@DisplayName("deleteメソッドに、登録されていないidを渡すと、答えが削除できないこと")
 	public void notDeleteAnswerWhenNotRegisterId() throws Exception {
@@ -165,7 +162,6 @@ class AnswerServiceTest {
 	}
 	
 	@Test
-	@Transactional
 	@DatabaseSetup("../dbunit/sampleData.xml")
 	@DisplayName("deleteメソッドに、登録されているidを渡すと、答えが削除できること")
 	public void deleteAnswerWhenRegisterId() throws Exception {

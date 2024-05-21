@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
 import com.example.demo.model.History;
@@ -23,9 +24,11 @@ import jakarta.transaction.Transactional;
 @SpringBootTest
 @TestExecutionListeners({
     DependencyInjectionTestExecutionListener.class,
+    DirtiesContextTestExecutionListener.class,
     TransactionalTestExecutionListener.class,
     DbUnitTestExecutionListener.class
 })
+@Transactional
 class HistoryServiceTest {
 	
 	//以下のクラスをインスタンス化
@@ -54,7 +57,6 @@ class HistoryServiceTest {
 	}
 	
 	@Test
-	@Transactional
 	@DatabaseSetup("../dbunit/sampleData.xml")
 	@DisplayName("registerメソッドで、履歴が登録できること")
 	public void registerHistory() throws Exception {
