@@ -33,6 +33,7 @@ import jakarta.transaction.Transactional;
 })
 class HistoryServiceTest {
 	
+	//以下のクラスをインスタンス化
 	@Autowired
 	private HistoryService historyService;
 	
