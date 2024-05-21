@@ -33,6 +33,7 @@ import jakarta.transaction.Transactional;
 })
 class AnswerServiceTest {
 	
+	//以下のクラスをインスタンス化
 	@Autowired
 	private AnswerService answerService;
 	
