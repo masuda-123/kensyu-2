@@ -10,13 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
-import com.example.demo.Kensyu2Application;
 import com.example.demo.model.User;
 
-@SpringBootTest(
-        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-        classes = Kensyu2Application.class)
+@SpringBootTest
+@TestExecutionListeners({
+    DependencyInjectionTestExecutionListener.class
+})
 class UserServiceTest {
 	
 	//以下のクラスをインスタンス化
