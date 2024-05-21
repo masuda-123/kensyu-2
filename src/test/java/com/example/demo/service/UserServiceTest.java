@@ -19,6 +19,7 @@ import com.example.demo.model.User;
         classes = Kensyu2Application.class)
 class UserServiceTest {
 	
+	//以下のクラスをインスタンス化
 	@Autowired
 	private UserService userService;
 	
@@ -36,7 +37,6 @@ class UserServiceTest {
 	public void getUserWhenRegisterUserId() throws Exception {
 		//登録されているidを渡して、ユーザーを取得
 		User user = userService.findById(1);
-		
 		//ユーザーが取得できることを確認
 		assertThat(user.getId(), is(1));
 		assertThat(user.getName(), is("testuser"));
