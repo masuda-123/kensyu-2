@@ -59,10 +59,18 @@
 			<!-- 隠し入力欄に、問題idと問題文を設定  -->
 			<input type="hidden" id="questionId" name="questionId" th:value="${questionId}">
 			<input type="hidden" id="question" name="question" th:value="${question}">
-			<!-- 答えの数だけ繰り返す  -->
-			<th:block th:each="answer : ${answers}">
-				<!-- 隠し入力欄に、答えを設定  -->
-				<input type="hidden" id="answer" name="answer" th:value="${answer}">
+			<!-- 答えがない場合  -->
+			<th:block th:if="${answers.length == 0}">
+				<!-- 隠し入力欄から空のanswerパラメーターを送信  -->
+				<input type="hidden" id="answer" name="answer">
+			</th:block>
+			<!-- 答えがある場合  -->
+			<th:block th:if="${answers.length != 0}">
+				<!-- 答えの数だけ繰り返す  -->
+				<th:block th:each="answer : ${answers}">
+					<!-- 隠し入力欄に、答えを設定  -->
+					<input type="hidden" id="answer" name="answer" th:value="${answer}">
+				</th:block>
 			</th:block>
 			<!-- 答えidの数だけ繰り返す  -->
 			<th:block th:each="answerId : ${answersId}">
