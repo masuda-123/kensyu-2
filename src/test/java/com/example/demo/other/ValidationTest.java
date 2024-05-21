@@ -30,7 +30,6 @@ class ValidationTest {
 				+ "s3tYwJTLHSit4d533eKJe2c3nSf9I9zVeVfu7UFOKwG1PiKH2eaOP6xCrp9LQlwOx4MwAJooCXpprrw5LwsHfqDD2YIgGZPNQRLy"
 				+ "6ZaF6K5Im5j2mcV7uuVbigxDQNBD6g5b97gKB8ijMCBJ5b5Tzja09sNL9muwaxhroejO6Yk3Ey5grG0ZCan0UTPgNGQHpKd6NmZi"
 				+ "bS15RpCpYItHQvo0986qeQ4XEe9jGflb9vly7D26I6S3VFKNhl9EhzuQ8EeeGfEgvV6vm7JUWCmZR9UgjFLWHA5w6TlcPOcxClfEyJz3O0CzOInL";
-		
 		String[] answers = {"あいう"};
 		//validateメソッドに問題文と答えを渡して、エラーメッセージを取得
 		String errorMessage = val.validate(question, answers);
