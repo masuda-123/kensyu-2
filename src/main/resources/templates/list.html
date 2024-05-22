@@ -23,8 +23,8 @@
 				<!-- 問題に紐づく答えの数だけ処理を繰り返す  -->
 				<div class="list_answers_area" th:each="ans, ansStatus:${ansList.get(queStatus.index)}">
 					<p th:text="'答え' + ${ansStatus.count} + ' ' + ${ans.getAnswer()}"></p>
-					</div>
 				</div>
+			</div>
 			<div>
 				<a th:href="@{/edit/{id}(id=${que.getId()})}"><button>編集</button></a>
 				<a th:href="@{/delete_confirm/{id}(id=${que.getId()})}"><button>削除</button></a>
