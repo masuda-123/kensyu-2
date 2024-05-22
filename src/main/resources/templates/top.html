@@ -6,17 +6,18 @@
 	<link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
 </head>
 <body>
-	<h2 th:text ="${userName}"></h2>
 	<div class="btn_area">
 		<form th:action="@{/logout}" method="post">
 			<input type="submit" value="logout" class="logout_btn">
 		</form>
 	</div>
 	<div class="menu_area">
-		<button onclick="location.href='./list'">問題と答えを確認・登録する ></button>
+		<!-- 問題/答え登録・確認ボタンは管理者のみ表示 -->
+		<button th:if="${user.getAdmin_flag == 1}" onclick="location.href='./list'">問題と答えを確認・登録する ></button>
 		<button onclick="location.href='./test'">テストをする ></button>
 		<button onclick="location.href='./history'">過去の採点結果をみる ></button>
-		<button onclick="location.href='./user/lists'">ユーザーを追加・編集する ></button>
+		<!-- ユーザー追加・編集ボタンは管理者のみ表示 -->
+		<button th:if="${user.getAdmin_flag == 1}" onclick="location.href='./user/lists'">ユーザーを追加・編集する ></button>
 	</div>
 </body>
 </html>
