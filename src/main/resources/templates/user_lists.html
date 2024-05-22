@@ -19,7 +19,7 @@
 				<th class="user_auth_area">権限</th>
 				<th class="user_name_area">ユーザー名</th>
 			</tr>
-			<!-- 問題の数だけ処理を繰り返す  -->
+			<!-- ユーザーの数だけ処理を繰り返す  -->
 			<th:block th:each="user : ${userList}">
 				<tr>
 					<td class="user_id_area" th:text="${user.getId()}" ></td>
