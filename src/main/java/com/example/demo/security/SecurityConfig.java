@@ -42,7 +42,10 @@ public class SecurityConfig {
 				.logoutUrl("/logout")
 				// ログアウトした場合の遷移先
 				.logoutSuccessUrl("/login").permitAll()
-			);
+			)
+	       .requestCache((cache) -> cache
+	               .requestCache(requestCache)
+	        );
 		return http.build();
 	}
 	

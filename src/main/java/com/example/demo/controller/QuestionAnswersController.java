@@ -252,6 +252,7 @@ public class QuestionAnswersController {
 	public String postResult(@RequestParam("questionId") int[] questionsId, @RequestParam("answer") String[] answers, Model model) {
 		int correctQueCnt = 0;
 		
+		//渡された答えがある場合
 		if(answers.length != 0) {
 			//questionsIdの要素数分だけ処理を繰り返す
 			for(int i = 0; i < questionsId.length; i++) {
