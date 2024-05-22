@@ -252,18 +252,20 @@ public class QuestionAnswersController {
 	public String postResult(@RequestParam("questionId") int[] questionsId, @RequestParam("answer") String[] answers, Model model) {
 		int correctQueCnt = 0;
 		
-		//questionsIdの要素数分だけ処理を繰り返す
-		for(int i = 0; i < questionsId.length; i++) {
-			//search_answerメソッドを呼び出して、answerと一致するレコードを取得
-			ArrayList<Answer> ansList = ansService.findByAnswer(answers[i]);
-			//ansListの要素数分だけ繰り返す
-			for(Answer ans : ansList ) {
-				//入力された答えと一致するレコードがあり、答えに紐づく問題idが一致する場合
-				if(ans.getId() != 0 && ans.getQuestions_id() == questionsId[i]) {
-					//正解の問題数をカウントアップ
-					correctQueCnt ++;
-					//繰り返し処理を抜ける
-					break;
+		if(answers.length != 0) {
+			//questionsIdの要素数分だけ処理を繰り返す
+			for(int i = 0; i < questionsId.length; i++) {
+				//search_answerメソッドを呼び出して、answerと一致するレコードを取得
+				ArrayList<Answer> ansList = ansService.findByAnswer(answers[i]);
+				//ansListの要素数分だけ繰り返す
+				for(Answer ans : ansList ) {
+					//入力された答えと一致するレコードがあり、答えに紐づく問題idが一致する場合
+					if(ans.getId() != 0 && ans.getQuestions_id() == questionsId[i]) {
+						//正解の問題数をカウントアップ
+						correctQueCnt ++;
+						//繰り返し処理を抜ける
+						break;
+					}
 				}
 			}
 		}
