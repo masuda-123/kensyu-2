@@ -45,4 +45,11 @@ public class UserController {
 		model.addAttribute("userList", userList);
 		return "user_lists";
 	}
+	
+	//登録画面の処理
+	@GetMapping("/user/register")
+	public String getRegister(Model model) {
+		//register画面に遷移
+		return "user_register";
+	}
 }

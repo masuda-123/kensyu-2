@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>user_lists</title>
+<link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
+</head>
+	<body>
+		<div class="btn_area">
+			<button onclick="location.href='../top'">top</button>
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="logout" class="logout_btn">
+			</form>
+		</div>
+		<form th:action="@{/user/register/confirm}" method="post">
+			<div>
+				<label>ユーザー名: </label>
+				<input type="text" id="userName" name="userName">
+			</div>
+			<div>
+				<label>PW: </label>
+				<input type="text" id="password" name="password">
+			</div>
+			<div>
+				<label>PW確認: </label>
+				<input type="text" id="passwordConfirm" name="passwordConfirm">
+			</div>
+			<div>
+				<label>管理者権限: </label>
+				<input type="checkbox" id="adminFlag" name="adminFlag">
+			</div>
+		</div>
+		<div class="bottom_btn_area">
+			<button type="button" onclick="history.back()">戻る</button>
+			<input type="submit" value="確認">
+		</div>
+	</body>
+</html>
