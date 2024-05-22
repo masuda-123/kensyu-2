@@ -26,16 +26,16 @@ p {
 	width: 100%;
 	/*右に寄せる*/
 	text-align: right;
-	/*要素を横並びにする*/
-	display: flex;
-	/* 横並びにした要素を右寄せする*/
-	justify-content: right;
 }
 
 /* btn_areaクラス*/
 .btn_area {
 	/*上に余白を20px作る*/
 	margin-top: 20px;
+	/*要素を横並びにする*/
+	display: flex;
+	/* 横並びにした要素を右寄せする*/
+	justify-content: right;
 }
 
 /* logout_btnクラス */
