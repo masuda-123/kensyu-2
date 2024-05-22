@@ -12,21 +12,24 @@
 				<input type="submit" value="logout" class="logout_btn">
 			</form>
 		</div>
-		<button class="new_btn" onclick="location.href='./register'" >新規登録</button>
-		<table>
+		<button class="user_new_btn" onclick="location.href='./register'" >新規登録</button>
+		<table class="user_table">
 			<tr>
-				<th>ID</th>
-				<th>権限</th>
-				<th>ユーザー名</th>
+				<th class="user_id_area">ID</th>
+				<th class="user_auth_area">権限</th>
+				<th class="user_name_area">ユーザー名</th>
 			</tr>
 			<!-- 問題の数だけ処理を繰り返す  -->
 			<th:block th:each="user : ${userList}">
 				<tr>
-					<td th:text="${user.getId()}" ></td>
-					<td th:text="${user.getAdmin_flag()}" ></td>
-					<td th:text="${user.getName()}" ></td>
+					<td class="user_id_area" th:text="${user.getId()}" ></td>
+					<td class="user_auth_area" th:if="${user.getAdmin_flag() == 0}">一般</td>
+					<td class="user_auth_area" th:if="${user.getAdmin_flag() == 1}">管理者</td>
+					<td class="user_name_area" th:text="${user.getName()}" ></td>
 					<td>
 						<a th:href="@{/user/{id}(id=${user.getId()})}"><button>編集</button></a>
+					</td>
+					<td>
 						<a th:href="@{/user/{id}(id=${user.getId()})}"><button>削除</button></a>
 					</td>
 				</tr>

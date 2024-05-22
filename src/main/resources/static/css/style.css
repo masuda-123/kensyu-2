@@ -325,17 +325,55 @@ h2 {
 }
 
 /* History画面のtableタグ*/
-table {
+.history_table {
 	/* 票の枠線を重ねる*/
 	border-collapse: collapse;
 }
 
 /* History画面のtd, thタグ*/
-td, th {
+.history_table td, th {
 	/*余白を7px作る*/
 	padding: 7px;
 	/*幅を210pxにする*/
 	width: 210px;
 	/*枠線の太さを1pxにして、1本線にする*/
 	border: solid 1px;
+}
+
+/* History画面のtd, thタグ*/
+.user_table td, th {
+	/*余白を2px作る*/
+	padding: 2px;
+	/*境界線をなくす*/
+	border: none;
+	/*文字を左詰めにする*/
+	text-align: left;
+}
+
+/* user_lists画面のtd, thタグのuser_id_areaクラス*/
+.user_id_area {
+	/*幅を全体の10%にする*/
+	width: 10%;
+}
+
+/* user_lists画面のtd, thタグのuser_auth_areaクラス*/
+.user_auth_area {
+	/*幅を全体の10%にする*/
+	width: 10%;	
+}
+
+/* user_lists画面のtd, thタグのuser_name_areaクラス*/
+.user_name_area {
+	/*幅を全体の63.5%にする*/
+	width: 65.3%;
+}
+
+/* user_lists画面の新規作成ボタン*/
+.user_new_btn {
+	/* 要素を右寄せする */
+	margin-left: auto;
+	/* 上に余白を10pxつくる*/
+	margin-top: 10px;
+	/* 要素をブロック化する*/
+	display: block;
 }
