@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 
 
 @Configuration
@@ -16,6 +17,9 @@ public class SecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		//パフォーマンスの最適化機能を無効にする
+	    HttpSessionRequestCache requestCache = new HttpSessionRequestCache();
+	    requestCache.setMatchingRequestParameterName(null);
 		http
 			.authorizeHttpRequests((authorize) -> authorize
 				// アクセス制限をかけない要求
@@ -38,7 +42,10 @@ public class SecurityConfig {
 				.logoutUrl("/logout")
 				// ログアウトした場合の遷移先
 				.logoutSuccessUrl("/login").permitAll()
-			);
+			)
+	       .requestCache((cache) -> cache
+	               .requestCache(requestCache)
+	        );
 		return http.build();
 	}
 	

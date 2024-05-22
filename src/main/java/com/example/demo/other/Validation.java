@@ -29,6 +29,12 @@ public class Validation {
 			errorMessage += "<br>";
 		}
 		
+		//答えが空だった場合
+		if(answers.length == 0) {
+			//エラーメッセージに文字列を追加
+			errorMessage += "※答え1が未入力です。" + "<br>" ;
+		}
+		
 		//答えの数だけ処理を繰り返す
 		for(int i = 0; i < answers.length; i++) {
 			//初期値に戻す

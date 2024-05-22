@@ -10,15 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
-import com.example.demo.Kensyu2Application;
 import com.example.demo.model.User;
 
-@SpringBootTest(
-        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-        classes = Kensyu2Application.class)
+@SpringBootTest
+@TestExecutionListeners({
+    DependencyInjectionTestExecutionListener.class
+})
 class UserServiceTest {
 	
+	//以下のクラスをインスタンス化
 	@Autowired
 	private UserService userService;
 	
@@ -36,7 +39,6 @@ class UserServiceTest {
 	public void getUserWhenRegisterUserId() throws Exception {
 		//登録されているidを渡して、ユーザーを取得
 		User user = userService.findById(1);
-		
 		//ユーザーが取得できることを確認
 		assertThat(user.getId(), is(1));
 		assertThat(user.getName(), is("testuser"));

@@ -4,10 +4,22 @@
 		<meta charset="UTF-8">
 		<title>Register</title>
 		<link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
-		<!-- jsファイルで使う変数を宣言し、初期値を設定   -->
-		<script th:inline="javascript">
-			var i = /*[[${answers.length}]]*/1;
-		</script>
+		
+		<!--答えのデータがある場合-->
+		<th:block th:if="${answers.length != 0}">
+			<!-- jsファイルで使う変数を宣言し、初期値に答えの数を設定   -->
+			<script th:inline="javascript">
+				var i = /*[[${answers.length}]]*/1;
+			</script>
+		</th:block>
+		<!--答えのデータがない場合-->
+		<th:block th:if="${answers.length == 0}">
+			<!-- jsファイルで使う変数を宣言し、初期値に1を設定   -->
+			<script th:inline="javascript">
+				var i = 1;
+			</script>
+		</th:block>
+		
 		<script type="text/javascript" th:src="@{/js/add_answer_form.js}"></script>
 		<script type="text/javascript" th:src="@{/js/delete_answer_form.js}"></script>
 	</head>
@@ -35,13 +47,13 @@
 			<div class="answer_forms_area">
 				<label for="answer">答え:</label>
 				<div class="answer_forms">
-					<!-- 以前入力した答えのデータがない場合（戻るボタンを押す前のデータ）-->
+					<!-- 答えのデータがない場合（戻るボタンを押す前のデータ）-->
 					<th:block th:if="${answers.length == 0}">
 						<div class="answer_form" id="answerform1">
 							<input type="text" id="answer" name="answer">
 						</div>
 					</th:block>
-					<!-- 答えのデータがある場合-->
+					<!-- 答えのデータがある場合（戻るボタンを押す前のデータ）-->
 					<th:block th:if="${answers.length != 0}">
 						<!-- 答えの数だけ処理を繰り返す  -->
 						<th:block th:each="answer, ansStatus: ${answers}">
@@ -57,7 +69,7 @@
 				</div>
 			</div>
 			<div class="bottom_btn_area">
-				<button type="button" onclick="location.href='../list'">戻る</button>
+				<button type="button" onclick="history.back()">戻る</button>
 				<input type="submit" value="確認">
 				<button type="button" onclick="addForm()">追加</button>
 			</div>
