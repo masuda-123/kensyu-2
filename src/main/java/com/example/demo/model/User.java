@@ -29,6 +29,8 @@ public class User implements UserDetails {
 	
 	private Timestamp deleted_at;
 	
+	private int admin_flag;
+	
 	//権限を取得
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

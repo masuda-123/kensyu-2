@@ -4,4 +4,7 @@
 	<select id="findById" resultType="com.example.demo.model.User">
 		SELECT * FROM users WHERE id = #{userId};
 	</select>
+	<select id="findAll" resultType="com.example.demo.model.User">
+		SELECT * FROM users;
+	</select>
 </mapper>
