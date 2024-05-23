@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
@@ -36,7 +37,7 @@ public class UserController {
 		return "login";
 	}
 	
-	//一覧画面の処理
+	//ユーザー一覧画面の処理
 	@GetMapping("/user/lists")
 	public String getList(Model model) {
 		//全てのユーザーを取得
@@ -46,10 +47,44 @@ public class UserController {
 		return "user_lists";
 	}
 	
-	//登録画面の処理
+	//ユーザー登録画面の処理
 	@GetMapping("/user/register")
 	public String getRegister(Model model) {
 		//register画面に遷移
 		return "user_register";
+	}
+	
+	//ユーザー登録確認画面の処理
+	@PostMapping("/user/register/confirm")
+	public String postRegisterConfirm(@RequestParam("userName") String userName, @RequestParam("password") String password, 
+			@RequestParam("passwordConfirm") String passwordConfirm, @RequestParam("adminFlag") int adminFlag, Model model) {
+		//変数をモデルに登録
+		model.addAttribute("userName", userName);
+		model.addAttribute("password", password);
+		model.addAttribute("passwordConfirm", passwordConfirm);
+		String userAuth = null;
+		if(adminFlag == 1) {
+			userAuth = "あり";
+		}else {
+			userAuth = "なし";
+		}
+		model.addAttribute("userAuth", userAuth);
+		//uer_register_confirm画面に遷移
+		return "user_register_confirm";
+	}
+	
+	//登録処理
+	@PostMapping("user/register/complete")
+	public String postRegisterComplete(@RequestParam("userName") String userName, @RequestParam("password") String password, @RequestParam("userAuth") String userAuth, Model model) {
+		int adminFlag = 0;
+		if(userAuth.equals("あり")) {
+			adminFlag = 1;
+		}else {
+			adminFlag = 0;
+		}
+		//フォームから渡された値をもとに、ユーザーを登録
+		userService.register(userName, password, adminFlag);
+		//user_lists画面にリダイレクト
+		return "redirect:/user/lists";
 	}
 }

@@ -7,4 +7,7 @@
 	<select id="findAll" resultType="com.example.demo.model.User">
 		SELECT * FROM users;
 	</select>
+	<insert id="register">
+		INSERT INTO users (name, password, admin_flag, created_at) values (#{userName}, #{password}, #{adminFlag}, CURRENT_TIMESTAMP());
+	</insert>
 </mapper>
