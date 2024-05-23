@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -73,8 +74,9 @@ public class UserController {
 	}
 	
 	//ユーザー登録処理
-	@PostMapping("user/register/complete")
-	public String postRegisterComplete(@RequestParam("userName") String userName, @RequestParam("password") String password, @RequestParam("userAuth") String userAuth, Model model) {
+	@PostMapping("/user/register/complete")
+	public String postRegisterComplete(@RequestParam("userName") String userName, @RequestParam("password") String password, 
+			@RequestParam("userAuth") String userAuth, Model model) {
 		int adminFlag = 0;
 		//userAuthが「あり」だった場合
 		if(userAuth.equals("あり")) {
@@ -84,5 +86,16 @@ public class UserController {
 		userService.register(userName, password, adminFlag);
 		//user_lists画面にリダイレクト
 		return "redirect:/user/lists";
+	}
+	
+	//ユーザー編集画面の処理
+	@GetMapping("/user/edit/{id}")
+	public String getEdit(@PathVariable("id") int userId,  Model model) {
+		//パスから取得した問題Idをもとに、問題と答えを取得
+		User user = userService.findById(userId);
+		//変数をモデルに登録
+		model.addAttribute("user", user);
+		//edit画面に遷移
+		return "user_edit";
 	}
 }
