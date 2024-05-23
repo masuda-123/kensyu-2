@@ -4,15 +4,16 @@
 <meta charset="UTF-8">
 <title>user_register</title>
 <link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
+<script type="text/javascript" th:src="@{/js/check_user_validation.js}"></script>
 </head>
 	<body>
 		<div class="btn_area">
-			<button onclick="location.href='../top'">top</button>
+			<button onclick="location.href='/top'">top</button>
 			<form th:action="@{/logout}" method="post">
 				<input type="submit" value="logout" class="logout_btn">
 			</form>
 		</div>
-		<form th:action="@{/user/register/confirm}" method="post">
+		<form th:action="@{/user/register/confirm}" method="post" onsubmit="return checkValidation()">
 			<div>
 				<label>ユーザー名: </label>
 				<input type="text" id="userName" name="userName">
@@ -29,6 +30,10 @@
 				<label>管理者権限: </label>
 				<input type="checkbox" id="adminFlag" name="adminFlag" value="1">
 				<input type='hidden' name="adminFlag" value='0'>
+			</div>
+			<div>
+				<li>ユーザー名は半角英数字で入力してください</li>
+				<li>PWは半角英数字で8文字以上で入力してください</li>
 			</div>
 		</div>
 		<div class="bottom_btn_area">
