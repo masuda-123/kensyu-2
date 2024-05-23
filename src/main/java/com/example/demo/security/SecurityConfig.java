@@ -26,7 +26,7 @@ public class SecurityConfig {
 				.requestMatchers("/favicon.ico", "/resources/**", "/error").permitAll()
 				.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
 				// 管理者しかアクセスできないページを設定
-				.requestMatchers("/user/lists", "/user/register").hasRole("ADMIN")
+				.requestMatchers("/user/lists", "/user/register").hasAuthority("ADMIN")
 				//上記以外のすべての要求で、ユーザーの認証を必要とする
 				.anyRequest().authenticated()
 			)

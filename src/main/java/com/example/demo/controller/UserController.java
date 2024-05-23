@@ -93,6 +93,7 @@ public class UserController {
 	public String getEdit(@PathVariable("id") int userId,  Model model) {
 		//パスから取得した問題Idをもとに、問題と答えを取得
 		User user = userService.findById(userId);
+		System.out.println(user.getAuthorities());
 		//変数をモデルに登録
 		model.addAttribute("user", user);
 		//edit画面に遷移

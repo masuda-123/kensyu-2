@@ -20,7 +20,7 @@
 			</div>
 			<div  class="user_form">
 				<label>PW: </label>
-				<input type="password" id="password" name="password" th;value="${user.getPassword()">
+				<input type="password" id="password" name="password" th;value="${user.getPassword()}">
 			</div>
 			<div  class="user_form">
 				<label>PW確認: </label>
@@ -28,18 +28,13 @@
 			</div>
 			<div  class="user_form">
 				<label>管理者権限: </label>
-				<th:block if="${user.getAdmin_flag() == 1"></th:block>
+				<th:block th:if="${user.getAdmin_flag() == 1}">
 					<input type="checkbox" id="adminFlag" name="adminFlag" value="1" checked>
 				</th:block>
-				<th:block if="${user.getAdmin_flag() != 1"></th:block>
+				<th:block th:if="${user.getAdmin_flag() != 1}">
 					<input type="checkbox" id="adminFlag" name="adminFlag" value="1">
 				</th:block>
 				<input type='hidden' name="adminFlag" value='0'>
-			</div>
-			<div class="user_form">
-				<label>管理者権限: </label>
-				<p th:text="${userAuth}"></p>
-				<input type="hidden" id="userAuth" name="userAuth" th:value="${userAuth}">
 			</div>
 		</div>
 		<div class="bottom_btn_area">

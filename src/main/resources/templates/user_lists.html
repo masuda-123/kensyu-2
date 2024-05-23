@@ -27,7 +27,7 @@
 					<td class="user_auth_area" th:if="${user.getAdmin_flag() == 1}">管理者</td>
 					<td class="user_name_area" th:text="${user.getName()}" ></td>
 					<td>
-						<a th:href="@{/user/{id}(id=${user.getId()})}"><button>編集</button></a>
+						<a th:href="@{/user/edit/{id}(id=${user.getId()})}"><button>編集</button></a>
 					</td>
 					<td>
 						<a th:href="@{/user/{id}(id=${user.getId()})}"><button>削除</button></a>
