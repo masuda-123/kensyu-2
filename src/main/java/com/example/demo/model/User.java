@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Entity;
@@ -34,7 +35,13 @@ public class User implements UserDetails {
 	//権限を取得
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
+		//admin_flagが1の場合、ADMINを返す
+		if(this.admin_flag == 1) {
+			return AuthorityUtils.createAuthorityList("ADMIN");
+		//それ以外の場合、USERを返す
+		}else {
+			return AuthorityUtils.createAuthorityList("USER");
+		}
 	}
 	
 	//userIdを取得
