@@ -23,6 +23,7 @@ public class SecurityConfig {
 		http
 			.authorizeHttpRequests((authorize) -> authorize
 				// アクセス制限をかけない要求
+				.requestMatchers("/favicon.ico", "/resources/**", "/error").permitAll()
 				.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
 				//上記以外のすべての要求で、ユーザーの認証を必要とする
 				.anyRequest().authenticated()
