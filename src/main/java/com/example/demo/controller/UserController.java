@@ -58,27 +58,31 @@ public class UserController {
 	@PostMapping("/user/register/confirm")
 	public String postRegisterConfirm(@RequestParam("userName") String userName, @RequestParam("password") String password, 
 			@RequestParam("passwordConfirm") String passwordConfirm, @RequestParam("adminFlag") int adminFlag, Model model) {
+		String userAuth = null;
+		//adminFlagが1だった場合
+		if(adminFlag == 1) {
+			userAuth = "あり";
+		//それ以外の場合
+		}else {
+			userAuth = "なし";
+		}
 		//変数をモデルに登録
 		model.addAttribute("userName", userName);
 		model.addAttribute("password", password);
 		model.addAttribute("passwordConfirm", passwordConfirm);
-		String userAuth = null;
-		if(adminFlag == 1) {
-			userAuth = "あり";
-		}else {
-			userAuth = "なし";
-		}
 		model.addAttribute("userAuth", userAuth);
 		//uer_register_confirm画面に遷移
 		return "user_register_confirm";
 	}
 	
-	//登録処理
+	//ユーザー登録処理
 	@PostMapping("user/register/complete")
 	public String postRegisterComplete(@RequestParam("userName") String userName, @RequestParam("password") String password, @RequestParam("userAuth") String userAuth, Model model) {
 		int adminFlag = 0;
+		//userAuthが「あり」だった場合
 		if(userAuth.equals("あり")) {
 			adminFlag = 1;
+		//それ以外の場合
 		}else {
 			adminFlag = 0;
 		}

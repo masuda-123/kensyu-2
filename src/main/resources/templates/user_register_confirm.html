@@ -12,22 +12,23 @@
 				<input type="submit" value="logout" class="logout_btn">
 			</form>
 		</div>
-		<form th:action="@{/user/register/complete}" method="post">
-			<div>
+		<!-- formタグで入力されたデータを/user/register/completeにpostで送信する  -->
+		<form class="user_form_area" th:action="@{/user/register/complete}" method="post">
+			<div class="user_form">
 				<label>ユーザー名: </label>
 				<p th:text="${userName}"></p>
 				<input type="hidden" id="userName" name="userName" th:value="${userName}">
 			</div>
-			<div>
+			<div class="user_form">
 				<label>PW: </label>
 				<p>********</p>
 				<input type="hidden" id="password" name="password" th:value="${password}">
 			</div>
-			<div>
+			<div class="user_form">
 				<label>PW確認: </label>
 				<p>********</p>
 			</div>
-			<div>
+			<div class="user_form">
 				<label>管理者権限: </label>
 				<p th:text="${userAuth}"></p>
 				<input type="hidden" id="userAuth" name="userAuth" th:value="${userAuth}">

@@ -13,25 +13,26 @@
 				<input type="submit" value="logout" class="logout_btn">
 			</form>
 		</div>
-		<form th:action="@{/user/register/confirm}" method="post" onsubmit="return checkValidation()">
-			<div>
+		<!-- formタグで入力されたデータを/user/register/confirmにpostで送信する（送信する前にjsでバリデーションチェックする）  -->
+		<form class="user_form_area" th:action="@{/user/register/confirm}" method="post" onsubmit="return checkValidation()">
+			<div  class="user_form">
 				<label>ユーザー名: </label>
 				<input type="text" id="userName" name="userName">
 			</div>
-			<div>
+			<div  class="user_form">
 				<label>PW: </label>
 				<input type="password" id="password" name="password">
 			</div>
-			<div>
+			<div  class="user_form">
 				<label>PW確認: </label>
 				<input type="password" id="passwordConfirm" name="passwordConfirm">
 			</div>
-			<div>
+			<div  class="user_form">
 				<label>管理者権限: </label>
 				<input type="checkbox" id="adminFlag" name="adminFlag" value="1">
 				<input type='hidden' name="adminFlag" value='0'>
 			</div>
-			<div>
+			<div class="user_form_info">
 				<li>ユーザー名は半角英数字で入力してください</li>
 				<li>PWは半角英数字で8文字以上で入力してください</li>
 			</div>
