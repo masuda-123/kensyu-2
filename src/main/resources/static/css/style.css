@@ -377,3 +377,39 @@ h2 {
 	/* 要素をブロック化する*/
 	display: block;
 }
+
+/* user_register画面、user_register_confirm画面のクラス*/
+.user_form {
+	/*要素を横並びにする*/
+	display: flex;
+	/*下に10pxの余白を作る*/
+	margin-bottom: 10px;;
+}
+
+/* user_register画面、user_register_confirm画面のクラス*/
+.user_form label {
+	/*幅は全体の15%にする*/
+	width: 15%;
+	/*要素をブロック化する*/
+	display: block;
+	/*文字を右寄せする*/
+	text-align: right;
+}
+
+/* user_register画面のliタグ*/
+.user_form_info li{
+	/*左に20%の余白を作る*/
+	margin-left: 20%;
+}
+
+/* user_register画面のinputタグ（チェックボックスを除く）*/
+.user_form input[type="text"], .user_form input[type="password"] {
+	/*幅を全体の80%にする*/
+	width: 80%;
+}
+
+/* user_register画面のformタグのクラス*/
+.user_form_area {
+	/*上に余白を20px作る*/
+	margin-top: 20px;	
+}

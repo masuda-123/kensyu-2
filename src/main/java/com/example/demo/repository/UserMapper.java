@@ -13,4 +13,7 @@ public interface UserMapper {
 	
 	//ユーザーをすべて取得
 	ArrayList<User> findAll();
+	
+	//ユーザーを登録
+	void register(String userName, String password, int adminFlag);
 }
