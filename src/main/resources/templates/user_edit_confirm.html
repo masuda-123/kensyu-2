@@ -12,7 +12,7 @@
 				<input type="submit" value="logout" class="logout_btn">
 			</form>
 		</div>
-		<!-- formタグで入力されたデータを/user/edit/completeにpostで送信する  -->
+		<!-- formタグで入力されたデータを/user/edit/{id}/completeにpostで送信する  -->
 		<form class="user_form_area" th:action="@{/user/edit/{id}/complete(id=${userId})}" method="post">
 			<div class="user_form">
 				<label>ユーザー名: </label>

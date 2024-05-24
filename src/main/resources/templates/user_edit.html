@@ -13,7 +13,7 @@
 				<input type="submit" value="logout" class="logout_btn">
 			</form>
 		</div>
-		<!-- formタグで入力されたデータを/user/edit/confirmにpostで送信する  -->
+		<!-- formタグで入力されたデータを/user/edit/{id}/confirmにpostで送信する（送信する前にjsでバリデーションチェックする）  -->
 		<form class="user_form_area" th:action="@{/user/edit/{id}/confirm(id=${user.getId()})}" method="post" onsubmit="return checkValidation()">
 			<div  class="user_form">
 				<label>ID: </label>
@@ -34,12 +34,15 @@
 			</div>
 			<div  class="user_form">
 				<label>管理者権限: </label>
+				<!-- 管理者の場合、チェックボックスにチェックを入れる -->
 				<th:block th:if="${user.getAdmin_flag() == 1}">
 					<input type="checkbox" id="adminFlag" name="adminFlag" value="1" checked>
 				</th:block>
+				<!-- 管理者ではない場合 -->
 				<th:block th:if="${user.getAdmin_flag() != 1}">
 					<input type="checkbox" id="adminFlag" name="adminFlag" value="1">
 				</th:block>
+				<!-- チェックボックスにチェックが入っていない場合、以下のデータを送信-->
 				<input type='hidden' name="adminFlag" value='0'>
 			</div>
 		</div>
