@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>user_register_confirm</title>
+<title>user_edit_confirm</title>
 <link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
 </head>
 	<body>
@@ -12,8 +12,8 @@
 				<input type="submit" value="logout" class="logout_btn">
 			</form>
 		</div>
-		<!-- formタグで入力されたデータを/user/register/completeにpostで送信する  -->
-		<form class="user_form_area" th:action="@{/user/register/complete}" method="post">
+		<!-- formタグで入力されたデータを/user/edit/completeにpostで送信する  -->
+		<form class="user_form_area" th:action="@{/user/edit/complete}" method="post">
 			<div class="user_form">
 				<label>ユーザー名: </label>
 				<p th:text="${userName}"></p>

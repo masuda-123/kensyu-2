@@ -2,8 +2,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>user_lists</title>
+<title>user_edit</title>
 <link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
+<script type="text/javascript" th:src="@{/js/check_user_validation.js}"></script>
 </head>
 	<body>
 		<div class="btn_area">
@@ -12,8 +13,8 @@
 				<input type="submit" value="logout" class="logout_btn">
 			</form>
 		</div>
-		<!-- formタグで入力されたデータを/user/register/completeにpostで送信する  -->
-		<form class="user_form_area" th:action="@{/user/edit/complete}" method="post">
+		<!-- formタグで入力されたデータを/user/edit/confirmにpostで送信する  -->
+		<form class="user_form_area" th:action="@{/user/edit/confirm}" method="post" onsubmit="return checkValidation()">
 			<div  class="user_form">
 				<label>ID: </label>
 				<p th:text="${user.getId()}"></p>
@@ -21,6 +22,7 @@
 			<div  class="user_form">
 				<label>ユーザー名: </label>
 				<p th:text="${user.getName()}"></p>
+				<input type="hidden" id="userName" name="userName" th:value="${user.getName()}">
 			</div>
 			<div  class="user_form">
 				<label>PW: </label>
@@ -43,7 +45,7 @@
 		</div>
 		<div class="bottom_btn_area">
 			<button type="button" onclick="history.back()">戻る</button>
-			<input type="submit" value="登録">
+			<input type="submit" value="確認">
 		</div>
 	</body>
 </html>

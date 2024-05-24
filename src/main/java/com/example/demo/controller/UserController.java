@@ -95,7 +95,25 @@ public class UserController {
 		User user = userService.findById(userId);
 		//変数をモデルに登録
 		model.addAttribute("user", user);
-		//edit画面に遷移
+		//user_edit画面に遷移
 		return "user_edit";
+	}
+	
+	//ユーザー編集確認画面の処理
+	@PostMapping("/user/edit/confirm")
+	public String postEditConfirm(@RequestParam("userName") String userName, @RequestParam("password") String password, 
+			@RequestParam("passwordConfirm") String passwordConfirm, @RequestParam("adminFlag") int adminFlag, Model model) {
+		String userAuth = "なし";
+		//adminFlagが1だった場合
+		if(adminFlag == 1) {
+			userAuth = "あり";
+		}
+		//変数をモデルに登録
+		model.addAttribute("userName", userName);
+		model.addAttribute("password", password);
+		model.addAttribute("passwordConfirm", passwordConfirm);
+		model.addAttribute("userAuth", userAuth);
+		//uer_edit_confirm画面に遷移
+		return "user_edit_confirm";
 	}
 }
