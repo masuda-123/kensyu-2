@@ -38,7 +38,7 @@
 				<th:block th:if="${adminFlag == 1}">
 					<input type="checkbox" id="adminFlag" name="adminFlag" value="1" checked>
 				</th:block>
-				<!-- 管理者ではない場合 -->
+				<!-- 管理者ではない場合、チェックボックスにチェックを入れない -->
 				<th:block th:if="${adminFlag == 0}">
 					<input type="checkbox" id="adminFlag" name="adminFlag" value="1">
 				</th:block>

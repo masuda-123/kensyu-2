@@ -29,9 +29,11 @@
 			</div>
 			<div class="user_form">
 				<label>管理者権限: </label>
+				<!-- 管理者の場合 -->
 				<th:block th:if="${adminFlag == 1}">
 					<p>あり</p>
 				</th:block>
+				<!-- 管理者ではない場合 -->
 				<th:block th:if="${adminFlag == 0}">
 					<p>なし</p>
 				</th:block>
