@@ -58,9 +58,9 @@ public class UserService implements UserDetailsService {
 		return userMapper.findAll();
 	}
 	
-	//ユーザーを登録（パスワードはハッシュ化）
+	//ユーザーを登録
 	@Transactional
 	public void register(String userName, String password, int adminFlag) {
-		userMapper.register(userName, passwordEncoder.encode(password), adminFlag);
+		userMapper.register(userName, password, adminFlag);
 	}
 }

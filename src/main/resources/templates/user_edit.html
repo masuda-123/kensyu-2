@@ -15,16 +15,20 @@
 		<!-- formタグで入力されたデータを/user/register/completeにpostで送信する  -->
 		<form class="user_form_area" th:action="@{/user/edit/complete}" method="post">
 			<div  class="user_form">
+				<label>ID: </label>
+				<p th:text="${user.getId()}"></p>
+			</div>
+			<div  class="user_form">
 				<label>ユーザー名: </label>
-				<input type="text" id="userName" name="userName" th:value="${user.getName()}">
+				<p th:text="${user.getName()}"></p>
 			</div>
 			<div  class="user_form">
 				<label>PW: </label>
-				<input type="password" id="password" name="password" th;value="${user.getPassword()}">
+				<input type="password" id="password" name="password" th:value="${user.getPassword()}">
 			</div>
 			<div  class="user_form">
 				<label>PW確認: </label>
-				<input type="password" id="passwordConfirm" name="passwordConfirm" value="${user.getPassword()}">
+				<input type="password" id="passwordConfirm" name="passwordConfirm" th:value="${user.getPassword()}">
 			</div>
 			<div  class="user_form">
 				<label>管理者権限: </label>
