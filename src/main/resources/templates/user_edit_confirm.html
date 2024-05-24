@@ -12,7 +12,7 @@
 				<input type="submit" value="logout" class="logout_btn">
 			</form>
 		</div>
-		<!-- formタグで入力されたデータを/user/edit/{id}/completeにpostで送信する  -->
+		<!-- formタグで以下のデータを/user/edit/{id}/completeにpostで送信する  -->
 		<form class="user_form_area" th:action="@{/user/edit/{id}/complete(id=${userId})}" method="post">
 			<div class="user_form">
 				<label>ユーザー名: </label>
@@ -29,13 +29,26 @@
 			</div>
 			<div class="user_form">
 				<label>管理者権限: </label>
-				<p th:text="${userAuth}"></p>
-				<input type="hidden" id="userAuth" name="userAuth" th:value="${userAuth}">
+				<th:block th:if="${adminFlag == 1}">
+					<p>あり</p>
+				</th:block>
+				<th:block th:if="${adminFlag == 0}">
+					<p>なし</p>
+				</th:block>
+				<input type="hidden" id="adminFlag" name="adminFlag" th:value="${adminFlag}">
 			</div>
-		</div>
-		<div class="bottom_btn_area">
-			<button type="button" onclick="history.back()">戻る</button>
-			<input type="submit" value="登録">
-		</div>
+			<div class="bottom_btn_area">
+				<input type="submit" value="登録">
+			</div>
+		</form>
+		<!-- formタグで以下のデータを/user/edit/{id}にpostで送信する  -->
+		<form th:action="@{/user/edit/{id}(id=${userId})}" method="post">
+			<input type="hidden" id="userName" name="userName" th:value="${userName}">
+			<input type="hidden" id="password" name="password" th:value="${password}">
+			<input type="hidden" id="adminFlag" name="adminFlag" th:value="${adminFlag}">
+			<div class="bottom_btn_area">
+				<input type="submit" value="戻る">
+			</div>
+		</form>
 	</body>
 </html>

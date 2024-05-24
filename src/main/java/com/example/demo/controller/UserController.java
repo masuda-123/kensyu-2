@@ -51,7 +51,11 @@ public class UserController {
 	//ユーザー登録画面の処理
 	@GetMapping("/user/register")
 	public String getRegister(Model model) {
-		//register画面に遷移
+		//モデルに変数を登録
+		model.addAttribute("userName", "");
+		model.addAttribute("password", "");
+		model.addAttribute("adminFlag", 0);
+		//user_register画面に遷移
 		return "user_register";
 	}
 	
@@ -59,29 +63,31 @@ public class UserController {
 	@PostMapping("/user/register/confirm")
 	public String postRegisterConfirm(@RequestParam("userName") String userName, @RequestParam("password") String password, 
 			@RequestParam("passwordConfirm") String passwordConfirm, @RequestParam("adminFlag") int adminFlag, Model model) {
-		String userAuth = "なし";
-		//adminFlagが1だった場合
-		if(adminFlag == 1) {
-			userAuth = "あり";
-		}
 		//変数をモデルに登録
 		model.addAttribute("userName", userName);
 		model.addAttribute("password", password);
 		model.addAttribute("passwordConfirm", passwordConfirm);
-		model.addAttribute("userAuth", userAuth);
+		model.addAttribute("adminFlag", adminFlag);
 		//uer_register_confirm画面に遷移
 		return "user_register_confirm";
+	}
+	
+	//ユーザー登録確認画面から登録画面に戻った際の処理
+	@PostMapping("user/register")
+	public String postregister(@RequestParam("userName") String userName, @RequestParam("password") String password, 
+			@RequestParam("adminFlag") int adminFlag, Model model) {
+		//変数をモデルに登録
+		model.addAttribute("userName", userName);
+		model.addAttribute("password", password);
+		model.addAttribute("adminFlag", adminFlag);
+		//user_register画面に遷移
+		return "user_register";
 	}
 	
 	//ユーザー登録処理
 	@PostMapping("/user/register/complete")
 	public String postRegisterComplete(@RequestParam("userName") String userName, @RequestParam("password") String password, 
-			@RequestParam("userAuth") String userAuth, Model model) {
-		int adminFlag = 0;
-		//userAuthが「あり」だった場合
-		if(userAuth.equals("あり")) {
-			adminFlag = 1;
-		}
+			@RequestParam("adminFlag") int adminFlag, Model model) {
 		//フォームから渡された値をもとに、ユーザーを登録
 		userService.register(userName, password, adminFlag);
 		//user_lists画面にリダイレクト
@@ -91,10 +97,13 @@ public class UserController {
 	//ユーザー編集画面の処理
 	@GetMapping("/user/edit/{id}")
 	public String getEdit(@PathVariable("id") int userId,  Model model) {
-		//パスから取得した問題Idをもとに、問題と答えを取得
+		//パスから取得したIdをもとに、ユーザーを取得
 		User user = userService.findById(userId);
 		//変数をモデルに登録
-		model.addAttribute("user", user);
+		model.addAttribute("userId", userId);
+		model.addAttribute("userName", user.getName());
+		model.addAttribute("password", user.getPassword());
+		model.addAttribute("adminFlag", user.getAdmin_flag());
 		//user_edit画面に遷移
 		return "user_edit";
 	}
@@ -103,30 +112,33 @@ public class UserController {
 	@PostMapping("/user/edit/{id}/confirm")
 	public String postEditConfirm(@PathVariable("id") int userId, @RequestParam("userName") String userName, @RequestParam("password") String password, 
 			@RequestParam("passwordConfirm") String passwordConfirm, @RequestParam("adminFlag") int adminFlag, Model model) {
-		String userAuth = "なし";
-		//adminFlagが1だった場合
-		if(adminFlag == 1) {
-			userAuth = "あり";
-		}
 		//変数をモデルに登録
 		model.addAttribute("userId", userId);
 		model.addAttribute("userName", userName);
 		model.addAttribute("password", password);
 		model.addAttribute("passwordConfirm", passwordConfirm);
-		model.addAttribute("userAuth", userAuth);
+		model.addAttribute("adminFlag", adminFlag);
 		//uer_edit_confirm画面に遷移
 		return "user_edit_confirm";
+	}
+	
+	//ユーザー編集確認画面から編集画面に戻った際の処理
+	@PostMapping("user/edit/{id}")
+	public String postEdit(@PathVariable("id") int userId, @RequestParam("userName") String userName, @RequestParam("password") String password, 
+			@RequestParam("adminFlag") int adminFlag, Model model) {
+		//変数をモデルに登録
+		model.addAttribute("userId", userId);
+		model.addAttribute("userName", userName);
+		model.addAttribute("password", password);
+		model.addAttribute("adminFlag", adminFlag);
+		//edit画面に遷移
+		return "user_edit";
 	}
 	
 	//ユーザー登録処理
 	@PostMapping("/user/edit/{id}/complete")
 	public String postEditComplete(@PathVariable("id") int userId, @RequestParam("password") String password, 
-			@RequestParam("userAuth") String userAuth, Model model) {
-		int adminFlag = 0;
-		//userAuthが「あり」だった場合
-		if(userAuth.equals("あり")) {
-			adminFlag = 1;
-		}
+			@RequestParam("adminFlag") int adminFlag, Model model) {
 		//URLのパスやフォームから渡された値をもとに、ユーザーを更新
 		userService.update(userId, password, adminFlag);
 		//user_lists画面にリダイレクト
