@@ -16,4 +16,7 @@ public interface UserMapper {
 	
 	//ユーザーを登録
 	void register(String userName, String password, int adminFlag);
+	
+	//userIdをもとにユーザーを更新
+	void update(int userId, String password, int adminFlag);
 }

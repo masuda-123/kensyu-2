@@ -100,8 +100,8 @@ public class UserController {
 	}
 	
 	//ユーザー編集確認画面の処理
-	@PostMapping("/user/edit/confirm")
-	public String postEditConfirm(@RequestParam("userName") String userName, @RequestParam("password") String password, 
+	@PostMapping("/user/edit/{id}/confirm")
+	public String postEditConfirm(@PathVariable("id") int userId, @RequestParam("userName") String userName, @RequestParam("password") String password, 
 			@RequestParam("passwordConfirm") String passwordConfirm, @RequestParam("adminFlag") int adminFlag, Model model) {
 		String userAuth = "なし";
 		//adminFlagが1だった場合
@@ -109,11 +109,27 @@ public class UserController {
 			userAuth = "あり";
 		}
 		//変数をモデルに登録
+		model.addAttribute("userId", userId);
 		model.addAttribute("userName", userName);
 		model.addAttribute("password", password);
 		model.addAttribute("passwordConfirm", passwordConfirm);
 		model.addAttribute("userAuth", userAuth);
 		//uer_edit_confirm画面に遷移
 		return "user_edit_confirm";
+	}
+	
+	//ユーザー登録処理
+	@PostMapping("/user/edit/{id}/complete")
+	public String postEditComplete(@PathVariable("id") int userId, @RequestParam("password") String password, 
+			@RequestParam("userAuth") String userAuth, Model model) {
+		int adminFlag = 0;
+		//userAuthが「あり」だった場合
+		if(userAuth.equals("あり")) {
+			adminFlag = 1;
+		}
+		//URLのパスやフォームから渡された値をもとに、ユーザーを更新
+		userService.update(userId, password, adminFlag);
+		//user_lists画面にリダイレクト
+		return "redirect:/user/lists";
 	}
 }

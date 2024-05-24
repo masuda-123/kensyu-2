@@ -14,7 +14,7 @@
 			</form>
 		</div>
 		<!-- formタグで入力されたデータを/user/edit/confirmにpostで送信する  -->
-		<form class="user_form_area" th:action="@{/user/edit/confirm}" method="post" onsubmit="return checkValidation()">
+		<form class="user_form_area" th:action="@{/user/edit/{id}/confirm(id=${user.getId()})}" method="post" onsubmit="return checkValidation()">
 			<div  class="user_form">
 				<label>ID: </label>
 				<p th:text="${user.getId()}"></p>

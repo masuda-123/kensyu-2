@@ -63,4 +63,10 @@ public class UserService implements UserDetailsService {
 	public void register(String userName, String password, int adminFlag) {
 		userMapper.register(userName, password, adminFlag);
 	}
+	
+	//userIdをもとにユーザーを更新
+	@Transactional
+	public void update(int userId, String password, int adminFlag) {
+		userMapper.update(userId, password, adminFlag);
+	}
 }

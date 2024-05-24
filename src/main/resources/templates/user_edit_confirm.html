@@ -13,11 +13,10 @@
 			</form>
 		</div>
 		<!-- formタグで入力されたデータを/user/edit/completeにpostで送信する  -->
-		<form class="user_form_area" th:action="@{/user/edit/complete}" method="post">
+		<form class="user_form_area" th:action="@{/user/edit/{id}/complete(id=${userId})}" method="post">
 			<div class="user_form">
 				<label>ユーザー名: </label>
 				<p th:text="${userName}"></p>
-				<input type="hidden" id="userName" name="userName" th:value="${userName}">
 			</div>
 			<div class="user_form">
 				<label>PW: </label>
