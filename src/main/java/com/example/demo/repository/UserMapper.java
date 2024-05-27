@@ -19,4 +19,7 @@ public interface UserMapper {
 	
 	//userIdをもとにユーザーを更新
 	void update(int userId, String password, int adminFlag);
+	
+	//userIdをもとにユーザーを削除
+	void delete(int userId);
 }

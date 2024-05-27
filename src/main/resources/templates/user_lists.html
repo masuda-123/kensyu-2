@@ -30,7 +30,7 @@
 						<a th:href="@{/user/edit/{id}(id=${user.getId()})}"><button>編集</button></a>
 					</td>
 					<td>
-						<a th:href="@{/user/{id}(id=${user.getId()})}"><button>削除</button></a>
+						<a th:href="@{/user/delete/{id}/confirm(id=${user.getId()})}"><button>削除</button></a>
 					</td>
 				</tr>
 			</th:block>

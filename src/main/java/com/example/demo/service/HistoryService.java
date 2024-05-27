@@ -27,5 +27,11 @@ public class HistoryService {
 	public void register(int userId, int point) {
 		historyMapper.register(userId, point);
 	}
+	
+	//userIdをもとに履歴を削除
+	@Transactional
+	public void delete(int userId) {
+		historyMapper.delete(userId);
+	}
 
 }

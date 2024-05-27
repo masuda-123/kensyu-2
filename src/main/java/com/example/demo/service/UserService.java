@@ -42,7 +42,6 @@ public class UserService implements UserDetailsService {
 		return user;
 	}
 	
-	
 	//useIdをもとにユーザーを取得
 	@Transactional
 	public User findById(int userId) {
@@ -69,5 +68,11 @@ public class UserService implements UserDetailsService {
 		//パスワードは暗号化
 		PasswordEncrypter passEncrypter = new PasswordEncrypter();
 		userMapper.update(userId, passEncrypter.encode(password), adminFlag);
+	}
+	
+	//userIdをもとにユーザーを削除
+	@Transactional
+	public void delete(int userId) {
+		userMapper.delete(userId);
 	}
 }

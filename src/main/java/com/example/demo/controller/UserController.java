@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.User;
 import com.example.demo.security.PasswordEncrypter;
+import com.example.demo.service.HistoryService;
 import com.example.demo.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,9 @@ public class UserController {
 	//以下のクラスをインスタンス化
 	@Autowired
 	private final UserService userService;
+	
+	@Autowired
+	private final HistoryService historyService;
 	
 	//ログイン画面の処理
 	@GetMapping("/login")
@@ -133,7 +137,7 @@ public class UserController {
 		model.addAttribute("userName", userName);
 		model.addAttribute("password", password);
 		model.addAttribute("adminFlag", adminFlag);
-		//edit画面に遷移
+		//user_edit画面に遷移
 		return "user_edit";
 	}
 	
@@ -143,6 +147,30 @@ public class UserController {
 			@RequestParam("adminFlag") int adminFlag, Model model) {
 		//URLのパスやフォームから渡された値をもとに、ユーザーを更新
 		userService.update(userId, password, adminFlag);
+		//user_lists画面にリダイレクト
+		return "redirect:/user/lists";
+	}
+	
+	//ユーザー削除確認画面の処理
+	@GetMapping("/user/delete/{id}/confirm")
+	public String getDeleteConfirm(@PathVariable("id") int userId, Model model) {
+		//パスから取得したIdをもとに、ユーザーを取得
+		User user = userService.findById(userId);
+		//変数をモデルに登録（パスワードは復号化する）
+		model.addAttribute("userId", userId);
+		model.addAttribute("userName", user.getName());
+		model.addAttribute("adminFlag", user.getAdmin_flag());
+		//yser_delete_confirm画面に遷移
+		return "user_delete_confirm";
+	}
+	
+	//ユーザー削除確認画面の処理
+	@PostMapping("/user/delete/{id}/complete")
+	public String getDeleteComplete(@PathVariable("id") int userId, Model model) {
+		//パスから取得したIdをもとに、ユーザーを論理削除
+		userService.delete(userId);
+		//idをもとに履歴も論理削除
+		historyService.delete(userId);
 		//user_lists画面にリダイレクト
 		return "redirect:/user/lists";
 	}

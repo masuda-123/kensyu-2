@@ -7,5 +7,8 @@
 	<insert id="register">
 		INSERT INTO histories (user_id, point, created_at) VALUES (#{userId}, #{point}, CURRENT_TIMESTAMP());
 	</insert>
+	<update id="delete">
+		UPDATE histories SET deleted_at = CURRENT_TIMESTAMP() WHERE user_id = #{userId};
+	</update>
 </mapper>
  
