@@ -101,7 +101,7 @@ public class UserController {
 		//パスから取得したIdをもとに、ユーザーを取得
 		User user = userService.findById(userId);
 		PasswordEncrypter passEncrypter = new PasswordEncrypter();
-        //変数をモデルに登録（パスワードは復号化する）
+		//変数をモデルに登録（パスワードは復号化する）
 		model.addAttribute("userId", userId);
 		model.addAttribute("userName", user.getName());
 		model.addAttribute("password", passEncrypter.decrypt(user.getPassword()));
