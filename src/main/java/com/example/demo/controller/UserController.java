@@ -137,7 +137,7 @@ public class UserController {
 		return "user_edit";
 	}
 	
-	//ユーザー登録処理
+	//ユーザー編集処理
 	@PostMapping("/user/edit/{id}/complete")
 	public String postEditComplete(@PathVariable("id") int userId, @RequestParam("password") String password, 
 			@RequestParam("adminFlag") int adminFlag, Model model) {
