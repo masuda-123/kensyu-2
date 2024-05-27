@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 
@@ -45,15 +45,14 @@ public class SecurityConfig {
 				// ログアウトした場合の遷移先
 				.logoutSuccessUrl("/login").permitAll()
 			)
-	       .requestCache((cache) -> cache
-	               .requestCache(requestCache)
-	        );
+			.requestCache((cache) -> cache
+				.requestCache(requestCache));
 		return http.build();
 	}
 	
-	//ユーザーが入力したパスワードをハッシュ化しないようにする
-    @Bean
-    public static NoOpPasswordEncoder passwordEncoder() {
-       return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
-    }
+	//ユーザーが入力したパスワードを暗号化する
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new PasswordEncrypter();
+	}
 }

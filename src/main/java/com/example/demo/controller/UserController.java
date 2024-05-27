@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.User;
+import com.example.demo.security.PasswordEncrypter;
 import com.example.demo.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -99,10 +100,11 @@ public class UserController {
 	public String getEdit(@PathVariable("id") int userId,  Model model) {
 		//パスから取得したIdをもとに、ユーザーを取得
 		User user = userService.findById(userId);
-		//変数をモデルに登録
+		PasswordEncrypter passEncrypter = new PasswordEncrypter();
+        //変数をモデルに登録（パスワードは復号化する）
 		model.addAttribute("userId", userId);
 		model.addAttribute("userName", user.getName());
-		model.addAttribute("password", user.getPassword());
+		model.addAttribute("password", passEncrypter.decrypt(user.getPassword()));
 		model.addAttribute("adminFlag", user.getAdmin_flag());
 		//user_edit画面に遷移
 		return "user_edit";

@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.model.User;
 import com.example.demo.repository.UserMapper;
+import com.example.demo.security.PasswordEncrypter;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -19,9 +19,6 @@ public class UserService implements UserDetailsService {
 	//以下のクラスをインスタンス化
 	@Autowired
 	private UserMapper userMapper;
-	
-	@Autowired
-    PasswordEncoder passwordEncoder;
 	
 	//UserDetailsServiceのメソッドをオーバーライドし、ログイン時の認証方法を設定
 	@Override
@@ -61,12 +58,16 @@ public class UserService implements UserDetailsService {
 	//ユーザーを登録
 	@Transactional
 	public void register(String userName, String password, int adminFlag) {
-		userMapper.register(userName, password, adminFlag);
+		//パスワードは暗号化
+		PasswordEncrypter passEncrypter = new PasswordEncrypter();
+		userMapper.register(userName, passEncrypter.encode(password), adminFlag);
 	}
 	
 	//userIdをもとにユーザーを更新
 	@Transactional
 	public void update(int userId, String password, int adminFlag) {
-		userMapper.update(userId, password, adminFlag);
+		//パスワードは暗号化
+		PasswordEncrypter passEncrypter = new PasswordEncrypter();
+		userMapper.update(userId, passEncrypter.encode(password), adminFlag);
 	}
 }
