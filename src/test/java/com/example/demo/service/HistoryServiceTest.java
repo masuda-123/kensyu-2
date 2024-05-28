@@ -71,4 +71,16 @@ class HistoryServiceTest {
 		//user_id = 1と紐づく最新のデータが、登録したデータと一致することを確認
 		assertThat(hisList2.get(2).getPoint(), is(50));
 	}
+	
+	@Test
+	@DatabaseSetup("../dbunit/sampleData.xml")
+	@DisplayName("deleteメソッドに、登録されているuser_idを渡すと、履歴が削除できること")
+	public void deleteUserWhenRegisterUserId() throws Exception {
+		//登録されているuser_idを渡し、履歴を削除
+		historyService.delete(1);
+		//user_id = 1と一致するデータを取得
+		ArrayList<History> hisList = historyService.findByUserId(1);
+		//履歴が取得できていないことを確認
+		assertTrue(hisList.isEmpty());
+	}
 }
