@@ -10,4 +10,8 @@
     <histories id="1" user_id="1" point="10" created_at="2024-05-20 12:00:00" />
     <histories id="2" user_id="1" point="20" created_at="2024-05-20 11:00:00" />
     <histories id="3" user_id="2" point="30" created_at="2024-05-20 14:00:00" />
+    <users id="1" name="testuser1" password="JzloXih8I+6oLnm51tL6aw==" admin_flag="1" />
+    <users id="2" name="testuser2" password="0VbhPuCCJrYqP2SDurhbZw==" admin_flag="0" />
+    <users id="3" name="testuser3" password="w1SKccXvnocnhaRrwjADpQ==" admin_flag="1" />
+    <users id="4" name="testuser4" password="w1SKccXvnocnhaRrwjADpQ==" admin_flag="1" deleted_at="2024-05-27 18:43:05" />
 </dataset>

@@ -83,7 +83,6 @@ class AnswerServiceTest {
 		assertThat(ansList2.size() - ansList1.size(), is(1));
 		//最新の答えが、登録した答えと一致しているか確認
 		assertThat(ansList2.get(3).getAnswer(), is(answer));
-		
 	}
 	
 	@Test
