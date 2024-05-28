@@ -160,7 +160,7 @@ public class UserController {
 		model.addAttribute("userId", userId);
 		model.addAttribute("userName", user.getName());
 		model.addAttribute("adminFlag", user.getAdmin_flag());
-		//yser_delete_confirm画面に遷移
+		//user_delete_confirm画面に遷移
 		return "user_delete_confirm";
 	}
 	
