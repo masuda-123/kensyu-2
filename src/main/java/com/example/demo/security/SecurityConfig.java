@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
@@ -26,7 +25,7 @@ public class SecurityConfig {
 				.requestMatchers("/favicon.ico", "/resources/**", "/error").permitAll()
 				.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
 				// 管理者しかアクセスできないページを設定
-				.requestMatchers("/user/lists", "/user/register").hasRole("ADMIN")
+				.requestMatchers("/user/*", "/user/edit/*").hasAuthority("ADMIN")
 				//上記以外のすべての要求で、ユーザーの認証を必要とする
 				.anyRequest().authenticated()
 			)
@@ -46,15 +45,14 @@ public class SecurityConfig {
 				// ログアウトした場合の遷移先
 				.logoutSuccessUrl("/login").permitAll()
 			)
-	       .requestCache((cache) -> cache
-	               .requestCache(requestCache)
-	        );
+			.requestCache((cache) -> cache
+				.requestCache(requestCache));
 		return http.build();
 	}
 	
-	//ユーザーが入力したパスワードをハッシュ化する
+	//ユーザーが入力したパスワードを暗号化する
 	@Bean
 	PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
+		return new PasswordEncrypter();
 	}
 }

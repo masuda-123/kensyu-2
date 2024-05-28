@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>user_register</title>
+<title>user_edit</title>
 <link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
 <script type="text/javascript" th:src="@{/js/check_user_validation.js}"></script>
 </head>
@@ -13,11 +13,16 @@
 				<input type="submit" value="logout" class="logout_btn">
 			</form>
 		</div>
-		<!-- formタグで入力されたデータを/user/register/confirmにpostで送信する（送信する前にjsでバリデーションチェックする）  -->
-		<form class="user_form_area" th:action="@{/user/register/confirm}" method="post" onsubmit="return checkValidation()">
+		<!-- formタグで入力されたデータを/user/edit/{id}/confirmにpostで送信する（送信する前にjsでバリデーションチェックする）  -->
+		<form class="user_form_area" th:action="@{/user/edit/{id}/confirm(id=${userId})}" method="post" onsubmit="return checkValidation()">
+			<div  class="user_form">
+				<label>ID: </label>
+				<p th:text="${userId}"></p>
+			</div>
 			<div  class="user_form">
 				<label>ユーザー名: </label>
-				<input type="text" id="userName" name="userName" th:value="${userName}">
+				<p th:text="${userName}"></p>
+				<input type="hidden" id="userName" name="userName" th:value="${userName}">
 			</div>
 			<div  class="user_form">
 				<label>PW: </label>
@@ -39,10 +44,6 @@
 				</th:block>
 				<!-- チェックボックスにチェックが入っていない場合、以下のデータを送信-->
 				<input type='hidden' name="adminFlag" value='0'>
-			</div>
-			<div class="user_form_info">
-				<li>ユーザー名は半角英数字で入力してください</li>
-				<li>PWは半角英数字で8文字以上で入力してください</li>
 			</div>
 		</div>
 		<div class="bottom_btn_area">

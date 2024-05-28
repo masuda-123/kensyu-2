@@ -10,4 +10,7 @@
 	<insert id="register">
 		INSERT INTO users (name, password, admin_flag, created_at) values (#{userName}, #{password}, #{adminFlag}, CURRENT_TIMESTAMP());
 	</insert>
+	<update id="update">
+		UPDATE users SET password = #{password}, admin_flag = #{adminFlag}, updated_at = CURRENT_TIMESTAMP() WHERE id = #{userId};
+	</update>
 </mapper>
