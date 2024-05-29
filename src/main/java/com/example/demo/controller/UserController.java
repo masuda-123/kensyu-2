@@ -20,7 +20,6 @@ import com.example.demo.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 
@@ -34,9 +33,6 @@ public class UserController {
 	
 	@Autowired
 	private final HistoryService historyService;
-	
-	@Autowired
-    private HttpSession session;
 	
 	//ログイン画面の処理
 	@GetMapping("/login")
