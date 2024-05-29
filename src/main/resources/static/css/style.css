@@ -378,7 +378,13 @@ h2 {
 	display: block;
 }
 
-/* user_register画面、user_register_confirm画面のクラス*/
+/* user_register画面、user_register_confirm画面、user_delete_confirrm画面のformタグのクラス*/
+.user_form_area {
+	/*上に余白を20px作る*/
+	margin-top: 20px;	
+}
+
+/* user_register画面、user_register_confirm画面、user_delete_confirrm画面のクラス*/
 .user_form {
 	/*要素を横並びにする*/
 	display: flex;
@@ -406,10 +412,4 @@ h2 {
 .user_form input[type="text"], .user_form input[type="password"] {
 	/*幅を全体の80%にする*/
 	width: 80%;
-}
-
-/* user_register画面のformタグのクラス*/
-.user_form_area {
-	/*上に余白を20px作る*/
-	margin-top: 20px;	
 }
