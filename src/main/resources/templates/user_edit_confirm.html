@@ -14,6 +14,10 @@
 		</div>
 		<!-- formタグで以下のデータを/user/edit/{id}/completeにpostで送信する  -->
 		<form class="user_form_area" th:action="@{/user/edit/{id}/complete(id=${userId})}" method="post">
+			<div  class="user_form">
+				<label>ID: </label>
+				<p th:text="${userId}"></p>
+			</div>
 			<div class="user_form">
 				<label>ユーザー名: </label>
 				<p th:text="${userName}"></p>
