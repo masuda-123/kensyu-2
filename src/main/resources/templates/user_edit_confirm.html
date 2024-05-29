@@ -1,17 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>user_edit_confirm</title>
-<link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<title>user_edit_confirm</title>
+		<link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
+	</head>
 	<body>
-		<div class="btn_area">
-			<button onclick="location.href='/top'">top</button>
-			<form th:action="@{/logout}" method="post">
-				<input type="submit" value="logout" class="logout_btn">
-			</form>
-		</div>
+		<div th:replace="common/header::header"></div>
 		<!-- formタグで以下のデータを/user/edit/{id}/completeにpostで送信する  -->
 		<form class="user_form_area" th:action="@{/user/edit/{id}/complete(id=${userId})}" method="post">
 			<div  class="user_form">
