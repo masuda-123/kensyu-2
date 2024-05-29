@@ -43,13 +43,6 @@ public class UserController {
 		return "login";
 	}
 	
-	//ログアウトの処理
-	@PostMapping("/logout")
-	public String postLogout() {
-		//login画面に遷移
-		return "login";
-	}
-	
 	//ユーザー一覧画面の処理
 	@GetMapping("/user/lists")
 	public String getList(Model model) {
@@ -161,7 +154,7 @@ public class UserController {
 		User currentUser = userService.findById(currentUserId);
 		int currentUserAdminFlag = currentUser.getAdmin_flag();
 		if(currentUserId == userId && currentUserAdminFlag == 0) {
-			//トークンに保存されている権限情報を更新し、セッションに設定
+			//権限情報を更新し、セッションに設定
 			Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(), AuthorityUtils.createAuthorityList("USER"));
 			SecurityContextHolder.getContext().setAuthentication(newAuth);
 			return "redirect:/top";
