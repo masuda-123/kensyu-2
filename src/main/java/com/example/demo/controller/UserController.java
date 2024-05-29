@@ -3,7 +3,9 @@ package com.example.demo.controller;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -152,8 +154,21 @@ public class UserController {
 			@RequestParam("adminFlag") int adminFlag, Model model) {
 		//URLのパスやフォームから渡された値をもとに、ユーザーを更新
 		userService.update(userId, password, adminFlag);
-		//user_lists画面にリダイレクト
-		return "redirect:/user/lists";
+		//sessionからuserIdを取得
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		int currentUserId = Integer.parseInt(auth.getName());
+		//userIdからadminFlagを取得
+		User currentUser = userService.findById(currentUserId);
+		int currentUserAdminFlag = currentUser.getAdmin_flag();
+		if(currentUserId == userId && currentUserAdminFlag == 0) {
+			//トークンに保存されている権限情報を更新し、セッションに設定
+			Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(), AuthorityUtils.createAuthorityList("USER"));
+			SecurityContextHolder.getContext().setAuthentication(newAuth);
+			return "redirect:/top";
+		} else {
+			//user_lists画面にリダイレクト
+			return "redirect:/user/lists";
+		}
 	}
 	
 	//ユーザー削除確認画面の処理
