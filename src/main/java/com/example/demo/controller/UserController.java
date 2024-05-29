@@ -161,7 +161,7 @@ public class UserController {
 	public String getDeleteConfirm(@PathVariable("id") int userId, Model model) {
 		//パスから取得したIdをもとに、ユーザーを取得
 		User user = userService.findById(userId);
-		//変数をモデルに登録（パスワードは復号化する）
+		//変数をモデルに登録
 		model.addAttribute("userId", userId);
 		model.addAttribute("userName", user.getName());
 		model.addAttribute("adminFlag", user.getAdmin_flag());
