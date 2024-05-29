@@ -164,9 +164,9 @@ public class UserController {
 		return "user_delete_confirm";
 	}
 	
-	//ユーザー削除確認画面の処理
+	//ユーザー削除処理
 	@PostMapping("/user/delete/{id}/complete")
-	public String getDeleteComplete(@PathVariable("id") int userId, Model model) {
+	public String postDeleteComplete(@PathVariable("id") int userId, Model model) {
 		//パスから取得したIdをもとに、ユーザーを論理削除
 		userService.delete(userId);
 		//idをもとに履歴も論理削除
