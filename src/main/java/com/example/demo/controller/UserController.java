@@ -3,6 +3,9 @@ package com.example.demo.controller;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.User;
 import com.example.demo.security.PasswordEncrypter;
+import com.example.demo.service.HistoryService;
 import com.example.demo.service.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
 
@@ -25,6 +31,9 @@ public class UserController {
 	@Autowired
 	private final UserService userService;
 	
+	@Autowired
+	private final HistoryService historyService;
+	
 	//ログイン画面の処理
 	@GetMapping("/login")
 	public String getLogin() {
@@ -34,7 +43,7 @@ public class UserController {
 	
 	//ログアウトの処理
 	@PostMapping("/logout")
-	public String getLogout() {
+	public String postLogout() {
 		//login画面に遷移
 		return "login";
 	}
@@ -133,7 +142,7 @@ public class UserController {
 		model.addAttribute("userName", userName);
 		model.addAttribute("password", password);
 		model.addAttribute("adminFlag", adminFlag);
-		//edit画面に遷移
+		//user_edit画面に遷移
 		return "user_edit";
 	}
 	
@@ -145,5 +154,41 @@ public class UserController {
 		userService.update(userId, password, adminFlag);
 		//user_lists画面にリダイレクト
 		return "redirect:/user/lists";
+	}
+	
+	//ユーザー削除確認画面の処理
+	@GetMapping("/user/delete/{id}/confirm")
+	public String getDeleteConfirm(@PathVariable("id") int userId, Model model) {
+		//パスから取得したIdをもとに、ユーザーを取得
+		User user = userService.findById(userId);
+		//変数をモデルに登録
+		model.addAttribute("userId", userId);
+		model.addAttribute("userName", user.getName());
+		model.addAttribute("adminFlag", user.getAdmin_flag());
+		//user_delete_confirm画面に遷移
+		return "user_delete_confirm";
+	}
+	
+	//ユーザー削除処理
+	@PostMapping("/user/delete/{id}/complete")
+	public String postDeleteComplete(Authentication authentication, HttpServletRequest request, HttpServletResponse response, @PathVariable("id") int userId, Model model) {
+		//パスから取得したIdをもとに、ユーザーを論理削除
+		userService.delete(userId);
+		//idをもとに履歴も論理削除
+		historyService.delete(userId);
+		//sessionからuserIdを取得
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		int currentUserId = Integer.parseInt(auth.getName());
+		//現在ログインしているユーザーのidと削除したidが一致していた場合
+		if(userId == currentUserId) {
+			//セッションを削除
+			SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
+			logoutHandler.logout(request, response, authentication);
+			//user_lists画面にリダイレクト
+			return "redirect:/login";
+		}else {
+			//user_lists画面にリダイレクト
+			return "redirect:/user/lists";
+		}
 	}
 }

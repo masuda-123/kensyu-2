@@ -3,6 +3,7 @@ package com.example.demo.repository;
 import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.model.History;
 
@@ -13,4 +14,8 @@ public interface HistoryMapper {
 	
 	//履歴を登録
 	void register(int userId, int point);
+	
+	//userIdをもとに履歴を削除
+	@Transactional
+	public void delete(int userId);
 }

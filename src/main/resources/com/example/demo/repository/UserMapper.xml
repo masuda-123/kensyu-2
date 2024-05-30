@@ -2,15 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.repository.UserMapper">
 	<select id="findById" resultType="com.example.demo.model.User">
-		SELECT * FROM users WHERE id = #{userId};
+		SELECT * FROM users WHERE id = #{userId} AND deleted_at IS NULL;
 	</select>
 	<select id="findAll" resultType="com.example.demo.model.User">
-		SELECT * FROM users;
+		SELECT * FROM users WHERE deleted_at IS NULL;
 	</select>
 	<insert id="register">
 		INSERT INTO users (name, password, admin_flag, created_at) values (#{userName}, #{password}, #{adminFlag}, CURRENT_TIMESTAMP());
 	</insert>
 	<update id="update">
 		UPDATE users SET password = #{password}, admin_flag = #{adminFlag}, updated_at = CURRENT_TIMESTAMP() WHERE id = #{userId};
+	</update>
+	<update id="delete">
+		UPDATE users SET deleted_at = CURRENT_TIMESTAMP() WHERE id = #{userId};
 	</update>
 </mapper>
