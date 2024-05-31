@@ -153,10 +153,12 @@ public class UserController {
 		//userIdからadminFlagを取得
 		User currentUser = userService.findById(currentUserId);
 		int currentUserAdminFlag = currentUser.getAdmin_flag();
+		//ログインユーザーが自身の管理者権限を無効にした場合
 		if(currentUserId == userId && currentUserAdminFlag == 0) {
 			//権限情報を更新し、セッションに設定
 			Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(), AuthorityUtils.createAuthorityList("USER"));
 			SecurityContextHolder.getContext().setAuthentication(newAuth);
+			//top画面にリダイレクト
 			return "redirect:/top";
 		} else {
 			//user_lists画面にリダイレクト
