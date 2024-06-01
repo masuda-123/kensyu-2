@@ -1,17 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>List</title>
-<link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<title>List</title>
+		<link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
+	</head>
 	<body>
-		<div class="btn_area">
-			<button onclick="location.href='./top'">top</button>
-			<form th:action="@{/logout}" method="post">
-				<input type="submit" value="logout" class="logout_btn">
-			</form>
-		</div>
+		<div th:replace="common/header::header"></div>
 		<button class="new_btn" onclick="location.href='./register'" >新規登録</button>
 		<!-- 問題の数だけ処理を繰り返す  -->
 		<div class="list_area" th:each="que, queStatus:${queList}">

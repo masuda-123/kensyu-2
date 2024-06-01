@@ -6,12 +6,7 @@
 		<link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
 	</head>
 	<body>
-		<div class="btn_area">
-			<button onclick="location.href='./top'">top</button>
-			<form th:action="@{/logout}" method="post">
-				<input type="submit" value="logout" class="logout_btn">
-			</form>
-		</div>
+		<div th:replace="common/header::header"></div>
 		<!-- 問題が登録されていない場合  -->
 		<th:block th:if="${queList.isEmpty()}">
 			<p>問題が登録されていません</p>

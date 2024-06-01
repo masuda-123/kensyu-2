@@ -3,7 +3,9 @@ package com.example.demo.controller;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -37,13 +39,6 @@ public class UserController {
 	//ログイン画面の処理
 	@GetMapping("/login")
 	public String getLogin() {
-		//login画面に遷移
-		return "login";
-	}
-	
-	//ログアウトの処理
-	@PostMapping("/logout")
-	public String postLogout() {
 		//login画面に遷移
 		return "login";
 	}
@@ -152,8 +147,23 @@ public class UserController {
 			@RequestParam("adminFlag") int adminFlag, Model model) {
 		//URLのパスやフォームから渡された値をもとに、ユーザーを更新
 		userService.update(userId, password, adminFlag);
-		//user_lists画面にリダイレクト
-		return "redirect:/user/lists";
+		//sessionからuserIdを取得
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		int currentUserId = Integer.parseInt(auth.getName());
+		//userIdからadminFlagを取得
+		User currentUser = userService.findById(currentUserId);
+		int currentUserAdminFlag = currentUser.getAdmin_flag();
+		//ログインユーザーが自身の管理者権限を無効にした場合
+		if(currentUserId == userId && currentUserAdminFlag == 0) {
+			//権限情報を更新し、セッションに設定
+			Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(), AuthorityUtils.createAuthorityList("USER"));
+			SecurityContextHolder.getContext().setAuthentication(newAuth);
+			//top画面にリダイレクト
+			return "redirect:/top";
+		} else {
+			//user_lists画面にリダイレクト
+			return "redirect:/user/lists";
+		}
 	}
 	
 	//ユーザー削除確認画面の処理

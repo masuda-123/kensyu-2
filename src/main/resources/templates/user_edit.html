@@ -1,18 +1,13 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>user_edit</title>
-<link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
-<script type="text/javascript" th:src="@{/js/check_user_validation.js}"></script>
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<title>user_edit</title>
+		<link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
+		<script type="text/javascript" th:src="@{/js/check_user_validation.js}"></script>
+	</head>
 	<body>
-		<div class="btn_area">
-			<button onclick="location.href='/top'">top</button>
-			<form th:action="@{/logout}" method="post">
-				<input type="submit" value="logout" class="logout_btn">
-			</form>
-		</div>
+		<div th:replace="common/header::header"></div>
 		<!-- formタグで入力されたデータを/user/edit/{id}/confirmにpostで送信する（送信する前にjsでバリデーションチェックする）  -->
 		<form class="user_form_area" th:action="@{/user/edit/{id}/confirm(id=${userId})}" method="post" onsubmit="return checkValidation()">
 			<div  class="user_form">

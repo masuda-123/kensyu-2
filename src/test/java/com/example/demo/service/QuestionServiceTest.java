@@ -100,7 +100,7 @@ class QuestionServiceTest {
 		assertThat(queList1.size() - queList2.size(), is(1));
 		//id = 1に紐づくデータがDBに存在しないことを確認
 		for(Question que : queList2) { 
-			assertThat(queList2.get(0).getId(), is(not(1)));
+			assertThat(que.getId(), is(not(1)));
 		}
 	}
 	

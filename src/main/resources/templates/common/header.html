@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+  <div class="btn_area" th:fragment="header">
+	<button onclick="location.href='/top'">top</button>
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="logout" class="logout_btn">
+	</form>
+</div>
+</html>
